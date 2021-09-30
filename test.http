@@ -1,0 +1,300 @@
+### 404 =>ok
+GET http://localhost:5000/trucquiexistepas
+
+### / =>ok
+GET http://localhost:5000/
+
+
+
+####################
+# Les utilisateurs #
+####################
+
+### Lister les utilisateurs =>ok  Surement a supprimer
+GET http://localhost:5000/users
+
+
+
+### Lister un users + revenue + article &(comment-article) + commentaire =>ok
+GET http://localhost:5000/user/3
+
+### Créer un utilisateur => ok
+POST http://localhost:5000/user
+Content-Type: application/json
+
+{
+  "pseudo": "tata22",
+  "password": "tata",
+  "password2": "tata",
+  "email": "regis@aah.com",
+  "birthdate": "11-05-1895",
+  "role": 1
+}
+
+### delete utilisateur => ok
+DELETE http://localhost:5000/user/44
+
+
+### mise a jour un utlisateur => ok
+PATCH http://localhost:5000/user/9
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZoCI6MTQsInBzZXVkbyI6InRhdGEyMiIsImVtYWlsIjoiJDJiJDEwJEcwSVhrUzFuWUx4SGM1OHd4NGxuNmV2MDFVVEdQVUVvSVdDaWxOSmVQemkyakdYUGthMzJPIiwicm9sZSI6MSwiaWF0IjoxNjMyNjUyMjQ1LCJleHAiOjE2MzI2NTQwNDV9.pmwJVX9SMBbfL2FQu-uC9uHkumKhYQog_kaH7QvyAEE
+
+{
+  "pseudo": "Cide a jour",
+  "password": "Cide3",
+  "email": "regis@aah.com",
+  "birthdate": "1981-06-19",
+  "role": 3
+}
+
+
+
+##########################
+# détail par utilisateur #
+##########################
+
+### détail par utilisateur avec son article + commentaire =>ok
+GET http://localhost:5000/user/3/article/1
+
+### détail par un autre utilisateur avec article + commentaire =>ok
+GET http://localhost:5000/user/2/article/1
+
+### les articles de l'utilisateur => ok
+GET http://localhost:5000/user/3/articles
+
+### les commentaire de l'utilisateur => ok
+GET http://localhost:5000/user/3/comments
+
+### les revenus de l'utilisateur => ok
+GET http://localhost:5000/user/3/incomes
+
+
+### un revenu de l'utilisateur => ok
+GET http://localhost:5000/user/3/income/2
+
+### Le revenu d'un autre utilisateur Message errreur =>ok
+GET http://localhost:5000/user/1/income/2
+
+###### creer un revenues => ok
+post http://localhost:5000/user/3/income
+Content-Type: application/json
+
+{
+  "year": 2001,
+  "amount": 14222,
+  "situation": "couple",
+  "nb_child": 0
+}
+
+###### Supprime un revenues => ok
+DELETE  http://localhost:5000/user/3/income/9
+
+### mise a jour un revenu => ok
+PATCH http://localhost:5000/user/3/income/9
+Content-Type: application/json
+
+{
+  "year": 1999,
+  "amount": 90000012,
+  "situation": "couple",
+  "nb_child": 0
+}
+
+
+
+################
+# Les Articles #
+################
+
+###Liste tous les articles => ok
+GET http://localhost:5000/articles
+
+###Liste un article => ok
+GET http://localhost:5000/article/1
+
+### Lister les articles de l'utilisateur avec commentaire => ok
+GET http://localhost:5000/user/3/articles
+
+### Liste un article de l'utilisateur + ses commentaire => OK
+GET http://localhost:5000/user/3/article/15
+
+
+### Créer un article => ok
+POST http://localhost:5000/user/3/article
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInBzZXVkbyI6InBvc3RtYW4zIiwiZW1haWwiOiIkMmIkMTAkYmJ1ekp0Yk9Fbm12WENyb1VKTzVzT3RLSS5PMEZPaHA4TUxSNFdpNXR2WmNEYXZyUnlhVlMiLCJyb2xlIjoxLCJpYXQiOjE2MzI2NTUyNDAsImV4cCI6MTYzMjY1NzA0MH0.cp9vJPq9bzsOBwYYBpysozjzL7mDx0zNFa8KGL2A2jw
+
+{
+  "title": "gfhfhf",
+  "content": "455",
+  "user_id": 3
+}
+
+### mise a jour un article => ok
+PATCH http://localhost:5000/user/2/article/15
+Content-Type: application/json
+
+{
+  "title": "Une liste de hacker  user 3",
+  "content": "auteur Cide ID3 une mise a jour test article 2",
+  "update_at": "2021-05-24",
+  "user_id": 3
+}
+
+### delete article => ok
+DELETE http://localhost:5000/user/3/article/19
+
+
+
+####################
+# les commentaires #
+####################
+
+
+
+
+###### Lister tous les commentaire d'un utilisateur=> OK
+GET http://localhost:5001/user/3/comments
+
+###### Liste un commentaire  et l'article=> ok
+GET http://localhost:5000/user/3/comment/3
+
+###### creer un commentaire => ok
+post http://localhost:5000/user/3/article/2/comment
+Content-Type: application/json
+
+{
+  "content": "fdgdgd",
+  "user_id": 3,
+  "article_id": 2
+}
+
+### Suprimer un commentaire => ok
+DELETE http://localhost:5000/user/3/comment/18
+
+### mise a jour un commentaire => ok
+PATCH http://localhost:5000/user/3/comment/14
+Content-Type: application/json
+
+{
+  "content": " ",
+  "user_id": 3,
+  "article_id": 2
+}
+
+
+
+#################
+# Les Comptages #
+#################
+
+### Compte tous les commentaires => ok
+GET http://localhost:5000/commentsCount
+
+### Compte tous les revenues => ok
+GET http://localhost:5000/incomesCount
+
+### Compte tous les utlisisateurs => ok
+GET http://localhost:5000/usersCount
+
+### Compte tous les articles => ok
+GET http://localhost:5000/articlesCount
+
+### Compte tous les articles => a faire plutard
+GET http://localhost:5000/Count
+
+
+
+
+
+
+
+
+
+
+
+
+# détail par utilisateur
+### détaile par article =>ok
+
+GET http://localhost:5000/user/3/articles
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInBzZXVkbyI6InBvc3RtYW4zIiwiZW1haWwiOiIkMmIkMTAkYmJ1ekp0Yk9Fbm12WENyb1VKTzVzT3RLSS5PMEZPaHA4TUxSNFdpNXR2WmNEYXZyUnlhVlMiLCJyb2xlIjoxLCJpYXQiOjE2MzI2NTQ4NzcsImV4cCI6MTYzMjY1NjY3N30._Sscuxacin_n4fMFXHlAVaEMgLe_AN0o4wHen02fk_E
+
+
+### login
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+  "pseudo": "postman3",
+  "password": "Cide2"
+}
+
+###
+GET http://localhost:5000/logme
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInBzZXVkbyI6ImNpZGUxMiIsImVtYWlsIjoicmVnaXNAZ21haWwuY29tIiwicm9sZSI6MSwiaWF0IjoxNjMyNjQ1NTIxLCJleHAiOjE2MzI2NDczMjF9.rOC2ONNdUh827AzQAjgWp0-6nq7_ha_BsKoLsW__U1M
+
+###
+GET http://localhost:5000/user/19
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInBzZXVkbyI6InBvc3RtYW4zIiwiZW1haWwiOiIkMmIkMTAkYmJ1ekp0Yk9Fbm12WENyb1VKTzVzT3RLSS5PMEZPaHA4TUxSNFdpNXR2WmNEYXZyUnlhVlMiLCJyb2xlIjoxLCJpYXQiOjE2MzI2NTkxNTgsImV4cCI6MTYzMjY2MDk1OH0.lOFF3Oh9xB_UPwS8H0OguJ2-gzpdvVfRE284YYz1DTc
+
+
+
+
+
+
+
+### logout
+POST http://localhost:5000/logout
+Content-Type: application/json
+
+{
+  "email": "toto@gmail.com",
+  "password": "toto"
+}
+
+
+### Créer un utilisateur => ok
+POST http://localhost:5000/user
+Content-Type: application/json
+
+{
+  "pseudo": "marie",
+  "password": "marie",
+  "password2": "marie",
+  "email": "regis@aah.com",
+  "birthdate": "11-05-1895",
+  "role": 1
+}
+
+### 
+POST http://localhost:5000/signup
+Content-Type: application/json
+
+{
+  "pseudo": "postman3",
+  "password": "Cide2",
+  "passwordConfirm":"Cide2",
+  "email": "regis@aah.com",
+  "birthdate": "1981-06-19",
+  "role": 1
+}
+
+
+### count user
+POST http://localhost:5000/signup
+Content-Type: application/json
+
+{
+  "pseudo": "postman3",
+  "password": "Cide2",
+  "passwordConfirm":"Cide2",
+  "email": "regis@aah.com",
+  "birthdate": "1981-06-01",
+  "role": 1
+}
+##
