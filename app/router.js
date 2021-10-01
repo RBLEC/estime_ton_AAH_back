@@ -64,8 +64,7 @@ router.get(`/`, (req, res) => {
 router.get(`/api`, (req, res) => {
   res.status(200).json({
     success: true,
-    message: `Bienvenu sur le serveur Back 'Calcul ta AAH !' 
-    https://htmlbackcalcultaaah.herokuapp.com/ `,
+    message: `Bienvenu sur le serveur Back 'Estime ton AAH !'`,
   });
 });
 
