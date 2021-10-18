@@ -3,20 +3,17 @@ const {generateAccessToken,generateRefreshToken }= require(`../middlewares/jwt`)
 const bcrypt = require("bcrypt");
 
 //* liste de tous les utilisateurs
-exports.getUsers = (req, res) => {
+exports.getUsers = async (req, res) => {
   // J`utilise sequelize pour récupérer l`ensemble des listes
-  User.findAll({
-    order: [
-      //[`id`, `DESC`]
-      [`pseudo`],
-    ],
+  await User.findAndCountAll({
+    order: [[`pseudo`]],
   })
     .then((users) => {
       // dans le then (lorsque sequelize à enfin récupéré les listes) j`envoi les lites au client.
       // je répond en JSON car je suis une API
       res.status(200).json({
         success: true,
-        message: `Voici la liste de tous les utilisateurs`,
+        message: `Voici la liste de tous les utilisateurs par pseudo`,
         users,
       });
     })
@@ -25,26 +22,18 @@ exports.getUsers = (req, res) => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: `Oups il y a un problème avec la liste de tous les utilisateurs`,
+        message: `Oups il y a un problème avec la liste de tous les utilisateurs, veuillez vous connecter.`,
         error: error.message,
       });
     });
 };
 
-//* liste un utilisateur avec ses revenus, ses articles et ses commentaires
-exports.getUser = (req, res) => {
+//* liste un utilisateur avec ses infos
+exports.getUser = async (req, res) => {
   const userId = userToken.id
-  User.findByPk(userId, {
-    include: [
-      `income`,
-      {
-        association: `article`,
-        include: [{ association: `comment` }, `comment`],
-      },
-      `comment`,
-    ],
-  })
-    .then((user) => {
+  await User.findAndCountAll( { 
+    where: id = userId,
+    }).then((user) => {
       if (!user) {
         throw new Error(`Utilisateur non trouvé`);
       }
@@ -58,7 +47,127 @@ exports.getUser = (req, res) => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: `Oups il y a un problème avec les informations de l'utilisateur`,
+        message: `Oups il y a un problème avec les informations de l'utilisateur, veuillez vous connecter.`,
+        error: error.message,
+      });
+    });
+};
+
+//* liste un utilisateur avec ses 10 dernier commentaires
+exports.getUserLastComment = async (req, res) => {
+  const userId = userToken.id
+  await User.findAndCountAll( { 
+    where: id = userId,
+    include: [model = 'comment'], 
+    order: [[ model = 'comment',"updated_at", "DESC",]],
+    offset: 5,
+    limit:10,
+    subQuery: false,
+  }).then((user) => {
+      if (!user) {
+        throw new Error(`Utilisateur non trouvé`);
+      }
+      res.status(200).json({
+        success: true,
+        message: `Les 10 derniers commentaires`,
+        user,
+      });
+    })
+    .catch((error) => {
+      console.trace(error);
+      res.status(500).json({
+        success: false,
+        message: `Oups il y a un problème avec les 10 derniers commentaires de l'utilisateur, veuillez vous connecter.`,
+        error: error.message,
+      });
+    });
+};
+
+//* liste un utilisateur avec ses 10 dernier articles
+exports.getUserLastArticle = async (req, res) => {
+  const userId = userToken.id
+  await User.findAndCountAll( { 
+    where: id = userId,
+    include: [model = 'article'], 
+    order: [[ model = 'article',"updated_at", "DESC",]],
+    offset: 5,
+    limit:10,
+    subQuery: false,
+  }).then((user) => {
+      if (!user) {
+        throw new Error(`Utilisateur non trouvé`);
+      }
+      res.status(200).json({
+        success: true,
+        message: `Les 10 derniers articles`,
+        user,
+      });
+    })
+    .catch((error) => {
+      console.trace(error);
+      res.status(500).json({
+        success: false,
+        message: `Oups, il y a un problème avec les 10 derniers articles de l'utilisateur, veuillez vous connecter.`,
+        error: error.message,
+      });
+    });
+};
+
+//* liste un utilisateur avec ses 10 dernier message du livre d'or
+exports.getUserLastGuestbook = async (req, res) => {
+  const userId = userToken.id
+  await User.findAndCountAll( { 
+    where: id = userId,
+    include: [model = 'guestbook'], 
+    order: [[ model = 'guestbook',"updated_at", "DESC",]],
+    offset: 5,
+    limit:10,
+    subQuery: false,
+  }).then((user) => {
+      if (!user) {
+        throw new Error(`Utilisateur non trouvé`);
+      }
+      res.status(200).json({
+        success: true,
+        message: `Les 10 derniers messages du livre d'or`,
+        user,
+      });
+    })
+    .catch((error) => {
+      console.trace(error);
+      res.status(500).json({
+        success: false,
+        message: `Oups il y a un problème avec les 10 derniers messages du livre d'or, veuillez vous connecter.`,
+        error: error.message,
+      });
+    });
+};
+
+//* liste un utilisateur avec ses 10 dernières information de simulation
+exports.getUserLastInfosimulation = async (req, res) => {
+  const userId = userToken.id
+  await User.findAndCountAll( { 
+    where: id = userId,
+    include: [model = 'infosimulation'], 
+    order: [[ model = 'infosimulation',"updated_at", "DESC",]],
+    offset: 5,
+    limit:10,
+    subQuery: false,
+  }).then((user) => {
+      if (!user) {
+        throw new Error(`Utilisateur non trouvé`);
+      }
+      res.status(200).json({
+        success: true,
+        message: `Les 10 dernières simulations`,
+        user,
+      });
+    })
+    .catch((error) => {
+      console.trace(error);
+      res.status(500).json({
+        success: false,
+        message: `Oups il y a un problème avec les 10 dernières simulations de l'utilisateur, veuillez vous connecter..`,
         error: error.message,
       });
     });
@@ -66,22 +175,31 @@ exports.getUser = (req, res) => {
 
 //* création d'un utilisateur
 exports.createUser = async (req, res) => {
-  const { pseudo, email, birthdate, password, role } = req.body;
+  const { pseudo, email, birthdate, password, role, disability_rate, place_of_residence, apl  } = req.body;
   let missingParams = [];
   if (!pseudo) {
-    missingParams.push(`pseudo`);
+    missingParams.push(`Votre pseudo`);
   }
   if (!birthdate) {
-    missingParams.push(`birthDate`);
+    missingParams.push(`Votre date de naissance`);
   }
   if (!role) {
     missingParams.push(`role`);
   }
   if (!email) {
-    missingParams.push(`email`);
+    missingParams.push(`Votre email`);
   }
   if (!password) {
-    missingParams.push(`password`);
+    missingParams.push(`Votre mot de passe`);
+  }
+  if (!disability_rate) {
+    missingParams.push(`Votre taux d'invalidité`);
+  }
+  if (!place_of_residence) {
+    missingParams.push(`Votre lieu de résidance`);
+  }
+  if (!apl) {
+    missingParams.push(`Toucher vous des apl`);
   }
   if (missingParams.length > 0) {
     return res.status(400).json({
@@ -100,20 +218,22 @@ exports.createUser = async (req, res) => {
         message: `Pseudo déja existant !`,
       });
     }
-
     const hashPassword = await bcrypt.hash(req.body.password, 10);
-    //const hashEmail = await bcrypt.hash(req.body.email, 10); //! a voir plus tard
     const newUser = {
       pseudo: req.body.pseudo,
       password: hashPassword,
       email: req.body.email,
       birthdate: req.body.birthdate,
       role: req.body.role,
+      disability_rate: req.body.disability_rate,
+      place_of_residence: req.body.place_of_residence,
+      apl: req.body.apl,
     };
     await User.create(newUser);
     res.status(200).json({
       success: true,
       message: `Tout c'est bien passé, l'utilisateur à bien été crée avec le pseudo ${pseudo}`,
+      newUser
     });
   } catch (error) {
     console.trace(error);
@@ -126,11 +246,21 @@ exports.createUser = async (req, res) => {
 };
 
 //* Mise à jour d'un utilisateur
-exports.updateUser = (req, res) => {
-  const userData = req.body;
+exports.updateUser = async (req, res) => {
   const userId = userToken.id
+  const hashPassword = await bcrypt.hash(req.body.password, 10);
+  const userData = {
+    pseudo: req.body.pseudo,
+    password: hashPassword,
+    email: req.body.email,
+    birthdate: req.body.birthdate,
+    role: req.body.role,
+    disability_rate: req.body.disability_rate,
+    place_of_residence: req.body.place_of_residence,
+    apl: req.body.apl,
+  };
   //* je récupère le user à modifier
-  User.findByPk(userId)
+  await User.findByPk(userId)
     .then((user) => {
       return user.update(userData);
     })
@@ -154,9 +284,9 @@ exports.updateUser = (req, res) => {
 };
 
 //* Suppréssion de l'utilisateur
-exports.deleteUser = (req, res) => {
+exports.deleteUser = async (req, res) => {
   const userId = userToken.id
-  User.findByPk(userId)
+  await User.findByPk(userId)
     .then((user) => {
       return user.destroy();
     })
@@ -177,8 +307,8 @@ exports.deleteUser = (req, res) => {
 };
 
 //* compteur du nombre d'utilisateur enregister
-exports.getCountUsers = (req, res) => {
-  User.count()
+exports.getCountUsers = async (req, res) => {
+  await User.count()
     .then((users) => {
       res.status(200).json({
         success: true,
@@ -196,7 +326,7 @@ exports.getCountUsers = (req, res) => {
     });
 };
 
-  //* pour login user
+//* pour login user
 exports.loginUser = async (req, res) => {
   try {
     let userInfo;
@@ -231,7 +361,6 @@ exports.loginUser = async (req, res) => {
       accessToken,
       refreshToken
     });
-
   } catch (error) {
       console.trace(error);
       res.status(500).json({
@@ -241,8 +370,3 @@ exports.loginUser = async (req, res) => {
       });
   }
 };
-
-//! a faire
-  exports.logoutUser = (req, res) =>{
-    console.log('on entre dans => logout')
-  }

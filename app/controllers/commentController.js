@@ -1,10 +1,18 @@
 const { Comment, User } = require(`../models`);
 
   // Liste tous les commentaires de l'utilisateur
-  exports.getCommentsUser= (req, res) => {
+  exports.getCommentsUser = async (req, res) => {
     const userId = userToken.id
-    User.findByPk(userId, {
-      include: `comment`, 
+    await User.findAndCountAll( { 
+        // Par id user et par mise a jour du commentaire
+        where: id = userId,
+        include:[
+          model = 'comment', 
+        ],
+        order:[[
+          model = 'comment',
+          "updated_at", "DESC",
+        ]],
     }).then((user) => {
       if(!user) {
         throw new Error(`Utilisateur non trouvé`);
@@ -25,10 +33,10 @@ const { Comment, User } = require(`../models`);
   };
 
   // liste un commentaire et l'article
-  exports.getCommentUser= (req, res) => {
+  exports.getCommentUser = async (req, res) => {
     const userId = userToken.id
     const commentId = parseInt(req.params.commentId, 10);
-    Promise.all([
+    await Promise.all([
       User.findByPk(userId),
       Comment.findByPk(commentId, {
         include: `article`,
@@ -60,8 +68,8 @@ const { Comment, User } = require(`../models`);
     });
   };
 
-  // Création d'un commentaires
-  exports.createCommentUser= (req, res) => {
+  // Création d'un commentaire pour un article
+  exports.createCommentArticleUser = async (req, res) => {
     const userId = userToken.id
     const articleId = parseInt(req.params.articleId, 10);
     const { content} = req.body;
@@ -72,8 +80,8 @@ const { Comment, User } = require(`../models`);
     if (missingParams.length > 0) {
       return res.status(400).json(`Il manque votre ${missingParams.join(`, `)}`);
     }
-    User.findByPk(userId),    
-    Comment.create({
+    await User.findByPk(userId),    
+    await Comment.create({
       content: req.body.content,
       user_id: userId,
       article_id: articleId
@@ -93,11 +101,44 @@ const { Comment, User } = require(`../models`);
     });      
   };
 
+    // Création d'un commentaire pour le livre d'or
+  exports.createCommentGuestbookUser = async (req, res) => {
+    const userId = userToken.id
+    const guestbookId = parseInt(req.params.guestbookId, 10);
+    const { content} = req.body;
+    let missingParams =[];
+    if (!content) {
+      missingParams.push(`commentaire`);  
+    }
+    if (missingParams.length > 0) {
+      return res.status(400).json(`Il manque votre ${missingParams.join(`, `)}`);
+    }
+    await User.findByPk(userId),    
+    await Comment.create({
+      content: req.body.content,
+      user_id: userId,
+      guestbook_id: guestbookId
+    }).then(comment => {
+      res.status(201).json({
+        success: true,
+        message: (`Commentaire créer`),
+        comment,
+      });
+    }).catch(error => {
+      console.trace(error);
+      res.status(500).json({
+        success: false,
+        message: (`Oups commentaire non créer`),
+        error: error.message
+      });
+    });      
+  };
+
   // supression d'un commentaire de l'utilisateur
-  exports.deleteCommentUser= (req, res) => {
+  exports.deleteCommentUser = async (req, res) => {
     const userId = userToken.id
     const commentId = parseInt(req.params.commentId, 10);
-    Promise.all([
+    await Promise.all([
       User.findByPk(userId),
       Comment.findByPk(commentId)
     ]).then(values => {
@@ -128,7 +169,7 @@ const { Comment, User } = require(`../models`);
   };
 
   // Mise à jour d'un commentaire de L'utilisateur
-  exports.updateCommentUser= (req, res) => {
+  exports.updateCommentUser = async (req, res) => {
     const commentData = req.body;
     const commentId = parseInt(req.params.commentId, 10);
     const userId = userToken.id
@@ -140,7 +181,7 @@ const { Comment, User } = require(`../models`);
     if (missingParams.length > 0) {
       return res.status(400).json(`Il manque votre ${missingParams.join(`,  `)}`);
     }
-    Promise.all ([
+    await Promise.all ([
       User.findByPk(userId), 
       Comment.findByPk(commentId)
     ]).then(values => {
@@ -172,8 +213,8 @@ const { Comment, User } = require(`../models`);
   };
 
   // compteur du nombre de commentaire enregister
-  exports.getCountComments= (req, res) => {
-    Comment.count().then(comments => {
+  exports.getCountComments= async (req, res) => {
+    await Comment.count().then(comments => {
       res.status(200).json({
         success: true,
         message: (`Voici le nombre total de commentaire => ${comments}`),

@@ -1,0 +1,42 @@
+
+### ajoute une simulation => ok
+POST http://localhost:5000/nbsimulation
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+{
+ "content": "j'ai fait une simulation"
+}
+
+### toutes les simulations des utilisateurs => ok
+GET http://localhost:5000/nbsimulations
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+### toutes les simulations des utilisateurs => ok
+GET http://localhost:5000/user/10/nbsimulations
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+
+
+### Compte tous les articles => ok
+GET http://localhost:5000/countarticles
+
+### Compte tous les Méssages du livre d'or => ok
+GET http://localhost:5000/countguestbooks
+
+### Compte tous les commentaires => ok
+GET http://localhost:5000/countcomments
+
+### Compte tous les simulations => ok
+GET http://localhost:5000/countnbsimulations
+
+### Compte tous les utilisateur => ok
+GET http://localhost:5000/countusers
+
+
+
+
+
+

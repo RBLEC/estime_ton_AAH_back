@@ -1,14 +1,10 @@
 const { Article, User } = require(`../models`);
 
   // Liste tous les articles avec les commentaires par ordre de création desc
-  exports.getArticles = (req, res) => {
-    Article.findAll({
-      include: {
-        association: `comment`
-      },
-      order: [
-        [`created_at`, `DESC`]
-      ]           
+  exports.getArticles = async (req, res) => {
+    await Article.findAndCountAll( {
+      //include: {association: `comment`},
+      order: [[`created_at`, `DESC`]],           
     }).then(articles => {
       res.status(200).json({
         success: true,
@@ -25,10 +21,33 @@ const { Article, User } = require(`../models`);
     });
   };
 
+  // les 10 derniers articles
+  exports.getLastArticles = async (req, res) => {
+    await Article.findAndCountAll( {
+    order: [[`created_at`, `DESC`]], 
+    offset: 5,
+    limit:10,
+    subQuery: false,    
+    }).then(articles => {
+      res.status(200).json({
+        success: true,
+        message:(`Voici des 10 derniers articles`),
+        articles
+      });
+    }).catch(error => {
+      console.trace(error);
+      res.status(500).json({
+      success: false,
+      message:(`Oups il y a un problème avec les 10 derniers articles`),
+      error: error.message
+      });
+    });
+  };
+
   // Liste un article avec ses commentaires
-  exports.getArticle = (req, res) => {
+  exports.getArticle = async (req, res) => {
     const articleId = parseInt(req.params.id, 10);
-    Article.findByPk(articleId, {
+    await Article.findByPk(articleId, {
       include: `comment`
     }).then((article) => {
       if(!article) {
@@ -50,10 +69,13 @@ const { Article, User } = require(`../models`);
   };
 
   // Liste tous les articles d`un utilisateur 
-  exports.getArticlesUser = (req, res) => {
+  exports.getArticlesUser = async (req, res) => {
     const userId = userToken.id
-    User.findByPk(userId, {
-      include: `article`, 
+    await User.findAndCountAll( { 
+        // Par id user et par mise a jour des articles
+        where: id = userId,
+        include:[model = 'article',],
+        order: [[model = 'article',"updated_at", "DESC",]],
     }).then((user) => {
       if(!user) {
         throw new Error(`Utilisateur non trouvé`);
@@ -74,10 +96,10 @@ const { Article, User } = require(`../models`);
   };
 
   // Liste un article d'un utilisateur
-  exports.getArticleUser = (req, res) => {
+  exports.getArticleUser = async (req, res) => {
     const userId = userToken.id
     const articleId = parseInt(req.params.articleId, 10);
-    Promise.all([
+    await Promise.all([
       User.findByPk(userId),
       Article.findByPk(articleId, {
         include: `comment`,
@@ -111,7 +133,7 @@ const { Article, User } = require(`../models`);
   };
 
   // création d'un article de l'utilisateur
-  exports.createArticleUser = (req, res) => {
+  exports.createArticleUser = async (req, res) => {
     const userId = userToken.id
     const {title, content} = req.body;
     let missingParams =[];
@@ -124,8 +146,8 @@ const { Article, User } = require(`../models`);
     if (missingParams.length > 0) {
       return res.status(400).json(`Il manque des paramètres: ${missingParams.join(`, `)}`);
     }
-    User.findByPk(userId),   
-    Article.create({
+    await User.findByPk(userId),   
+    await Article.create({
       title: req.body.title,
       content: req.body.content,
       user_id: userId 
@@ -146,10 +168,10 @@ const { Article, User } = require(`../models`);
   };
 
   // Suppresion de l'article de l'utilisateur
-  exports.deleteArticleUser = (req, res) => {
+  exports.deleteArticleUser = async (req, res) => {
     const userId = userToken.id
     const articleId = parseInt(req.params.articleId, 10);
-    Promise.all([
+    await Promise.all([
       User.findByPk(userId),
       Article.findByPk(articleId)
     ]).then(values => {
@@ -180,11 +202,15 @@ const { Article, User } = require(`../models`);
   };
 
   // Mise a jour de l'article de l'utilisateur
-  exports.updateArticleUser = (req, res) => {
-    const articleData = req.body;
+  exports.updateArticleUser = async (req, res) => {
     const userId = userToken.id
+    const articleData = {
+      title : req.body.title,
+      content : req.body.content,
+      user_id : userId
+    } ;
     const articleId = parseInt(req.params.articleId, 10);
-    Promise.all ([
+    await Promise.all ([
       User.findByPk(userId), 
       Article.findByPk(articleId)
     ]).then(values => {
@@ -203,7 +229,7 @@ const { Article, User } = require(`../models`);
       res.status(200).json({
         success: true,
         message: (`Article mis à jour`),
-        article, user
+        article
       });
     }).catch(error => {
       console.trace(error);
@@ -215,9 +241,9 @@ const { Article, User } = require(`../models`);
     });
   };
 
-  // compteur du nombre d`article enregister
-  exports.getCountArticles = (req, res) => {
-    Article.count().then(articles => {
+  // compteur du nombre d`article 
+  exports.getCountArticles = async (req, res) => {
+    await Article.count().then(articles => {
       res.status(200).json({
         success: true,
         message: (`Voici le nombre total d'articles => ${articles}`),

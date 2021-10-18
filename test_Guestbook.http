@@ -1,0 +1,62 @@
+
+### login => ok
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+  "pseudo": "cidaah2",
+  "password": "cidaah"
+}
+
+############################
+# Les routes du livre d'or #
+############################
+
+###Liste tous les guestbooks => ok
+GET http://localhost:5000/guestbooks
+
+
+###Liste un guestbook => ok
+GET http://localhost:5000/guestbook/20
+
+### Créer un guestbook => ok
+POST http://localhost:5000/user/3/guestbook
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQxMDY4NCwiZXhwIjoxNjM0NDk3MDg0fQ.bJ5Y1g0bW5hTPyOFwaQkwuavr6pWWWNoBnSvBZ7hjV4
+
+{
+  "title": "Création d'un guestbook 123",
+  "content": "ici le contenu des guestbooks"
+}
+
+### mise a jour un guestbook => ok
+PATCH http://localhost:5000/user/9/guestbook/20
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQxMDY4NCwiZXhwIjoxNjM0NDk3MDg0fQ.bJ5Y1g0bW5hTPyOFwaQkwuavr6pWWWNoBnSvBZ7hjV4
+
+{
+  "title": "Une liste de hacker  guestbo",
+  "content": "auteur Cide ID3 une mise a jour test guestbook 2"
+}
+
+### delete guestbook => ok
+DELETE http://localhost:5000/user/3/guestbook/9
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDA2MDM5NCwiZXhwIjoxNjM0MDYyMTk0fQ.6lZyslXimbjjNOW63sW5RwG1NqLdrN7P8ClzjIaT3wU
+
+### Liste tous les guestbooks de l'utilisateur par ordre DESC => ok
+GET http://localhost:5000/user/3/guestbooks
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQxMTQ1NCwiZXhwIjoxNjM0NDk3ODU0fQ.Rt5VThQmveWtTgCAUYh1aiFV8EEj8p1yc1HKb8IutZE
+
+### Liste tous les guestbooks de l'utilisateur par ordre DESC => ok
+GET http://localhost:5000/user/3/guestbook/20
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQxMTQ1NCwiZXhwIjoxNjM0NDk3ODU0fQ.Rt5VThQmveWtTgCAUYh1aiFV8EEj8p1yc1HKb8IutZE
+
+
+### Compte tous les guestbooks => ok
+GET http://localhost:5000/countguestbooks
+
+### les 10 derniers articles => ok
+GET http://localhost:5000/lastguestbooks

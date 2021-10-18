@@ -151,12 +151,12 @@ class aah_base_ressources_hors_activite_eval_trimestrielle(Variable):
 
     '''
         N'entrent pas en compte dans les ressources :
-        L'allocation compensatrice tierce personne, les allocations familiales,
-        l'allocation de logement, la retraite du combattant, les rentes viagères
-        constituées en faveur d'une personne handicapée ou dans la limite d'un
-        montant fixé à l'article D.821-6 du code de la sécurité sociale (1 830 €/an),
-        lorsqu'elles ont été constituées par une personne handicapée pour elle-même.
-        Le RMI (article R 531-10 du code de la sécurité sociale).
+            L'allocation compensatrice tierce personne, les allocations familiales,
+            l'allocation de logement, la retraite du combattant, les rentes viagères
+            constituées en faveur d'une personne handicapée ou dans la limite d'un
+            montant fixé à l'article D.821-6 du code de la sécurité sociale (1 830 €/an),
+            lorsqu'elles ont été constituées par une personne handicapée pour elle-même.
+            Le RMI (article R 531-10 du code de la sécurité sociale).
         A partir du 1er juillet 2007, votre Caf, pour le calcul de votre Aah,
         continue à prendre en compte les ressources de votre foyer diminuées de 20%.
         Notez, dans certaines situations, la Caf évalue forfaitairement vos
@@ -168,7 +168,7 @@ class aah_base_ressources_hors_activite_eval_trimestrielle(Variable):
         three_previous_months = period.start.period('month', 3).offset(-3)
 
         ressources_a_inclure = [
-            'asi',
+            'asi', # Allocation Supplementaire d'Invaliditée = ASI
             'allocation_securisation_professionnelle',
             'bourse_recherche',
             'gains_exceptionnels',

@@ -1,0 +1,65 @@
+
+
+####################
+# les commentaires #
+####################
+
+### Créer un utilisateur => ok
+POST http://localhost:5000/signup
+Content-Type: application/json
+
+{
+  "pseudo": "cidaah2",
+  "password": "atcidaah",
+  "email": "regis@aah.com",
+  "birthdate": "11-05-1895",
+  "role": 3,
+  "disability_rate": 0.8,
+  "place_of_residence": true,
+  "apl": true
+}
+
+### login => ok
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+  "pseudo": "cidaah2",
+  "password": "cidaah"
+}
+
+
+
+
+
+###### creer un commentaire a article=> ok
+post http://localhost:5000/user/15/article/21/comment
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQxMjY3NCwiZXhwIjoxNjM0NDk5MDc0fQ.AQYW2HQhZKoiIdi--TQzpj7C3JN_Nn1Iz0OLmmGaXCc
+
+{
+  "content": "Mon commentaire que je poste"
+}
+
+###### creer un commentaire pour le livre d'or=> ok
+post http://localhost:5000/user/15/guestbook/20/comment
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQxMjY3NCwiZXhwIjoxNjM0NDk5MDc0fQ.AQYW2HQhZKoiIdi--TQzpj7C3JN_Nn1Iz0OLmmGaXCc
+
+{
+  "content": "Mon commentaire que je poste pour le livre d'or"
+}
+
+###### Lister tous les commentaire d'un utilisateur par ordre de mise a jour => OK
+GET http://localhost:5000/user/3/comments
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDEzMDgzNiwiZXhwIjoxNjM0MTMyNjM2fQ.VgPYPLeajf4oNxe9r6wLjkYanHn3daItXghCuooSlQQ
+
+### Compte tous les commentaires => ok
+GET http://localhost:5000/countcomments
+
+
+### delete comment => ok
+DELETE http://localhost:5000/user/3/comment/39
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDA2MDM5NCwiZXhwIjoxNjM0MDYyMTk0fQ.6lZyslXimbjjNOW63sW5RwG1NqLdrN7P8ClzjIaT3wU
