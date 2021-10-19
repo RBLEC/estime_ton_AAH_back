@@ -6,59 +6,18 @@ GET http://localhost:5000/
 
 
 
-####################
-# Les utilisateurs #
-####################
-
-### Lister les utilisateurs =>ok  Surement a supprimer
-GET http://localhost:5000/users
-
-
-
-### Lister un users + revenue + article &(comment-article) + commentaire =>ok
-GET http://localhost:5000/user/3
-
-### Créer un utilisateur => ok
-POST http://localhost:5000/user
-Content-Type: application/json
-
-{
-  "pseudo": "tata22",
-  "password": "tata",
-  "password2": "tata",
-  "email": "regis@aah.com",
-  "birthdate": "11-05-1895",
-  "role": 1
-}
-
-### delete utilisateur => ok
-DELETE http://localhost:5000/user/44
-
-
-### mise a jour un utlisateur => ok
-PATCH http://localhost:5000/user/9
-Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZoCI6MTQsInBzZXVkbyI6InRhdGEyMiIsImVtYWlsIjoiJDJiJDEwJEcwSVhrUzFuWUx4SGM1OHd4NGxuNmV2MDFVVEdQVUVvSVdDaWxOSmVQemkyakdYUGthMzJPIiwicm9sZSI6MSwiaWF0IjoxNjMyNjUyMjQ1LCJleHAiOjE2MzI2NTQwNDV9.pmwJVX9SMBbfL2FQu-uC9uHkumKhYQog_kaH7QvyAEE
-
-{
-  "pseudo": "Cide a jour",
-  "password": "Cide3",
-  "email": "regis@aah.com",
-  "birthdate": "1981-06-19",
-  "role": 3
-}
-
-
-
 ##########################
 # détail par utilisateur #
 ##########################
 
 ### détail par utilisateur avec son article + commentaire =>ok
 GET http://localhost:5000/user/3/article/1
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDM4NjUyMywiZXhwIjoxNjM0Mzg4MzIzfQ.u0Wa5aasQCVDkezXvhHwfjkEvwEoqG6co11v2IkrUkc
+
 
 ### détail par un autre utilisateur avec article + commentaire =>ok
 GET http://localhost:5000/user/2/article/1
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDM4NjUyMywiZXhwIjoxNjM0Mzg4MzIzfQ.u0Wa5aasQCVDkezXvhHwfjkEvwEoqG6co11v2IkrUkc
 
 ### les articles de l'utilisateur => ok
 GET http://localhost:5000/user/3/articles
@@ -67,11 +26,13 @@ GET http://localhost:5000/user/3/articles
 GET http://localhost:5000/user/3/comments
 
 ### les revenus de l'utilisateur => ok
-GET http://localhost:5000/user/3/incomes
+GET http://localhost:5000/user/3/infosimulations
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDM4NjUyMywiZXhwIjoxNjM0Mzg4MzIzfQ.u0Wa5aasQCVDkezXvhHwfjkEvwEoqG6co11v2IkrUkc
 
 
 ### un revenu de l'utilisateur => ok
-GET http://localhost:5000/user/3/income/2
+GET http://localhost:5000/user/3/income/1
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiY2lkYWFoMjIiLCJlbWFpbCI6InJlZ2lzQGFhaC5jb20iLCJyb2xlIjoxLCJpYXQiOjE2MzM4Nzc1NzcsImV4cCI6MTYzMzg3OTM3N30.27Kgm0G1M0sULCiZ0zMV5O76kca5a47QFOTJov0Zo14
 
 ### Le revenu d'un autre utilisateur Message errreur =>ok
 GET http://localhost:5000/user/1/income/2
@@ -79,12 +40,24 @@ GET http://localhost:5000/user/1/income/2
 ###### creer un revenues => ok
 post http://localhost:5000/user/3/income
 Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDEzOTgxNCwiZXhwIjoxNjM0MTQxNjE0fQ.TOPYME4Qh3_lTXRBeG7WACsFGFI5SlBjLwNUqFWm2h
 
 {
   "year": 2001,
-  "amount": 14222,
   "situation": "couple",
-  "nb_child": 0
+  "nb_child": 5,
+  "age": 40,
+  "disability_rate": 0.8,
+  "place_of_residence": true,
+  "apl": true,
+   "applicant_income_without_activity": 0,
+    "applicant_income_with_activity": 0,
+    "spouses_income": 19000,
+    "child_income1": 0,
+    "child_income2":0,
+    "child_income3": 0,
+    "child_income4": 0,
+    "child_income5" : 0
 }
 
 ###### Supprime un revenues => ok
@@ -107,43 +80,18 @@ Content-Type: application/json
 # Les Articles #
 ################
 
-###Liste tous les articles => ok
-GET http://localhost:5000/articles
 
 ###Liste un article => ok
 GET http://localhost:5000/article/1
 
 ### Lister les articles de l'utilisateur avec commentaire => ok
 GET http://localhost:5000/user/3/articles
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInBzZXVkbyI6InBvc3RtYW4zIiwiZW1haWwiOiIkMmIkMTAkYmJ1ekp0Yk9Fbm12WENyb1VKTzVzT3RLSS5PMEZPaHA4TUxSNFdpNXR2WmNEYXZyUnlhVlMiLCJyb2xlIjoxLCJpYXQiOjE2MzI2NTUyNDAsImV4cCI6MTYzMjY1NzA0MH0.cp9vJPq9bzsOBwYYBpysozjzL7mDx0zNFa8KGL2A2jw
 
 ### Liste un article de l'utilisateur + ses commentaire => OK
 GET http://localhost:5000/user/3/article/15
-
-
-### Créer un article => ok
-POST http://localhost:5000/user/3/article
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInBzZXVkbyI6InBvc3RtYW4zIiwiZW1haWwiOiIkMmIkMTAkYmJ1ekp0Yk9Fbm12WENyb1VKTzVzT3RLSS5PMEZPaHA4TUxSNFdpNXR2WmNEYXZyUnlhVlMiLCJyb2xlIjoxLCJpYXQiOjE2MzI2NTUyNDAsImV4cCI6MTYzMjY1NzA0MH0.cp9vJPq9bzsOBwYYBpysozjzL7mDx0zNFa8KGL2A2jw
-
-{
-  "title": "gfhfhf",
-  "content": "455",
-  "user_id": 3
-}
-
-### mise a jour un article => ok
-PATCH http://localhost:5000/user/2/article/15
-Content-Type: application/json
-
-{
-  "title": "Une liste de hacker  user 3",
-  "content": "auteur Cide ID3 une mise a jour test article 2",
-  "update_at": "2021-05-24",
-  "user_id": 3
-}
-
-### delete article => ok
-DELETE http://localhost:5000/user/3/article/19
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDA2MDM5NCwiZXhwIjoxNjM0MDYyMTk0fQ.6lZyslXimbjjNOW63sW5RwG1NqLdrN7P8ClzjIaT3wU
 
 
 
@@ -163,11 +111,10 @@ GET http://localhost:5000/user/3/comment/3
 ###### creer un commentaire => ok
 post http://localhost:5000/user/3/article/2/comment
 Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDA2MDM5NCwiZXhwIjoxNjM0MDYyMTk0fQ.6lZyslXimbjjNOW63sW5RwG1NqLdrN7P8ClzjIaT3wU
 
 {
-  "content": "fdgdgd",
-  "user_id": 3,
-  "article_id": 2
+  "content": "Mon commentaire que je poste"
 }
 
 ### Suprimer un commentaire => ok
@@ -189,21 +136,19 @@ Content-Type: application/json
 # Les Comptages #
 #################
 
-### Compte tous les commentaires => ok
-GET http://localhost:5000/commentsCount
+
 
 ### Compte tous les revenues => ok
 GET http://localhost:5000/incomesCount
 
-### Compte tous les utlisisateurs => ok
-GET http://localhost:5000/usersCount
+
 
 ### Compte tous les articles => ok
 GET http://localhost:5000/articlesCount
 
 ### Compte tous les articles => a faire plutard
 GET http://localhost:5000/Count
-
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDA1NzI4NSwiZXhwIjoxNjM0MDU5MDg1fQ.5mVQ6d_lA-l_Gt_80NnKGdc3dir4zi8Iam2E8fNo9sc
 
 
 
@@ -220,7 +165,7 @@ GET http://localhost:5000/Count
 
 GET http://localhost:5000/user/3/articles
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInBzZXVkbyI6InBvc3RtYW4zIiwiZW1haWwiOiIkMmIkMTAkYmJ1ekp0Yk9Fbm12WENyb1VKTzVzT3RLSS5PMEZPaHA4TUxSNFdpNXR2WmNEYXZyUnlhVlMiLCJyb2xlIjoxLCJpYXQiOjE2MzI2NTQ4NzcsImV4cCI6MTYzMjY1NjY3N30._Sscuxacin_n4fMFXHlAVaEMgLe_AN0o4wHen02fk_E
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDA1NzI4NSwiZXhwIjoxNjM0MDU5MDg1fQ.5mVQ6d_lA-l_Gt_80NnKGdc3dir4zi8Iam2E8fNo9sc
 
 
 ### login
@@ -228,73 +173,89 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-  "pseudo": "postman3",
-  "password": "Cide2"
+  "pseudo": "cidaah22",
+  "password": "cide"
 }
 
 ###
-GET http://localhost:5000/logme
+GET http://localhost:5000/refreshToken
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInBzZXVkbyI6ImNpZGUxMiIsImVtYWlsIjoicmVnaXNAZ21haWwuY29tIiwicm9sZSI6MSwiaWF0IjoxNjMyNjQ1NTIxLCJleHAiOjE2MzI2NDczMjF9.rOC2ONNdUh827AzQAjgWp0-6nq7_ha_BsKoLsW__U1M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDA1NzI4NSwiZXhwIjoxNjM0MDU5MDg1fQ.5mVQ6d_lA-l_Gt_80NnKGdc3dir4zi8Iam2E8fNo9sc
 
 ###
-GET http://localhost:5000/user/19
+GET http://localhost:5000/user/10
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInBzZXVkbyI6InBvc3RtYW4zIiwiZW1haWwiOiIkMmIkMTAkYmJ1ekp0Yk9Fbm12WENyb1VKTzVzT3RLSS5PMEZPaHA4TUxSNFdpNXR2WmNEYXZyUnlhVlMiLCJyb2xlIjoxLCJpYXQiOjE2MzI2NTkxNTgsImV4cCI6MTYzMjY2MDk1OH0.lOFF3Oh9xB_UPwS8H0OguJ2-gzpdvVfRE284YYz1DTc
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDA1NzI4NSwiZXhwIjoxNjM0MDU5MDg1fQ.5mVQ6d_lA-l_Gt_80NnKGdc3dir4zi8Iam2E8fNo9sc
 
 
 
 
-
-
-
-### logout
-POST http://localhost:5000/logout
+### login
+POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-  "email": "toto@gmail.com",
-  "password": "toto"
+  "pseudo": "cidaahAdmin",
+  "password": "cidaah"
 }
 
 
 ### Créer un utilisateur => ok
-POST http://localhost:5000/user
+POST http://localhost:5000/signup
 Content-Type: application/json
 
 {
-  "pseudo": "marie",
-  "password": "marie",
-  "password2": "marie",
+  "pseudo": "cidaahAdmin",
+  "password": "cidaah",
   "email": "regis@aah.com",
   "birthdate": "11-05-1895",
-  "role": 1
+  "role": 3,
+  "disability_rate": 0.8,
+  "place_of_residence": true,
+  "apl": true
 }
+
+
+
+
+
+### Créer une simulation => ok
+POST http://localhost:5000/simulation
+Content-Type: application/json
+
+{
+   
+}
+
+
+### Lister les articles de l'utilisateur avec commentaire => ok
+GET http://localhost:5000/user/3/guestbooks
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDM4Nzk1NCwiZXhwIjoxNjM0Mzg5NzU0fQ.zhzhG_USbhabG7-CeGZ_13JoH1M_U-w6c7PPokATvQw
+
+
+
 
 ### 
-POST http://localhost:5000/signup
-Content-Type: application/json
+POST http://localhost:5000/simulation
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDM4Nzk1NCwiZXhwIjoxNjM0Mzg5NzU0fQ.zhzhG_USbhabG7-CeGZ_13JoH1M_U-w6c7PPokATvQw
 
 {
-  "pseudo": "postman3",
-  "password": "Cide2",
-  "passwordConfirm":"Cide2",
-  "email": "regis@aah.com",
-  "birthdate": "1981-06-19",
-  "role": 1
+ "content": "j'ai fait une simulation",
 }
 
 
-### count user
-POST http://localhost:5000/signup
-Content-Type: application/json
+### je compte le nombre total de simulation
+GET http://localhost:5000/countnbsimulations
 
-{
-  "pseudo": "postman3",
-  "password": "Cide2",
-  "passwordConfirm":"Cide2",
-  "email": "regis@aah.com",
-  "birthdate": "1981-06-01",
-  "role": 1
-}
-##
+
+### je compte et montre toutes les simulations
+GET http://localhost:5000/simulations
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDA1NzI4NSwiZXhwIjoxNjM0MDU5MDg1fQ.5mVQ6d_lA-l_Gt_80NnKGdc3dir4zi8Iam2E8fNo9sc
+
+
+
+
+
+###
+GET http://localhost:5000/user/10/simulations
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDM4Nzk1NCwiZXhwIjoxNjM0Mzg5NzU0fQ.zhzhG_USbhabG7-CeGZ_13JoH1M_U-w6c7PPokATvQw

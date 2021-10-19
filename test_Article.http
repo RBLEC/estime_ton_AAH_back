@@ -1,0 +1,57 @@
+
+### login => ok
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+  "pseudo": "cidaah2",
+  "password": "cidaah"
+}
+
+#######################
+# Les routes Articles #
+#######################
+
+###Liste tous les articles => ok
+GET http://localhost:5000/articles
+
+### les 10 derniers articles => ok
+GET http://localhost:5000/lastarticles
+
+###Liste un article => ok
+GET http://localhost:5000/article/21
+
+### Créer un article => ok
+POST http://localhost:5000/user/3/article
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQxMDY4NCwiZXhwIjoxNjM0NDk3MDg0fQ.bJ5Y1g0bW5hTPyOFwaQkwuavr6pWWWNoBnSvBZ7hjV4
+
+{
+  "title": "Création d'un article",
+  "content": "ici le contenu des articles"
+}
+
+### mise a jour un article => ok
+PATCH http://localhost:5000/user/9/article/21
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQxMDY4NCwiZXhwIjoxNjM0NDk3MDg0fQ.bJ5Y1g0bW5hTPyOFwaQkwuavr6pWWWNoBnSvBZ7hjV4
+
+{
+  "title": "Une liste de hacker  user 3",
+  "content": "auteur Cide ID3 une mise a jour test article 2"
+}
+
+### delete article => ok
+DELETE http://localhost:5000/user/3/article/9
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDA2MDM5NCwiZXhwIjoxNjM0MDYyMTk0fQ.6lZyslXimbjjNOW63sW5RwG1NqLdrN7P8ClzjIaT3wU
+
+### Liste tous les articles de l'utilisateur par ordre DESC => ok
+get http://localhost:5000/user/3/articles
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDEyODk2OCwiZXhwIjoxNjM0MTMwNzY4fQ.uPXqyqQYylyxr32UvayKnyoHIcDN8XVA1fbIgUZCenw
+
+
+### Compte tous les articles => ok
+GET http://localhost:5000/countarticles
+

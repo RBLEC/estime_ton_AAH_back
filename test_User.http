@@ -1,0 +1,105 @@
+
+############################
+# Les routes d'utilisateur #
+############################
+
+### Créer un utilisateur => ok
+POST http://localhost:5000/signup
+Content-Type: application/json
+
+{
+  "pseudo": "cidaah2",
+  "password": "atcidaah",
+  "email": "regis@aah.com",
+  "birthdate": "11-05-1895",
+  "role": 3,
+  "disability_rate": 0.8,
+  "place_of_residence": true,
+  "apl": true
+}
+
+### login => ok
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+  "pseudo": "cidaah2",
+  "password": "cidaah"
+}
+
+### Lister les utilisateurs =>ok  
+GET http://localhost:5000/users
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+
+
+
+
+### Lister un users + revenue + article &(comment-article) + commentaire =>ok
+GET http://localhost:5000/user/10
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+
+
+
+
+
+
+
+### mise a jour un utlisateur => ok
+PATCH http://localhost:5000/user/9
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+{
+  "pseudo": "cidaah2 a jour1",
+  "password": "atcidaah",
+  "email": "regis@aah.com",
+  "birthdate": "11-05-1895",
+  "role": 3,
+  "disability_rate": 0.8,
+  "place_of_residence": true,
+  "apl": true
+}
+
+### delete utilisateur => ok
+DELETE http://localhost:5000/user/2
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+
+
+### Compte tous les utlisisateurs => ok
+GET http://localhost:5000/usersCount
+
+### Compte tous les utlisisateurs => ok
+GET http://localhost:5000/simulationsCount
+
+
+### ### les 10 dernier comment user
+GET http://localhost:5000/userLastComment/10
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+### les 10 dernier article user
+GET http://localhost:5000/userLastArticle/10
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+### les 10 dernier guestbook user
+GET http://localhost:5000/userLastGuestbook/10
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+### les 10 dernier guestbook user
+GET http://localhost:5000/userLastInfosimulation/10
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+
+###
+POST http://localhost:5000/refreshToken
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU

@@ -1,0 +1,101 @@
+############################
+# Les routes d'utilisateur #
+############################
+
+### Créer un utilisateur => ok
+POST http://localhost:5000/signup
+Content-Type: application/json
+
+{
+  "pseudo": "cidaah23",
+  "password": "atcidaah",
+  "email": "regis@aah.com",
+  "birthdate": "11-05-1895",
+  "role": 1,
+  "disability_rate": 0.8,
+  "place_of_residence": true,
+  "apl": true
+}
+
+### login => ok
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+  "pseudo": "cidaah23",
+  "password": "atcidaah"
+}
+
+### Compte tous les simulations => ok
+GET http://localhost:5000/nbsimulations
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQ3NTg4OCwiZXhwIjoxNjM0NTYyMjg4fQ.C36A2_udGgjP2fVV3Z04ljjf37_xWW5KmdpGo5_WOYI
+
+###### creer un revenues => ok
+post http://localhost:5000/user/1/infosimulation
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQ3NTg4OCwiZXhwIjoxNjM0NTYyMjg4fQ.C36A2_udGgjP2fVV3Z04ljjf37_xWW5KmdpGo5_WOYI
+
+{
+    // Data
+    "year": 2001,
+    "aah_amount" :903.6,
+    "mva_amount" :104.77,
+    "smichb" :10.25,
+    "smicnbtf" :151.67,
+    "ageMinimal": 20,
+    "ageRetraite" : 62 ,
+    "disability_rate_mini" :0.6666,
+    "disability_rate_max" :0.80,
+    "majorationPlafonCouple": 0.81,
+    "coefPersonneACharge": 0.5,
+    // Info du foyer
+    "household_composition": "en couple",
+    "nb_child": 9,
+    "place_of_residence" : true,
+    "apl": true,
+    // le demandeur
+    "applicant_age" :40,
+    "applicant_disability" : true,
+    "applicant_disability_rate" :0.8,
+    "applicant_income_without_activity": 0,
+    "applicant_income_with_activity":0,
+    // le conjoint
+    "spouse_age" :40,
+    "spouse_disability" : false,
+    "spouse_disability_rate" :0,
+    "spouse_income_without_activity":0,
+    "spouse_income_with_activity": 37000,
+    // les enfants
+    "child_income1": 1,
+    "child_income2": 0,
+    "child_income3": 0,
+    "child_income4": 0,
+    "child_income5": 0
+}
+
+###
+POST http://localhost:5000/nbsimulation
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+{
+ "content": "j'ai fait une simulation"
+}
+
+###### liste toutes les simulation => ok
+GET http://localhost:5000/user/1/infosimulations
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+
+### les 10 dernier guestbook user
+GET http://localhost:5000/userLastInfosimulation/10
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+
+###### sup une  simulation => ok
+DELETE  http://localhost:5000/user/1/infosimulation/12
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
+

@@ -26,11 +26,22 @@ User.init({
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    updated_at: {
-      type: DataTypes.DATE,
+    disability_rate: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
-   
+    place_of_residence: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    apl: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      allowNull:  false,
+    },
 }, {
     sequelize,
     // le nom de la table
