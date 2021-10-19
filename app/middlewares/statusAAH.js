@@ -1,4 +1,4 @@
-const phraseFin = require("./phraseFin");
+const phraseFin = require("../middlewares/phraseFin");
 
 //* phrase de fin détailler
     function statusAAH(

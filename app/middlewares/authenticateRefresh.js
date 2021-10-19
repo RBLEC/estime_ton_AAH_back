@@ -1,7 +1,7 @@
 const jwt = require (`jsonwebtoken`);
 
 const jwtSecretRefresh = process.env.JWT_SECRET_REFRESH;
-const {generateAccessToken }= require(`./jwt`);
+const {generateAccessToken }= require(`../middlewares/jwt`);
     
 //* middleware d`authetification de token
 function authenticateTokenRefresh (req, res, next) {
