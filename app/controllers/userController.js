@@ -192,9 +192,6 @@ exports.createUser = async (req, res) => {
   if (!password) {
     missingParams.push(`Votre mot de passe`);
   }
-  if (!disability_rate) {
-    missingParams.push(`Votre taux d'invalidité`);
-  }
   if (!place_of_residence) {
     missingParams.push(`Votre lieu de résidance`);
   }
