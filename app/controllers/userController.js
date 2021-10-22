@@ -192,12 +192,6 @@ exports.createUser = async (req, res) => {
   if (!password) {
     missingParams.push(`Votre mot de passe`);
   }
-  if (!place_of_residence) {
-    missingParams.push(`Votre lieu de résidance`);
-  }
-  if (!apl) {
-    missingParams.push(`Toucher vous des apl`);
-  }
   if (missingParams.length > 0) {
     return res.status(400).json({
       success: false,
