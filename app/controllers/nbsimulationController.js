@@ -5,7 +5,7 @@ const { Nbsimulation, User } = require(`../models`);
     await Nbsimulation.count().then(simulations => {
       res.status(200).json({
         success: true,
-        message: (`Voici le nombre total de simulation => ${simulations}`),
+        message: (`Le nombre total de simulation ${simulations}`),
         simulations
       });
     }).catch(error => {

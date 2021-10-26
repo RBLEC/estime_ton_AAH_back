@@ -8,10 +8,10 @@ POST http://localhost:5000/signup
 Content-Type: application/json
 
 {
-  "pseudo": "cidaah2t8924534tt",
+  "pseudo": "cidaah2t81924534tt",
   "password": "atcidaah",
   "email": "regis@aah.com",
-  "birthdate": "11-05-1895",
+  "birthdate": "11/05/1895",
   "role": 3,
   "disability_rate": 0,
   "place_of_residence": false,
