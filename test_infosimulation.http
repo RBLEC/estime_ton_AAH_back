@@ -33,8 +33,9 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywicHNldWRvIj
 
 ###### creer un revenues => ok
 post http://localhost:5000/user/1/infosimulation
+#post https://projet-estime-ton-aah-back.herokuapp.com/user/1/infosimulation
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQ3NTg4OCwiZXhwIjoxNjM0NTYyMjg4fQ.C36A2_udGgjP2fVV3Z04ljjf37_xWW5KmdpGo5_WOYI
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInBzZXVkbyI6ImNpZGFhaDI3NzciLCJlbWFpbCI6InJlZ2lzQGFhaC5jb20iLCJyb2xlIjozLCJpYXQiOjE2MzU0MzEyNjEsImV4cCI6MTYzNTUxNzY2MX0.obYwRPgsS9jrXAoDj42o66ESjCUA0LRzWDcmcZkdy6A
 
 {
     // Data

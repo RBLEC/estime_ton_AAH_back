@@ -98,31 +98,31 @@ Infosimulation.init({
     //! Le conjoint
     spouse_age: {
         type: DataTypes.INTEGER, 
-        allowNull: false
+        allowNull: true
     },
     spouse_disability: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
     },
     spouse_disability_rate: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     spouse_eligibility_aah: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
     },
     spouse_eligibility_mva: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
     },
     spouse_income_without_activity: {
         type: DataTypes.INTEGER, 
-        allowNull: false,
+        allowNull: true,
     },
     spouse_income_with_activity: {
         type: DataTypes.INTEGER, 
-        allowNull: false,
+        allowNull: true,
     },
     //! Les enfants
     child_income1: {

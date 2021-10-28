@@ -105,7 +105,7 @@ const phraseFin = require("../middlewares/phraseFin");
     //  missingParams.push(`l'age du demandeur`);
     //}
     //if (!spouse_age) {
-    //  missingParams.push(`l'age du demandeur`);
+    //  missingParams.push(`l'age du conjoint`);
     //}
     if (missingParams.length > 0) {
       return res.status(400).json(`Il manque des paramètres: ${missingParams.join(`, `)}`);
