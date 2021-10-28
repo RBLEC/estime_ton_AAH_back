@@ -175,13 +175,10 @@ exports.getUserLastInfosimulation = async (req, res) => {
 
 //* création d'un utilisateur
 exports.createUser = async (req, res) => {
-  const { pseudo, email, birthdate, password, role, disability_rate, place_of_residence, apl  } = req.body;
+  const { pseudo, email, password, role} = req.body;
   let missingParams = [];
   if (!pseudo) {
     missingParams.push(`Votre pseudo`);
-  }
-  if (!birthdate) {
-    missingParams.push(`Votre date de naissance`);
   }
   if (!role) {
     missingParams.push(`role`);
