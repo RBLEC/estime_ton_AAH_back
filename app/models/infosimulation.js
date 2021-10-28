@@ -60,11 +60,11 @@ Infosimulation.init({
     },
     place_of_residence: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
     },
     apl: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
     },
     //! Le demandeur
     applicant_age: {
