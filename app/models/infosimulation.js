@@ -127,23 +127,23 @@ Infosimulation.init({
     //! Les enfants
     child_income1: {
         type: DataTypes.INTEGER, 
-        allowNull: false
+        allowNull: true
     },
     child_income2: {
         type: DataTypes.INTEGER, 
-        allowNull: false
+        allowNull:  true
     },
     child_income3: {
         type: DataTypes.INTEGER, 
-        allowNull: false
+        allowNull:  true
     },
     child_income4: {
         type: DataTypes.INTEGER, 
-        allowNull: false
+        allowNull:  true
     },
     child_income5: {
         type: DataTypes.INTEGER, 
-        allowNull: false
+        allowNull:  true
     },
     //! le Résultat
     coef_foyer: {
