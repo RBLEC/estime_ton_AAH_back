@@ -214,11 +214,7 @@ exports.createUser = async (req, res) => {
       pseudo: req.body.pseudo,
       password: hashPassword,
       email: req.body.email,
-      birthdate: req.body.birthdate,
       role: req.body.role,
-      disability_rate: req.body.disability_rate,
-      place_of_residence: req.body.place_of_residence,
-      apl: req.body.apl,
     };
     await User.create(newUser);
     res.status(200).json({
@@ -244,11 +240,7 @@ exports.updateUser = async (req, res) => {
     pseudo: req.body.pseudo,
     password: hashPassword,
     email: req.body.email,
-    birthdate: req.body.birthdate,
     role: req.body.role,
-    disability_rate: req.body.disability_rate,
-    place_of_residence: req.body.place_of_residence,
-    apl: req.body.apl,
   };
   //* je récupère le user à modifier
   await User.findByPk(userId)

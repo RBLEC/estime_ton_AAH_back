@@ -18,25 +18,9 @@ User.init({
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    birthdate: {
-      type: DataTypes.DATE(6),
-      allowNull: true,
-    },
     role: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    disability_rate: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    place_of_residence: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-    },
-    apl: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
     },
     updated_at: {
       type: DataTypes.DATE,

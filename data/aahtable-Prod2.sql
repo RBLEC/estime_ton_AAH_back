@@ -20,16 +20,11 @@ DROP TABLE IF EXISTS "article_guestbook_comment_user" CASCADE; -- ! on ferme ave
 
 -- Création de la TABLE "utilisateur"
 CREATE TABLE IF NOT EXISTS "user" ( 
-    -- serial PRIMARY KEY pour in id unique
     "id" SERIAL PRIMARY KEY, 
     "pseudo" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "birthdate" TIMESTAMP NOT NULL,
     "role" INTEGER NOT NULL,
-    "disability_rate" TEXT NOT NULL,
-    "place_of_residence" BOOLEAN NOT NULL,
-    "apl" BOOLEAN NOT NULL, 
     "created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMP NULL DEFAULT NOW()
 );
@@ -62,19 +57,19 @@ CREATE TABLE IF NOT EXISTS "infosimulation" (
     "applicant_income_without_activity" INTEGER NOT NULL,
     "applicant_income_with_activity" INTEGER NOT NULL,
     -- le conjoint
-    "spouse_age" INTEGER NOT NULL,
-    "spouse_disability" BOOLEAN NOT NULL,
-    "spouse_disability_rate" TEXT NOT NULL,
-    "spouse_eligibility_aah" BOOLEAN NOT NULL,
-    "spouse_eligibility_mva" BOOLEAN NOT NULL,
-    "spouse_income_without_activity" INTEGER NOT NULL,
-    "spouse_income_with_activity" INTEGER NOT NULL,
+    "spouse_age" INTEGER NULL,
+    "spouse_disability" BOOLEAN NULL,
+    "spouse_disability_rate" TEXT NULL,
+    "spouse_eligibility_aah" BOOLEAN NULL,
+    "spouse_eligibility_mva" BOOLEAN NULL,
+    "spouse_income_without_activity" INTEGER NULL,
+    "spouse_income_with_activity" INTEGER NULL,
     -- les enfants
-    "child_income1" INTEGER NOT NULL,
-    "child_income2" INTEGER NOT NULL,
-    "child_income3" INTEGER NOT NULL,
-    "child_income4" INTEGER NOT NULL,
-    "child_income5" INTEGER NOT NULL,
+    "child_income1" INTEGER NULL,
+    "child_income2" INTEGER NULL,
+    "child_income3" INTEGER NULL,
+    "child_income4" INTEGER NULL,
+    "child_income5" INTEGER NULL,
     -- le résultat
     "coef_foyer" TEXT NOT NULL,
     "plafond_foyer_annuel" TEXT NOT NULL,
