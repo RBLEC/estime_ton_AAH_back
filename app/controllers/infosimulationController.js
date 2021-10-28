@@ -95,12 +95,12 @@ const phraseFin = require("../middlewares/phraseFin");
     if (!household_composition) {
       missingParams.push(`votre situation`);
     }
-    if (!place_of_residence) {
-      missingParams.push(`le lieu de résidence`);
-    }
-    if (!apl) {
-      missingParams.push(`des apl`);
-    }
+    //if (!place_of_residence) {
+    //  missingParams.push(`le lieu de résidence`);
+    //}
+    //if (!apl) {
+    //  missingParams.push(`des apl`);
+    //}
     //if (!applicant_age) {
     //  missingParams.push(`l'age du demandeur`);
     //}
