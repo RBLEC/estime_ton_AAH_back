@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS "infosimulation" CASCADE;
 DROP TABLE IF EXISTS "article" CASCADE;
 DROP TABLE IF EXISTS "guestbook" CASCADE; 
 DROP TABLE IF EXISTS "comment" CASCADE;
-DROP TABLE IF EXISTS "simulation" CASCADE;
+DROP TABLE IF EXISTS "nbsimulation" CASCADE;
 DROP TABLE IF EXISTS "article_guestbook_comment_user" CASCADE; -- ! on ferme avec un " ; " 
 
 
