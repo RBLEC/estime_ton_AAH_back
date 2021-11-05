@@ -2,6 +2,7 @@ const express = require(`express`);
 const router = express.Router();
 
 const path = require('path');
+const axios = require('axios')
 
 // nodemailer
 const sendMessage = require(`../nodemailer`);
@@ -100,10 +101,21 @@ router.get(`/api`, (req, res) => {
   });
 });
 
-router.get(`/aahmontant`, (req, res) => {
+
+// 
+router.get(`/aahmontant`, async (res) => {
+  await axios
+  .get("https://fr.openfisca.org/api/latest/parameter/prestations.minima_sociaux.aah.montant")
+  .then(res =>{
+     aahMontant= res.data.values;
+     aahDescription= res.data.description;
+     console.log(`nbs`, aahMontant);
+     console.log(`res`, res);
+  })
   res.status(200).json({
-    success: true,
-    message: `Bienvenu sur le serveur Back 'Estime ton AAH !' `,
+  success: true,
+  aahDescription,
+  aahMontant,
   });
 });
 
