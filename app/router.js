@@ -100,6 +100,13 @@ router.get(`/api`, (req, res) => {
   });
 });
 
+router.get(`/aahmontant`, (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: `Bienvenu sur le serveur Back 'Estime ton AAH !' `,
+  });
+});
+
 // Middleware pour gérer le cas où on a trouvé aucune route (404)
 router.use((req, res) => {
   res.status(404).json({
