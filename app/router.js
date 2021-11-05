@@ -1,6 +1,5 @@
 const express = require(`express`);
 const router = express.Router();
-
 const path = require('path');
 const axios = require('axios')
 
@@ -101,16 +100,16 @@ router.get(`/api`, (req, res) => {
   });
 });
 
-
-// 
-router.get(`/aahmontant`, async (res) => {
+//! OpenFisca
+// Le montant de l'AAH
+router.get(`/aahMontant`, async (req, res) => {
   await axios
   .get("https://fr.openfisca.org/api/latest/parameter/prestations.minima_sociaux.aah.montant")
   .then(res =>{
-     aahMontant= res.data.values;
-     aahDescription= res.data.description;
-     console.log(`nbs`, aahMontant);
-     console.log(`res`, res);
+    aahMontant= res.data.values;
+    aahDescription= res.data.description;
+    console.log(`nbs`, aahMontant);
+    console.log(`res`, res);
   })
   res.status(200).json({
   success: true,
@@ -118,6 +117,88 @@ router.get(`/aahmontant`, async (res) => {
   aahMontant,
   });
 });
+
+// majoration_plafond_couple
+router.get(`/majorationPlafondCouple`, async (req, res) => {
+  await axios
+  .get("https://fr.openfisca.org/api/latest/parameter/prestations.minima_sociaux.aah.majoration_plafond_couple")
+  .then(res =>{
+    majorationPlafondCoupleCoef= res.data.values;
+    majorationPlafondCoupleDescription= res.data.description;
+  })
+  res.status(200).json({
+  success: true,
+  majorationPlafondCoupleDescription,
+  majorationPlafondCoupleCoef,
+  });
+});
+
+// coefPersonneACharge
+router.get(`/coefPersonneACharge`, async (req, res) => {
+  await axios
+  .get("https://fr.openfisca.org/api/latest/parameter/prestations.minima_sociaux.aah.majoration_plafond_personne_a_charge")
+  .then(res =>{
+    coefPersonneACharge= res.data.values;
+    coefPersonneAChargeDescription= res.data.description;
+  })
+  res.status(200).json({
+  success: true,
+  coefPersonneAChargeDescription,
+  coefPersonneACharge,
+  });
+});
+
+// smichb
+router.get(`/smichb`, async (req, res) => {
+  await axios
+  .get("https://fr.openfisca.org/api/latest/parameter/marche_travail.salaire_minimum.smic_h_b")
+  .then(res =>{
+    smichb= res.data.values;
+    smichbDescription= res.data.description;
+  })
+  res.status(200).json({
+  success: true,
+  smichbDescription,
+  smichb,
+  });
+});
+
+// smichbtf
+router.get(`/smichbtf`, async (req, res) => {
+  await axios
+  .get("https://fr.openfisca.org/api/latest/parameter/marche_travail.salaire_minimum.nb_heure_travail_mensuel")
+  .then(res =>{
+    smichbtf= res.data.values;
+    smichbtfDescription= res.data.description;
+  })
+  res.status(200).json({
+  success: true,
+  smichbtfDescription,
+  smichbtf,
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Middleware pour gérer le cas où on a trouvé aucune route (404)
 router.use((req, res) => {
