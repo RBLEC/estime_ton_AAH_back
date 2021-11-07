@@ -1,6 +1,5 @@
 const express = require(`express`);
 const router = express.Router();
-
 const path = require('path');
 
 // nodemailer
@@ -13,6 +12,7 @@ const guestbookController = require(`./controllers/guestbookController`);
 const commentController = require(`./controllers/commentController`);
 const infosimulationController = require(`./controllers/infosimulationController`);
 const nbsimulationController = require(`./controllers/nbsimulationController`);
+const apiExt = require('./controllers/apiExt');
 
 // importation du middleware
 const authenticate = require(`./middlewares/authenticate`);
@@ -84,6 +84,18 @@ router.get(`/countguestbooks`, guestbookController.getCountGuestbooks);
 router.get(`/countcomments`, commentController.getCountComments);
 router.get(`/countusers`, userController.getCountUsers);
 router.get(`/countnbsimulations`, nbsimulationController.getCountNbsimulations);
+
+//! Openfisca
+router.get(`/apiext/aah`, apiExt.getAAH);
+router.get(`/apiext/majorationPlafondCouple`, apiExt.getMajorationPlafondCouple);
+router.get(`/apiext/coefPersonneACharge`, apiExt.getCoefPersonneACharge);
+router.get(`/apiext/smichb`, apiExt.getSmichb);
+router.get(`/apiext/smichbtf`, apiExt.getSmichbtf);
+router.get(`/apiext/mva`, apiExt.getMVA);
+router.get(`/apiext/ageMinimal`, apiExt.getAgeMinimal);
+router.get(`/apiext/ageRetraite`, apiExt.getAgeRetraite);
+router.get(`/apiext/tauxInvalidite`, apiExt.getTauxInvalidite);
+router.get(`/apiext/tauxInvaliditeMinimum`, apiExt.getTauxInvaliditeMinimum);
 
 //! Nodemailer
 router.post(`/send_message`, sendMessage);

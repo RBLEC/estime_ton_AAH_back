@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/O-clock-Pan/projet-calculateur-aah-back#readme",
   "dependencies": {
+    "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
