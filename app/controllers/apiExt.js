@@ -87,8 +87,8 @@ exports.getSmichb = async (req, res) => {
       })
       res.status(200).json({
         success: true,
-        smichbtfDescription,
-        smichbtf,
+        smichbDescription,
+        smichb,
       });
   }catch (error) {
     console.error(error);
