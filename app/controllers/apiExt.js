@@ -2,7 +2,6 @@
 const axios = require('axios');
 
 //! OpenFisca France
-
 // Montant mensuel de l'allocation adulte handicapé
 exports.getAAH = async (req, res) => {
   try {
@@ -218,6 +217,7 @@ exports.getTauxInvalidite = async (req, res) => {
     });
   }
 }
+
 // Taux d'incapacité minimum
 exports.getTauxInvaliditeMinimum = async (req, res) => {
   try {
@@ -226,7 +226,6 @@ exports.getTauxInvaliditeMinimum = async (req, res) => {
       .then(res =>{
         tauxInvaliditeMinimum = res.data.values;
         tauxInvaliditeMinimumDescription = "Taux d'incapacité minimum";
-        console.log(`res`, res)
       })
       res.status(200).json({
         success: true,
@@ -242,4 +241,3 @@ exports.getTauxInvaliditeMinimum = async (req, res) => {
     });
   }
 }
-
