@@ -82,8 +82,8 @@ exports.getSmichb = async (req, res) => {
     await axios
       .get("https://fr.openfisca.org/api/latest/parameter/marche_travail.salaire_minimum.smic_h_b")
       .then(res =>{
-        smichbtf= res.data.values;
-        smichbtfDescription= res.data.description;
+        smichb= res.data.values;
+        smichbDescription= res.data.description;
       })
       res.status(200).json({
         success: true,
