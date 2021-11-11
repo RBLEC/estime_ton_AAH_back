@@ -309,31 +309,52 @@ exports.getCountUsers = async (req, res) => {
 //* pour login user
 exports.loginUser = async (req, res) => {
   try {
-    let userInfo;
-    await User.findOne({
-      where: { pseudo: req.body.pseudo },
-    }).then((result) => {
-      if (!result.dataValues.pseudo) {
+    const {password , pseudo} = req.body;
+
+    let missingParams =[];
+    if (!pseudo) {
+      missingParams.push(`pseudo`);
+    }
+    if (!password) {
+      missingParams.push(`mot de passe`);
+    }
+    if (missingParams.length > 0) {
+      return res.status(400).json({
+        sucess: false,
+        message:`Il manque votre ${missingParams.join(` et le `)}`});
+    }
+
+    const logUser = await User.findOne({
+      where: { pseudo }
+    });
+
+    if (!logUser) {
+      return res.status(401).json({
+        success: false,
+        message: `L'utilisateur n'existe pas !`,
+      });
+    }
+
+    userInfo = logUser.dataValues;
+
+    validPwd = await bcrypt.compare(password, userInfo.password );
+      if (!validPwd) {
         return res.status(401).json({
           success: false,
-          message: `Données non trouvé !`,
+          message: 'Le mot de passe est invalide !',
         });
       }
-      userInfo = result.dataValues;
-    });
-    bcrypt.compare(req.body.password, userInfo.password, (error) => {
-      if (error) {
-        throw new Error(error);
-      }
-    });
+
     const userLog = {
       id: userInfo.id,
       pseudo: userInfo.pseudo,
       email: userInfo.email,
       role: userInfo.role,
     };
+
     const accessToken = generateAccessToken(userLog);
     const refreshToken = generateRefreshToken(userLog);
+
     res.status(200).json({
       success: true,
       message: `Bienvenu ${userInfo.pseudo}`,
@@ -341,11 +362,12 @@ exports.loginUser = async (req, res) => {
       accessToken,
       refreshToken
     });
+
   } catch (error) {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: `données non trouvé !`,
+        message: `Données non trouvé !`,
         error: error.message,
       });
   }
