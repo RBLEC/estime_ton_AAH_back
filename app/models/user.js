@@ -18,6 +18,10 @@ User.init({
         type: DataTypes.TEXT,
         allowNull: false,
     },
+    author: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+    },
     role: {
       type: DataTypes.INTEGER,
       allowNull: false,

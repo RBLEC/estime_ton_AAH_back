@@ -3,6 +3,9 @@ const { Guestbook, User } = require(`../models`);
   // Liste tous les articles avec les commentaires par ordre de création desc
   exports.getGuestbooks = async (req, res) => {
     await Guestbook.findAndCountAll( { 
+      include: {
+        association: `user`
+      },
       order:[["updated_at", "DESC"]],
     }).then(guestbooks => {
       res.status(200).json({
@@ -23,6 +26,9 @@ const { Guestbook, User } = require(`../models`);
   // les 10 derniers messages du livre d'or
   exports.getLastGuestbooks = async (req, res) => {
     await Guestbook.findAndCountAll( {
+      include: {
+        association: `user`
+      },
       order: [[`created_at`, `DESC`]], 
       offset: 5,
       limit:10,
@@ -47,7 +53,10 @@ const { Guestbook, User } = require(`../models`);
   exports.getGuestbook = async (req, res) => {
     const guestbookId = parseInt(req.params.id, 10);
     await Guestbook.findByPk(guestbookId, {
-      include: `comment`
+      include: `comment`,
+      include: {
+        association: `user`
+      },
     }).then((guestbook) => {
       if(!guestbook) {
         throw new Error(`Message du livre d'or non trouvé`);

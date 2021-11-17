@@ -1,6 +1,7 @@
 const { User } = require(`../models`);
 const {generateAccessToken,generateRefreshToken }= require(`../middlewares/jwt`);
 const bcrypt = require("bcrypt");
+const assiette = require("../middlewares/assiette");
 
 //* liste de tous les utilisateurs
 exports.getUsers = async (req, res) => {
@@ -31,7 +32,7 @@ exports.getUsers = async (req, res) => {
 //* liste un utilisateur avec ses infos
 exports.getUser = async (req, res) => {
   const userId = userToken.id
-  await User.findAndCountAll( { 
+  await User.findAll( { 
     where: id = userId,
     }).then((user) => {
       if (!user) {
@@ -40,7 +41,7 @@ exports.getUser = async (req, res) => {
       res.status(200).json({
         success: true,
         message: `Toutes les informations de l'utilisateur`,
-        user,
+        user
       });
     })
     .catch((error) => {
@@ -211,13 +212,22 @@ exports.createUser = async (req, res) => {
       pseudo: req.body.pseudo,
       password: hashPassword,
       email: req.body.email,
+      author: req.body.author,
       role: req.body.role,
     };
+
+    const newUserWOPW = {
+      pseudo: req.body.pseudo,
+      email: req.body.email,
+      author: req.body.author,
+      role: req.body.role,
+    };
+
     await User.create(newUser);
     res.status(200).json({
       success: true,
       message: `Tout c'est bien passé, l'utilisateur à bien été crée avec le pseudo ${pseudo}`,
-      newUser
+      newUserWOPW
     });
   } catch (error) {
     console.trace(error);
@@ -232,11 +242,22 @@ exports.createUser = async (req, res) => {
 //* Mise à jour d'un utilisateur
 exports.updateUser = async (req, res) => {
   const userId = userToken.id
+  const userExist = await User.findOne({
+    where: { pseudo: req.body.pseudo },
+  });
+  if (userExist) {
+    // 409 conflit
+    return res.status(409).json({
+      success: false,
+      message: `le pseudo ${req.body.pseudo} est déja existant !`,
+    });
+  }
   const hashPassword = await bcrypt.hash(req.body.password, 10);
   const userData = {
     pseudo: req.body.pseudo,
     password: hashPassword,
     email: req.body.email,
+    author: req.body.author,
     role: req.body.role,
   };
   //* je récupère le user à modifier
@@ -246,10 +267,16 @@ exports.updateUser = async (req, res) => {
     })
     .then((user) => {
       // lorsque le mise à jours est terminée je renvoi au client la usere modifiée
+      const userWOPW = {
+      pseudo: user.dataValues.pseudo,
+      email: user.dataValues.email,
+      author: user.dataValues.author,
+      role: user.dataValues.role,
+      };
       res.status(200).json({
         success: true,
         message: `Utilisateur mis à jour`,
-        user,
+        userWOPW
       });
     })
     .catch((error) => {
@@ -349,6 +376,7 @@ exports.loginUser = async (req, res) => {
       id: userInfo.id,
       pseudo: userInfo.pseudo,
       email: userInfo.email,
+      author: userInfo.author,
       role: userInfo.role,
     };
 

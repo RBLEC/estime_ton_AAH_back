@@ -8,7 +8,9 @@ const { Comment, User } = require(`../models`);
         where: id = userId,
         include:[
           model = 'comment', 
+          
         ],
+        //association: `user`,
         order:[[
           model = 'comment',
           "updated_at", "DESC",

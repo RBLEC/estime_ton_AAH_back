@@ -3,7 +3,9 @@ const { Article, User } = require(`../models`);
   // Liste tous les articles avec les commentaires par ordre de création desc
   exports.getArticles = async (req, res) => {
     await Article.findAndCountAll( {
-      //include: {association: `comment`},
+      include: {
+        association: `user`
+      },
       order: [[`created_at`, `DESC`]],           
     }).then(articles => {
       res.status(200).json({
@@ -24,10 +26,13 @@ const { Article, User } = require(`../models`);
   // les 10 derniers articles
   exports.getLastArticles = async (req, res) => {
     await Article.findAndCountAll( {
-    order: [[`created_at`, `DESC`]], 
-    offset: 5,
-    limit:10,
-    subQuery: false,    
+      include: {
+        association: `user`
+      },
+      order: [[`created_at`, `DESC`]], 
+      offset: 5,
+      limit:10,
+      subQuery: false,    
     }).then(articles => {
       res.status(200).json({
         success: true,
@@ -47,8 +52,10 @@ const { Article, User } = require(`../models`);
   // Liste un article avec ses commentaires
   exports.getArticle = async (req, res) => {
     const articleId = parseInt(req.params.id, 10);
-    await Article.findByPk(articleId, {
-      include: `comment`
+    //await Article.findByPk(articleId, {
+    await Article.findAll({
+      where: id = articleId, 
+        include: ['user','comment'], 
     }).then((article) => {
       if(!article) {
         throw new Error(`Article non trouvé`);
