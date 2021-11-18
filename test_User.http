@@ -54,7 +54,7 @@ Content-Type: application/json
 Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQwODE4MSwiZXhwIjoxNjM0NDk0NTgxfQ.yZa2j2SauH5oQgXm9gDZq7FRLFlUyYKCjS9FwCDn4ZU
 
 {
-  "pseudo": "cidaah2 a jour1",
+  "pseudo": "cidaah2",
   "password": "atcidaah",
   "email": "regis@aah.com",
   "birthdate": "11-05-1895",

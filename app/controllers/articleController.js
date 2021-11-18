@@ -150,6 +150,9 @@ const { Article, User } = require(`../models`);
     if (!content) {
       missingParams.push(`le contenu`);
     }
+   // if (!author) {
+   //   missingParams.push(`l'auteur`);
+   // }
     if (missingParams.length > 0) {
       return res.status(400).json(`Il manque des paramètres: ${missingParams.join(`, `)}`);
     }
@@ -163,6 +166,7 @@ const { Article, User } = require(`../models`);
         success: true,
         message: (`Votre article a été créer`),
         article,
+       // user
       });
     }).catch(error => {
       console.trace(error);

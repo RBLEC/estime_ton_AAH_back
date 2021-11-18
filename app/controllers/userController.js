@@ -242,15 +242,17 @@ exports.createUser = async (req, res) => {
 //* Mise à jour d'un utilisateur
 exports.updateUser = async (req, res) => {
   const userId = userToken.id
-  const userExist = await User.findOne({
-    where: { pseudo: req.body.pseudo },
-  });
-  if (userExist) {
-    // 409 conflit
-    return res.status(409).json({
-      success: false,
-      message: `le pseudo ${req.body.pseudo} est déja existant !`,
+  if (userToken.pseudo !== req.body.pseudo ) {
+    const userExist = await User.findOne({
+      where: { pseudo: req.body.pseudo },
     });
+    if (userExist) {
+      // 409 conflit
+      return res.status(409).json({
+        success: false,
+        message: `le pseudo ${req.body.pseudo} est déja existant !`,
+      });
+    }
   }
   const hashPassword = await bcrypt.hash(req.body.password, 10);
   const userData = {
@@ -273,10 +275,14 @@ exports.updateUser = async (req, res) => {
       author: user.dataValues.author,
       role: user.dataValues.role,
       };
+    const accessToken = generateAccessToken(userWOPW);
+    const refreshToken = generateRefreshToken(userWOPW);
       res.status(200).json({
         success: true,
         message: `Utilisateur mis à jour`,
-        userWOPW
+        userWOPW,
+        accessToken,
+        refreshToken
       });
     })
     .catch((error) => {
@@ -337,7 +343,6 @@ exports.getCountUsers = async (req, res) => {
 exports.loginUser = async (req, res) => {
   try {
     const {password , pseudo} = req.body;
-
     let missingParams =[];
     if (!pseudo) {
       missingParams.push(`pseudo`);
@@ -350,20 +355,16 @@ exports.loginUser = async (req, res) => {
         sucess: false,
         message:`Il manque votre ${missingParams.join(` et le `)}`});
     }
-
     const logUser = await User.findOne({
       where: { pseudo }
     });
-
     if (!logUser) {
       return res.status(401).json({
         success: false,
         message: `L'utilisateur n'existe pas !`,
       });
     }
-
     userInfo = logUser.dataValues;
-
     validPwd = await bcrypt.compare(password, userInfo.password );
       if (!validPwd) {
         return res.status(401).json({
@@ -371,7 +372,6 @@ exports.loginUser = async (req, res) => {
           message: 'Le mot de passe est invalide !',
         });
       }
-
     const userLog = {
       id: userInfo.id,
       pseudo: userInfo.pseudo,
@@ -379,10 +379,8 @@ exports.loginUser = async (req, res) => {
       author: userInfo.author,
       role: userInfo.role,
     };
-
     const accessToken = generateAccessToken(userLog);
     const refreshToken = generateRefreshToken(userLog);
-
     res.status(200).json({
       success: true,
       message: `Bienvenu ${userInfo.pseudo}`,
@@ -390,7 +388,6 @@ exports.loginUser = async (req, res) => {
       accessToken,
       refreshToken
     });
-
   } catch (error) {
       console.trace(error);
       res.status(500).json({
