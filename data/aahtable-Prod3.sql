@@ -9,13 +9,13 @@ BEGIN;
 
 -- Supprime les tables si elles existent déjà, comme ça on est sûr de partir sur de bonnes bases
 -- On rajoute CASCADE pour ne pas avoir de probleme de références cassées 
-DROP TABLE IF EXISTS "user" CASCADE;
-DROP TABLE IF EXISTS "infosimulation" CASCADE;
+--DROP TABLE IF EXISTS "user" CASCADE;
+--DROP TABLE IF EXISTS "infosimulation" CASCADE;
 DROP TABLE IF EXISTS "article" CASCADE;
-DROP TABLE IF EXISTS "guestbook" CASCADE; 
-DROP TABLE IF EXISTS "comment" CASCADE;
-DROP TABLE IF EXISTS "nbsimulation" CASCADE;
-DROP TABLE IF EXISTS "article_guestbook_comment_user" CASCADE; -- ! on ferme avec un " ; " 
+--DROP TABLE IF EXISTS "guestbook" CASCADE; 
+--DROP TABLE IF EXISTS "comment" CASCADE;
+--DROP TABLE IF EXISTS "nbsimulation" CASCADE;
+--DROP TABLE IF EXISTS "article_guestbook_comment_user" CASCADE; -- ! on ferme avec un " ; " 
 
 
 -- Création de la TABLE "utilisateur"

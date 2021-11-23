@@ -42,9 +42,9 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIj
 }
 
 ### delete article => ok
-DELETE http://localhost:5000/user/3/article/9
+DELETE http://localhost:5000/user//article/
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDA2MDM5NCwiZXhwIjoxNjM0MDYyMTk0fQ.6lZyslXimbjjNOW63sW5RwG1NqLdrN7P8ClzjIaT3wU
+
 
 ### Liste tous les articles de l'utilisateur par ordre DESC => ok
 get http://localhost:5000/user/3/articles
