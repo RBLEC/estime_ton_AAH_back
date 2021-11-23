@@ -141,7 +141,8 @@ const { Article, User } = require(`../models`);
 
   // création d'un article de l'utilisateur
   exports.createArticleUser = async (req, res) => {
-    const userId = userToken.id
+     //const userId = userToken.id
+    const userId = req.body.id
     const {title, content} = req.body;
     let missingParams =[];
     if (!title) {
