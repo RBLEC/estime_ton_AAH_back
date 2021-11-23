@@ -22,7 +22,7 @@ GET http://localhost:5000/lastarticles
 GET http://localhost:5000/article/21
 
 ### Créer un article => ok
-POST http://localhost:5000/user/3/article
+POST http://localhost:5000/user/6/article
 Content-Type: application/json
 Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQxMDY4NCwiZXhwIjoxNjM0NDk3MDg0fQ.bJ5Y1g0bW5hTPyOFwaQkwuavr6pWWWNoBnSvBZ7hjV4
 

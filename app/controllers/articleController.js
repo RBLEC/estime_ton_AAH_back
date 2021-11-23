@@ -141,12 +141,7 @@ const { Article, User } = require(`../models`);
 
   // création d'un article de l'utilisateur
   exports.createArticleUser = async (req, res) => {
-     //const userId = userToken.id
-    // const userId = req.body.user_id
-
-    console.log(`req`, req.body)
-
-    console.log(`userId`, userId)
+      const userId = userToken.id
     const {title, content} = req.body;
     let missingParams =[];
     if (!title) {
@@ -165,8 +160,7 @@ const { Article, User } = require(`../models`);
     await Article.create({
       title: req.body.title,
       content: req.body.content,
-      user_id: req.body.user_id,
-      //user_id: userId 
+      user_id: userId ,
     }).then(article => {
       res.status(201).json({
         success: true,
