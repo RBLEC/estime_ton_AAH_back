@@ -30,7 +30,6 @@ const { Article, User } = require(`../models`);
         association: `user`
       },
       order: [[`created_at`, `DESC`]], 
-      offset: 5,
       limit:10,
       subQuery: false,    
     }).then(articles => {
