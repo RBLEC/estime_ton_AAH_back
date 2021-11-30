@@ -68,7 +68,7 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInBzZXVkby
     "spouse_income_without_activity":0,
     "spouse_income_with_activity": 37000,
     // les enfants
-    "child_income1": 1,
+    "child_income1": 10,
     "child_income2": 0,
     "child_income3": 0,
     "child_income4": 0,

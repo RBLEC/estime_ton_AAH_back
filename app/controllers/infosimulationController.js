@@ -172,13 +172,13 @@ const phraseFin = require("../middlewares/phraseFin");
 
     const revenusDesEnfants = revenusTotalEnfants(
       req.body.nb_child,
-      req.body.child_income1,
-      req.body.child_income2,
-      req.body.child_income3,
-      req.body.child_income4,
-      req.body.child_income5 
+      parseInt(req.body.child_income1),
+      parseInt(req.body.child_income2),
+      parseInt(req.body.child_income3),
+      parseInt(req.body.child_income4),
+      parseInt(req.body.child_income5) 
     );
-    
+
     const assietteEnfant = assiette(
       true,
       req.body.smichb,

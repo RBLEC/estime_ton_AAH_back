@@ -34,6 +34,9 @@ exports.getUser = async (req, res) => {
   const userId = userToken.id
   await User.findAll( { 
     where: id = userId,
+      //include: {
+      //  association: `article`
+      //},
     }).then((user) => {
       if (!user) {
         throw new Error(`Utilisateur non trouvé`);
