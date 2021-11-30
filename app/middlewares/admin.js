@@ -1,7 +1,7 @@
 // ici on va vérifier le rôle de l'utilisateur
 
-//! role : 1 visiteur enregistrer
-//! role : 2 modérateur
+//* role : 1 visiteur enregistrer
+//? role : 2 modérateur
 //! role : 3 Admin
 
 const adminMiddleware = (req, res, next) => {

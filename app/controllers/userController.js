@@ -61,7 +61,6 @@ exports.getUserLastComment = async (req, res) => {
     where: id = userId,
     include: [model = 'comment'], 
     order: [[ model = 'comment',"updated_at", "DESC",]],
-    offset: 5,
     limit:10,
     subQuery: false,
   }).then((user) => {
@@ -91,7 +90,7 @@ exports.getUserLastArticle = async (req, res) => {
     where: id = userId,
     include: [model = 'article'], 
     order: [[ model = 'article',"updated_at", "DESC",]],
-    offset: 5,
+
     limit:10,
     subQuery: false,
   }).then((user) => {
@@ -121,7 +120,6 @@ exports.getUserLastGuestbook = async (req, res) => {
     where: id = userId,
     include: [model = 'guestbook'], 
     order: [[ model = 'guestbook',"updated_at", "DESC",]],
-    offset: 5,
     limit:10,
     subQuery: false,
   }).then((user) => {
@@ -151,7 +149,6 @@ exports.getUserLastInfosimulation = async (req, res) => {
     where: id = userId,
     include: [model = 'infosimulation'], 
     order: [[ model = 'infosimulation',"updated_at", "DESC",]],
-    offset: 5,
     limit:10,
     subQuery: false,
   }).then((user) => {
