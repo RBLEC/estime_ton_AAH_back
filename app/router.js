@@ -6,7 +6,7 @@ const path = require('path');
 const sendMessage = require(`../nodemailer`);
 
 // importe nos controller
-Const adminController = require('./controllers/adminController');
+const adminController = require('./controllers/adminController');
 const userController = require(`./controllers/userController`);
 const articleController = require(`./controllers/articleController`);
 const guestbookController = require(`./controllers/guestbookController`);
