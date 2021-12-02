@@ -19,6 +19,13 @@ const authenticate = require(`./middlewares/authenticate`);
 const authenticateRefresh = require(`./middlewares/authenticateRefresh`);
 const admin = require(`./middlewares/admin`);
 
+//! admin
+router.get(`/adminusers`, authenticate, admin, adminController.getAdminUsers); // =>ok
+router.get(`/adminuser/:id`, authenticate, admin, adminController.getAdminUser); // =>ok
+router.delete(`/adminuser/:id`, authenticate, admin, adminController.deleteAdminUser); // =>ok
+router.get(`/adminuser/:id/articles`, authenticate, admin, adminController.getAdminUserArticles); // =>ok
+router.get(`/adminuser/:id/article/:id`, authenticate, admin, adminController.getAdminUserArticle); // =>ok
+
 //! CRUD User
 router.post(`/signup`, userController.createUser); // =>ok
 router.post(`/login`, userController.loginUser); // =>ok
