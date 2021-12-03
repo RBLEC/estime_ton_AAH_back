@@ -82,16 +82,23 @@ const { Comment, User } = require(`../models`);
     if (missingParams.length > 0) {
       return res.status(400).json(`Il manque votre ${missingParams.join(`, `)}`);
     }
-    await User.findByPk(userId),    
-    await Comment.create({
-      content: req.body.content,
-      user_id: userId,
-      article_id: articleId
-    }).then(comment => {
+    await Promise.all([
+      User.findByPk(userId),    
+      Comment.create({
+        content: req.body.content,
+        user_id: userId,
+        article_id: articleId
+      })
+    ])
+    .then(values => {
+      [user, comment] = values;
+    })
+    .then(() => {
       res.status(201).json({
         success: true,
         message: (`Commentaire créer`),
         comment,
+        user
       });
     }).catch(error => {
       console.trace(error);
@@ -115,16 +122,23 @@ const { Comment, User } = require(`../models`);
     if (missingParams.length > 0) {
       return res.status(400).json(`Il manque votre ${missingParams.join(`, `)}`);
     }
-    await User.findByPk(userId),    
-    await Comment.create({
-      content: req.body.content,
-      user_id: userId,
-      guestbook_id: guestbookId
-    }).then(comment => {
+    await Promise.all([
+      User.findByPk(userId),    
+      Comment.create({
+        content: req.body.content,
+        user_id: userId,
+        guestbook_id: guestbookId
+      })
+    ])
+    .then(values => {
+      [user, comment] = values;
+    })
+    .then(() => {
       res.status(201).json({
         success: true,
         message: (`Commentaire créer`),
         comment,
+        user
       });
     }).catch(error => {
       console.trace(error);
