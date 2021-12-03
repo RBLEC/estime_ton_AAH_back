@@ -6,7 +6,11 @@ const path = require('path');
 const sendMessage = require(`../nodemailer`);
 
 // importe nos controller
+<<<<<<< HEAD
 const adminController = require(`./controllers/adminController`);
+=======
+const adminController = require('./controllers/adminController');
+>>>>>>> 729ad67c1b3fa5ac3b7306ecc3f1d7d3d87faa1c
 const userController = require(`./controllers/userController`);
 const articleController = require(`./controllers/articleController`);
 const guestbookController = require(`./controllers/guestbookController`);
