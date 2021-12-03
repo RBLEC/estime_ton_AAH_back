@@ -6,6 +6,7 @@ const path = require('path');
 const sendMessage = require(`../nodemailer`);
 
 // importe nos controller
+const adminController = require(`./controllers/adminController`);
 const userController = require(`./controllers/userController`);
 const articleController = require(`./controllers/articleController`);
 const guestbookController = require(`./controllers/guestbookController`);
@@ -22,6 +23,7 @@ const admin = require(`./middlewares/admin`);
 //! admin
 router.get(`/adminusers`, authenticate, admin, adminController.getAdminUsers); // =>ok
 router.get(`/adminuser/:id`, authenticate, admin, adminController.getAdminUser); // =>ok
+router.patch(`/adminuser/:id`, authenticate, admin, adminController.updateAdminUser); // =>ok
 router.delete(`/adminuser/:id`, authenticate, admin, adminController.deleteAdminUser); // =>ok
 router.get(`/adminuser/:id/articles`, authenticate, admin, adminController.getAdminUserArticles); // =>ok
 router.get(`/adminuser/:id/article/:id`, authenticate, admin, adminController.getAdminUserArticle); // =>ok
@@ -32,7 +34,7 @@ router.post(`/login`, userController.loginUser); // =>ok
 router.post(`/refreshToken`, authenticateRefresh); // =>ok
 //router.post //! pas besoin avec les JWT on ne peu pas les supprimés
 
-router.get(`/users`, authenticate, admin, userController.getUsers); // =>ok
+router.get(`/users`, authenticate, admin, userController.getUsers); // =>ok //! a sup
 router.get(`/user/:id`, authenticate, userController.getUser); // =>ok
 router.get(`/userLastComment/:id`, authenticate, userController.getUserLastComment); // =>ok
 router.get(`/userLastArticle/:id`, authenticate, userController.getUserLastArticle); // =>ok

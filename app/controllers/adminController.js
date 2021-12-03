@@ -32,11 +32,6 @@ exports.getAdminUsers = async (req, res) => {
 
 //* liste un utilisateur avec ses infos
 exports.getAdminUser = async (req, res) => {
-
-
-  const today = new Date()
-  console.log(`today`, today)
-
   const urlId = parseInt(req.params.id, 10);
   await User.findAll( { 
     where: id =  parseInt(urlId),
@@ -60,27 +55,49 @@ exports.getAdminUser = async (req, res) => {
     });
 };
 
-
 //* Suppréssion d'un utilisateur
 exports.deleteAdminUser = async (req, res) => {
-  
-  const userId = parseInt(req.params.id, 10);
-  const hashPassword = await bcrypt.hash(dateTime(), 10);
-  const userData = {
-    pseudo: `Utilisateur supprimé ${dateTime()}`,
-    password: hashPassword,
-    email: '123@delete.fr',
-    author: `Utilisateur supprimé ${dateTime()}`,
-    role: 0,
-  };
-
-  console.log(`userData`, userData)
-    
-
-  //await User.findByPk(userId)
+  const userId = userToken.id
   await User.findByPk(userId)
     .then((user) => {
-      //return user.destroy();
+      return user.destroy();
+    })
+    .then(() => {
+      res.status(200).json({
+        success: true,
+        message: `L'utilisateur a été effacé`,
+      });
+    })
+    .catch((error) => {
+      console.trace(error);
+      res.status(500).json({
+        success: false,
+        message: `L'utilisateur n'a pas été effacé`,
+        error: error.message,
+      });
+    });
+};
+
+//* Mise à jour d'un utilisateur
+exports.updateAdminUser = async (req, res) => {
+  const userId = parseInt(req.params.id, 10);
+  if (userToken.pseudo !== req.body.pseudo ) {
+    const userExist = await User.findOne({
+      where: { pseudo: req.body.pseudo },
+    });
+  }
+  const hashPassword = await bcrypt.hash(req.body.password, 10);
+  const userData = {
+    pseudo: req.body.pseudo,
+    password: hashPassword,
+    email: req.body.email,
+    author: req.body.author,
+    role: req.body.role,
+    status: req.body.status,
+  };
+  //* je récupère le user à modifier
+  await User.findByPk(userId)
+    .then((user) => {
       return user.update(userData);
     })
     .then((user) => {
@@ -90,20 +107,24 @@ exports.deleteAdminUser = async (req, res) => {
       email: user.dataValues.email,
       author: user.dataValues.author,
       role: user.dataValues.role,
+      status: req.body.status,
       };
-    //.then(() => {
+    const accessToken = generateAccessToken(userWOPW);
+    const refreshToken = generateRefreshToken(userWOPW);
       res.status(200).json({
         success: true,
-        message: `L'utilisateur a été effacé`,
-        user,
-        userData
+        message: `Utilisateur mis à jour.`,
+        userWOPW,
+        accessToken,
+        refreshToken
       });
     })
     .catch((error) => {
       console.trace(error);
+      // si sequelize à eu une erreur je revoi un message au client ne JSON pour lui dire qu`il y a un pépin
       res.status(500).json({
         success: false,
-        message: `L'utilisateur n'a pas été effacé`,
+        message: `L'utilisateur n'a pas été mis à jour.`,
         error: error.message,
       });
     });
@@ -139,7 +160,6 @@ exports.getAdminUserArticles = async (req, res) => {
       });
     });
 };
-
 
 //* liste un utilisateur avec un article
 exports.getAdminUserArticle = async (req, res) => {
