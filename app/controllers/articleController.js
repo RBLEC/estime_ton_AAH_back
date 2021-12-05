@@ -52,7 +52,7 @@ const { Article, User } = require(`../models`);
   exports.getArticle = async (req, res) => {
     const articleId = parseInt(req.params.id, 10);
     //await Article.findByPk(articleId, {
-    await Article.findAll({
+    await Article.findAndCountAll({
       where: id = articleId, 
       include: ['user',`comment`, {
         association: `comment` ,

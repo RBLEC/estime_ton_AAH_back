@@ -51,7 +51,8 @@ const { Guestbook, User } = require(`../models`);
   // Liste un message du livre d'or avec ses commentaires
   exports.getGuestbook = async (req, res) => {
     const guestbookId = parseInt(req.params.id, 10);
-    await Guestbook.findByPk(guestbookId, {
+    await Guestbook.findAndCountAll({
+      where : id = guestbookId, 
       include: ['user',`comment`, {
         association: `comment` ,
         include: "user"
