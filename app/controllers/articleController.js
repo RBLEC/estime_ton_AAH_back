@@ -54,7 +54,10 @@ const { Article, User } = require(`../models`);
     //await Article.findByPk(articleId, {
     await Article.findAll({
       where: id = articleId, 
-        include: ['user','comment'], 
+      include: ['user',`comment`, {
+        association: `comment` ,
+        include: "user"
+      }],
     }).then((article) => {
       if(!article) {
         throw new Error(`Article non trouvé`);
@@ -108,7 +111,9 @@ const { Article, User } = require(`../models`);
     await Promise.all([
       User.findByPk(userId),
       Article.findByPk(articleId, {
-        include: `comment`,
+       // include: `comment`,
+              include: [`comment`,  `user`],
+
       })
     ]).then(values => {
       [user, article] = values;
@@ -140,7 +145,8 @@ const { Article, User } = require(`../models`);
 
   // création d'un article de l'utilisateur
   exports.createArticleUser = async (req, res) => {
-      const userId = userToken.id
+    const userId = userToken.id
+    //const userId = req.body.user_id
     const {title, content} = req.body;
     let missingParams =[];
     if (!title) {
@@ -149,9 +155,6 @@ const { Article, User } = require(`../models`);
     if (!content) {
       missingParams.push(`le contenu`);
     }
-   // if (!author) {
-   //   missingParams.push(`l'auteur`);
-   // }
     if (missingParams.length > 0) {
       return res.status(400).json(`Il manque des paramètres: ${missingParams.join(`, `)}`);
     }
@@ -159,13 +162,12 @@ const { Article, User } = require(`../models`);
     await Article.create({
       title: req.body.title,
       content: req.body.content,
-      user_id: userId ,
+      user_id: userId 
     }).then(article => {
       res.status(201).json({
         success: true,
         message: (`Votre article a été créer`),
         article,
-       // user
       });
     }).catch(error => {
       console.trace(error);
