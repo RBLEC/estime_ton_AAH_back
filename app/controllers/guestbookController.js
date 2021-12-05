@@ -52,10 +52,10 @@ const { Guestbook, User } = require(`../models`);
   exports.getGuestbook = async (req, res) => {
     const guestbookId = parseInt(req.params.id, 10);
     await Guestbook.findByPk(guestbookId, {
-      include: `comment`,
-      include: {
-        association: `user`
-      },
+      include: ['user',`comment`, {
+        association: `comment` ,
+        include: "user"
+      }],
     }).then((guestbook) => {
       if(!guestbook) {
         throw new Error(`Message du livre d'or non trouvé`);
