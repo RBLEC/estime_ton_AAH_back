@@ -10,8 +10,8 @@ exports.getAAH = async (req, res) => {
     .then(res =>{
       aahMontant= res.data.values;
       aahDescription= res.data.description;
-      console.log(`nbs`, aahMontant);
-      console.log(`res`, res);
+      //console.log(`nbs`, aahMontant);
+      //console.log(`res`, res);
     })
     res.status(200).json({
     success: true,

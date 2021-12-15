@@ -8,14 +8,6 @@
     tauxInvaliditeMinimum,
     residenceFrance
     ) { 
-
-      console.log(`invalide`, invalide)
-      console.log(`invalide boolean`, Boolean(invalide))
-      console.log(`age`, age)
-      console.log(`invaliditeDemandeur`, invaliditeDemandeur)
-      console.log(`tauxInvaliditeMinimum`, tauxInvaliditeMinimum)
-      console.log(`residenceFrance`, residenceFrance)
-
       let eligibilite_AAH;
       if (Boolean(invalide) === true ) {
         eligibilite_AAH = true;

@@ -45,7 +45,7 @@
     invaliditeDemandeur,
     tauxInvaliditeMinimum,
     residenceFrance,
-    ) { console.log(`je passe ici`);
+  ) {
     let eligibilite_AAH;
   if (age >= ageMinimal ) {
     eligibilite_AAH === true;
@@ -66,9 +66,8 @@
       }
   } else {
     eligibilite_AAH = false;
-  }console.log(`====>`, age)
+  }
   return eligibilite_AAH;
-   
   };
 module.exports = eligibiliteAAHDemandeur;
 

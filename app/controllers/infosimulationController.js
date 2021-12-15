@@ -77,7 +77,6 @@ const phraseFin = require("../middlewares/phraseFin");
 
     const userId = userToken.id
     //const userId = 6
-
     //const nbsimulationId = Number(req.params.nbsimulationId, 10);
 
     const {
@@ -130,9 +129,6 @@ const phraseFin = require("../middlewares/phraseFin");
       Number(req.body.disability_rate_mini),
       Boolean(req.body.place_of_residence)
     );
-
-    console.log(`eligibiliteAAHDemandeur`,eligibiliteAAHDemandeur)
-    console.log(`req.body.applicant_disability`, Boolean(req.body.applicant_disability))
     
     const eligibiliteAAHConjoint = eligibiliteAAH(
       Boolean(req.body.spouse_disability),
@@ -143,8 +139,6 @@ const phraseFin = require("../middlewares/phraseFin");
       Number(req.body.disability_rate_mini),
       Boolean(req.body.place_of_residence)
     );
-
-    //console.log(`eligibiliteAAHConjoint`, eligibiliteAAHConjoint)
     
     const eligibiliteMVADemandeur = eligibiliteMVA(
       Boolean(req.body.apl),
@@ -239,8 +233,6 @@ const phraseFin = require("../middlewares/phraseFin");
       req.body.aah_amount,
       montantAAHAvecMVA,
     );
-
-    console.log(`statusFinalAAH`,statusFinalAAH)
 
     const statusSimple = phraseFin(
       req.body.aah_amount,
