@@ -26,7 +26,8 @@ module.exports = assiette;
   function assiette_demandeur(  
     smichb,
     smicnbtf,
-    revenusSalarial,){
+    revenusSalarial,
+  ){
     smic_brut_annuel = 12 * Number(smichb) * Number(smicnbtf);
     //! ici seulement si il touche 30%  de plus que le smic brute annuel sinon tranche 1 = 0  
     let tranche1 ;
