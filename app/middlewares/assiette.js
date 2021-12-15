@@ -9,15 +9,15 @@
       let total_assiette;
       if (invalidite === true){
         total_assiette = assiette_demandeur(
-          parseInt(smichb),
-          parseInt(smicnbtf),
-          parseInt(revenusSalarial),)
+          Number(smichb),
+          Number(smicnbtf),
+          Number(revenusSalarial),)
       } else {
-        total_assiette = assiette_conjointEnfant(parseInt(revenusSalarial),parseInt(revenusNonSalarial))
+        total_assiette = assiette_conjointEnfant(Number(revenusSalarial),Number(revenusNonSalarial))
       }
 
       console.log(`total_assiette`, total_assiette)
-    return parseInt(total_assiette)
+    return Number(total_assiette)
   };
 
 module.exports = assiette;
@@ -27,15 +27,15 @@ module.exports = assiette;
     smichb,
     smicnbtf,
     revenusSalarial,){
-    smic_brut_annuel = 12 * parseInt(smichb) * parseInt(smicnbtf);
+    smic_brut_annuel = 12 * Number(smichb) * Number(smicnbtf);
     //! ici seulement si il touche 30%  de plus que le smic brute annuel sinon tranche 1 = 0  
     let tranche1 ;
       if( (( smic_brut_annuel * 1.3) < revenusSalarial)) {
-        tranche1 = parseInt(revenusSalarial) - parseInt(smic_brut_annuel) * 1.3  ;
+        tranche1 = Number(revenusSalarial) - Number(smic_brut_annuel) * 1.3  ;
       }else { 
         tranche1 = 0;
       }
-    const tranche2 = parseInt(revenusSalarial) - tranche1;
+    const tranche2 = Number(revenusSalarial) - tranche1;
     return ((1 - 0.8) * tranche1 + (1 - 0.4) * tranche2);
   };
 
