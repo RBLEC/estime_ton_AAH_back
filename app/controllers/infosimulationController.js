@@ -235,6 +235,8 @@ const phraseFin = require("../middlewares/phraseFin");
       montantAAHAvecMVA,
     );
 
+    console.log(`statusFinalAAH`,statusFinalAAH)
+
     const statusSimple = phraseFin(
       req.body.aah_amount,
       montantAAHAvecMVA,

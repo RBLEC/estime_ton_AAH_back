@@ -8,7 +8,7 @@
         revenusEnfant5
     ){
       if ( nbPersonneACharge >= 1) {
-        revenusEnfants = revenusEnfant1 ;
+        revenusEnfants = parseInt(revenusEnfant1) ;
         if ( nbPersonneACharge >= 2 ) {
           revenusEnfants = revenusEnfant1 + revenusEnfant2 ;
         if ( nbPersonneACharge >= 3 ) {
