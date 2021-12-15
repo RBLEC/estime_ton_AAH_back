@@ -122,38 +122,39 @@ const phraseFin = require("../middlewares/phraseFin");
     const aahPlafondRessourcesMois = coefDuFoyer * req.body.aah_amount;
 
     const eligibiliteAAHDemandeur = eligibiliteAAH(
-      req.body.applicant_disability,
+      Boolean(req.body.applicant_disability),
       Number(req.body.applicant_age),
       Number(req.body.ageMinimal),
       Number(req.body.ageRetraite),
       Number(req.body.applicant_disability_rate),
       Number(req.body.disability_rate_mini),
-      req.body.place_of_residence
+      Boolean(req.body.place_of_residence)
     );
 
     console.log(`eligibiliteAAHDemandeur`,eligibiliteAAHDemandeur)
+    console.log(`req.body.applicant_disability`, Boolean(req.body.applicant_disability))
     
     const eligibiliteAAHConjoint = eligibiliteAAH(
-      req.body.spouse_disability,
+      Boolean(req.body.spouse_disability),
       Number(req.body.spouse_age),
       Number(req.body.ageMinimal),
       Number(req.body.ageRetraite),
       Number(req.body.spouse_disability_rate),
       Number(req.body.disability_rate_mini),
-      req.body.place_of_residence
+      Boolean(req.body.place_of_residence)
     );
 
-    console.log(`eligibiliteAAHConjoint`, eligibiliteAAHConjoint)
+    //console.log(`eligibiliteAAHConjoint`, eligibiliteAAHConjoint)
     
     const eligibiliteMVADemandeur = eligibiliteMVA(
-      req.body.apl,
+      Boolean(req.body.apl),
       Number(req.body.applicant_disability_rate),
       Number(req.body.disability_rate_max),
       Number(req.body.applicant_income_with_activity),
     ); 
 
     const eligibiliteMVAConjoint = eligibiliteMVA(
-      req.body.apl,
+      Boolean(req.body.apl),
       Number(req.body.spouse_disability_rate),
       Number(req.body.disability_rate_max),
       Number(req.body.spouse_income_with_activity),
