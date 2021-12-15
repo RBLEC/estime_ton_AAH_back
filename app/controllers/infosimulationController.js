@@ -156,18 +156,18 @@ const phraseFin = require("../middlewares/phraseFin");
     
     const assietteDemandeur = assiette(
       req.body.applicant_disability,
-      req.body.smichb,
-      req.body.smicnbtf,
-      req.body.applicant_income_with_activity,
-      req.body.applicant_income_without_activity,
+      parseInt(req.body.smichb),
+      parseInt(req.body.smicnbtf),
+      parseInt(req.body.applicant_income_with_activity),
+      parseInt(req.body.applicant_income_without_activity),
     ); 
     
     const assietteConjoint = assiette(
       req.body.spouse_disability,
-      req.body.smichb,
-      req.body.smicnbtf,
-      req.body.spouse_income_with_activity,
-      req.body.spouse_income_without_activity,
+      parseInt(req.body.smichb),
+      parseInt(req.body.smicnbtf),
+      parseInt(req.body.spouse_income_with_activity),
+      parseInt(req.body.spouse_income_without_activity),
     ); 
 
     const revenusDesEnfants = revenusTotalEnfants(
