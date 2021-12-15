@@ -8,8 +8,10 @@
     tauxInvaliditeMinimum,
     residenceFrance
     ) { 
+
+      console.log(`invalide`, invalide)
       let eligibilite_AAH;
-      if (invalide === true ) {
+      if (invalide === 1 ) {
         eligibilite_AAH = true;
         if (age >= ageMinimal ) {
           eligibilite_AAH = true;
