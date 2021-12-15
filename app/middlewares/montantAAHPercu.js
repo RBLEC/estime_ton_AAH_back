@@ -3,7 +3,10 @@
     eligibiliteAAH, 
     resultassietteTotalFoyer,
     aahMontant
-    ){
+  ){
+
+      console.log(`object`, resultassietteTotalFoyer)
+      
     if ( eligibiliteAAH === false ) {
       montant = 0 ;
     } else if ( resultassietteTotalFoyer  < 0) {

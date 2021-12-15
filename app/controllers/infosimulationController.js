@@ -75,7 +75,8 @@ const phraseFin = require("../middlewares/phraseFin");
   // création d'une simulation pour l'utilisatuer
   exports.createInfosimulationUser = async (req, res) => {
 
-    const userId = userToken.id
+   // const userId = userToken.id
+    const userId = 6
 
     //const nbsimulationId = parseInt(req.params.nbsimulationId, 10);
 
