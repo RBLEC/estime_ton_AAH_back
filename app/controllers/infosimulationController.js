@@ -122,22 +122,22 @@ const phraseFin = require("../middlewares/phraseFin");
     const aahPlafondRessourcesMois = coefDuFoyer * req.body.aah_amount;
 
     const eligibiliteAAHDemandeur = eligibiliteAAH(
-      req.body.applicant_disability,
-      req.body.applicant_age,
-      req.body.ageMinimal,
-      req.body.ageRetraite,
-      req.body.applicant_disability_rate,
-      req.body.disability_rate_mini,
+      Number(req.body.applicant_disability),
+      Number(req.body.applicant_age),
+      Number(req.body.ageMinimal),
+      Number(req.body.ageRetraite),
+      Number(req.body.applicant_disability_rate),
+      Number(req.body.disability_rate_mini),
       req.body.place_of_residence
     );
     
     const eligibiliteAAHConjoint = eligibiliteAAH(
-      req.body.spouse_disability,
-      req.body.spouse_age,
-      req.body.ageMinimal,
-      req.body.ageRetraite,
-      req.body.spouse_disability_rate,
-      req.body.disability_rate_mini,
+      Number(req.body.spouse_disability),
+      Number(req.body.spouse_age),
+      Number(req.body.ageMinimal),
+      Number(req.body.ageRetraite),
+      Number(req.body.spouse_disability_rate),
+      Number(req.body.disability_rate_mini),
       req.body.place_of_residence
     );
     
@@ -182,8 +182,8 @@ const phraseFin = require("../middlewares/phraseFin");
 
     const assietteEnfant = assiette(
       true,
-      req.body.smichb,
-      req.body.smicnbtf,
+      Number(req.body.smichb),
+      Number(req.body.smicnbtf),
       revenusDesEnfants,
     ); 
 
