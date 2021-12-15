@@ -15,8 +15,6 @@
       } else {
         total_assiette = assiette_conjointEnfant(Number(revenusSalarial),Number(revenusNonSalarial))
       }
-
-      console.log(`total_assiette`, total_assiette)
     return Number(total_assiette)
   };
 

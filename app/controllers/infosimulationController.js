@@ -122,7 +122,7 @@ const phraseFin = require("../middlewares/phraseFin");
     const aahPlafondRessourcesMois = coefDuFoyer * req.body.aah_amount;
 
     const eligibiliteAAHDemandeur = eligibiliteAAH(
-      Number(req.body.applicant_disability),
+      req.body.applicant_disability,
       Number(req.body.applicant_age),
       Number(req.body.ageMinimal),
       Number(req.body.ageRetraite),
@@ -130,9 +130,11 @@ const phraseFin = require("../middlewares/phraseFin");
       Number(req.body.disability_rate_mini),
       req.body.place_of_residence
     );
+
+    console.log(`eligibiliteAAHDemandeur`,eligibiliteAAHDemandeur)
     
     const eligibiliteAAHConjoint = eligibiliteAAH(
-      Number(req.body.spouse_disability),
+      req.body.spouse_disability,
       Number(req.body.spouse_age),
       Number(req.body.ageMinimal),
       Number(req.body.ageRetraite),
@@ -140,6 +142,8 @@ const phraseFin = require("../middlewares/phraseFin");
       Number(req.body.disability_rate_mini),
       req.body.place_of_residence
     );
+
+    console.log(`eligibiliteAAHConjoint`, eligibiliteAAHConjoint)
     
     const eligibiliteMVADemandeur = eligibiliteMVA(
       req.body.apl,
