@@ -11,7 +11,7 @@
 
       console.log(`invalide`, invalide)
       let eligibilite_AAH;
-      if (invalide === 1 ) {
+      if (invalide === true ) {
         eligibilite_AAH = true;
         if (age >= ageMinimal ) {
           eligibilite_AAH = true;
