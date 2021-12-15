@@ -143,16 +143,16 @@ const phraseFin = require("../middlewares/phraseFin");
     
     const eligibiliteMVADemandeur = eligibiliteMVA(
       req.body.apl,
-      req.body.applicant_disability_rate,
-      req.body.disability_rate_max,
-      req.body.applicant_income_with_activity,
+      parseInt(req.body.applicant_disability_rate),
+      parseInt(req.body.disability_rate_max),
+      parseInt(req.body.applicant_income_with_activity),
     ); 
 
     const eligibiliteMVAConjoint = eligibiliteMVA(
       req.body.apl,
-      req.body.spouse_disability_rate,
-      req.body.disability_rate_max,
-      req.body.spouse_income_with_activity,
+      parseInt(req.body.spouse_disability_rate),
+      parseInt(req.body.disability_rate_max),
+      parseInt(req.body.spouse_income_with_activity),
     ); 
     
     const assietteDemandeur = assiette(
