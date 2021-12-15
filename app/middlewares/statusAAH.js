@@ -85,5 +85,7 @@ const phraseFin = require("../middlewares/phraseFin");
       parseInt(spouse_income_with_activity)+
       parseInt(revenusDesEnfants)
       )
+      console.log(`total`, total)
+      console.log(`typeOf`, typeof total) 
     return total;
   };
