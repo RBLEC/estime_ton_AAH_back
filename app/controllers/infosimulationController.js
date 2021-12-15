@@ -40,7 +40,7 @@ const phraseFin = require("../middlewares/phraseFin");
   // Liste une simulation de l'utilisateur
   exports.getInfosimulationUser = async (req, res) => {
     const userId = userToken.id
-    const infosimulationId = parseInt(req.params.infosimulationId, 10);  
+    const infosimulationId = Number(req.params.infosimulationId, 10);  
     await Promise.all([
       User.findByPk(userId),
       Infosimulation.findByPk(infosimulationId)
@@ -75,10 +75,10 @@ const phraseFin = require("../middlewares/phraseFin");
   // création d'une simulation pour l'utilisatuer
   exports.createInfosimulationUser = async (req, res) => {
 
-   // const userId = userToken.id
-    const userId = 6
+    const userId = userToken.id
+    //const userId = 6
 
-    //const nbsimulationId = parseInt(req.params.nbsimulationId, 10);
+    //const nbsimulationId = Number(req.params.nbsimulationId, 10);
 
     const {
       year, 
@@ -143,41 +143,41 @@ const phraseFin = require("../middlewares/phraseFin");
     
     const eligibiliteMVADemandeur = eligibiliteMVA(
       req.body.apl,
-      parseInt(req.body.applicant_disability_rate),
-      parseInt(req.body.disability_rate_max),
-      parseInt(req.body.applicant_income_with_activity),
+      Number(req.body.applicant_disability_rate),
+      Number(req.body.disability_rate_max),
+      Number(req.body.applicant_income_with_activity),
     ); 
 
     const eligibiliteMVAConjoint = eligibiliteMVA(
       req.body.apl,
-      parseInt(req.body.spouse_disability_rate),
-      parseInt(req.body.disability_rate_max),
-      parseInt(req.body.spouse_income_with_activity),
+      Number(req.body.spouse_disability_rate),
+      Number(req.body.disability_rate_max),
+      Number(req.body.spouse_income_with_activity),
     ); 
     
     const assietteDemandeur = assiette(
       req.body.applicant_disability,
-      parseInt(req.body.smichb),
-      parseInt(req.body.smicnbtf),
-      parseInt(req.body.applicant_income_with_activity),
-      parseInt(req.body.applicant_income_without_activity),
+      Number(req.body.smichb),
+      Number(req.body.smicnbtf),
+      Number(req.body.applicant_income_with_activity),
+      Number(req.body.applicant_income_without_activity),
     ); 
     
     const assietteConjoint = assiette(
       req.body.spouse_disability,
-      parseInt(req.body.smichb),
-      parseInt(req.body.smicnbtf),
-      parseInt(req.body.spouse_income_with_activity),
-      parseInt(req.body.spouse_income_without_activity),
+      Number(req.body.smichb),
+      Number(req.body.smicnbtf),
+      Number(req.body.spouse_income_with_activity),
+      Number(req.body.spouse_income_without_activity),
     ); 
 
     const revenusDesEnfants = revenusTotalEnfants(
       req.body.nb_child,
-      parseInt(req.body.child_income1),
-      parseInt(req.body.child_income2),
-      parseInt(req.body.child_income3),
-      parseInt(req.body.child_income4),
-      parseInt(req.body.child_income5) 
+      Number(req.body.child_income1),
+      Number(req.body.child_income2),
+      Number(req.body.child_income3),
+      Number(req.body.child_income4),
+      Number(req.body.child_income5) 
     );
 
     const assietteEnfant = assiette(
@@ -328,7 +328,7 @@ const phraseFin = require("../middlewares/phraseFin");
   // suppréssion d'une simulation de l'utilisateur
   exports.deleteInfosimulationUser = async (req, res) => {
     const userId = userToken.id
-    const infosimulationId = parseInt(req.params.infosimulationId, 10);
+    const infosimulationId = Number(req.params.infosimulationId, 10);
     await Promise.all([
       User.findByPk(userId),
       Infosimulation.findByPk(infosimulationId)

@@ -79,13 +79,13 @@ const phraseFin = require("../middlewares/phraseFin");
     spouse_income_with_activity,
     revenusDesEnfants
   ) {total = (
-      parseInt(applicant_income_without_activity)+
-      parseInt(applicant_income_with_activity)+
-      parseInt(spouse_income_without_activity)+
-      parseInt(spouse_income_with_activity)+
-      parseInt(revenusDesEnfants)
+      Number(applicant_income_without_activity)+
+      Number(applicant_income_with_activity)+
+      Number(spouse_income_without_activity)+
+      Number(spouse_income_with_activity)+
+      Number(revenusDesEnfants)
       )
-      console.log(`total`, total)
-      console.log(`typeOf`, typeof total) 
+    //  console.log(`total`, total)
+    //  console.log(`typeOf`, typeof total) 
     return total;
   };
