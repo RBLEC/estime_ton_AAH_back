@@ -28,6 +28,13 @@ router.delete(`/adminuser/:id`, authenticate, admin, adminController.deleteAdmin
 router.get(`/adminuser/:id/articles`, authenticate, admin, adminController.getAdminUserArticles); // =>ok
 router.get(`/adminuser/:id/article/:id`, authenticate, admin, adminController.getAdminUserArticle); // =>ok
 
+//! comment admin
+router.get(`/comments`,authenticate,admin, commentController.getComments); 
+router.get(`/lastcomments`,authenticate,admin, commentController.getLastComments); 
+router.get(`/comment/:id`,authenticate,admin, commentController.getComment); 
+//router.patch(`/comment/:id`,authenticate,admin, commentController.updateComment); 
+//router.delete(`/comment/:id`,authenticate,admin, commentController.deleteComment); 
+
 //! CRUD User
 router.post(`/signup`, userController.createUser); // =>ok
 router.post(`/login`, userController.loginUser); // =>ok

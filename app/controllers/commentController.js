@@ -246,3 +246,75 @@ const { Comment, User } = require(`../models`);
     });
   };
 
+  // Liste tous les  commentaires par ordre de création desc
+  exports.getComments = async (req, res) => {
+    await Comment.findAndCountAll( {
+      include: {
+        association: `user`
+      },
+      order: [[`created_at`, `DESC`]],           
+    }).then(comments => {
+      res.status(200).json({
+        success: true,
+        message:(`Voici la liste de tous les commentaires`),
+        comments
+      });
+    }).catch(error => {
+      console.trace(error);
+      res.status(500).json({
+      success: false,
+      message:(`Oups il y a un problème avec la liste de tous les commentaires`),
+      error: error.message
+      });
+    });
+  };
+
+    // les 10 derniers commentaires
+  exports.getLastComments = async (req, res) => {
+    await Comment.findAndCountAll( {
+      include: {
+        association: `user`
+      },
+      order: [[`created_at`, `DESC`]], 
+      limit:10,
+      subQuery: false,    
+    }).then(comments => {
+      res.status(200).json({
+        success: true,
+        message:(`Voici des 10 derniers commentaires`),
+        comments
+      });
+    }).catch(error => {
+      console.trace(error);
+      res.status(500).json({
+      success: false,
+      message:(`Oups il y a un problème avec les 10 derniers commentaires`),
+      error: error.message
+      });
+    });
+  };
+
+    // Liste un commentaire
+  exports.getComment = async (req, res) => {
+    const commentId = parseInt(req.params.id, 10);
+    await Comment.findAndCountAll({
+      where: id = commentId, 
+      include:'user',
+    }).then((comment) => {
+      if(!comment) {
+        throw new Error(`Commentaire non trouvé`);
+      }
+      res.status(200).json({
+          success: true,
+          message:(`Voici le commentaire`),
+          comment
+      });
+    }).catch(error => {
+      console.trace(error);
+        res.status(500).json({
+          success: false,
+          message:(`Oups il y a un problème pour lister le commentaire`),
+          error: error.message
+        });
+    });
+  };
