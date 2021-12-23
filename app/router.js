@@ -33,7 +33,7 @@ router.get(`/comments`, commentController.getComments);
 router.get(`/lastcomments`, commentController.getLastComments); 
 router.get(`/comment/:id`, commentController.getComment); 
 //router.patch(`/comment/:id`,authenticate,admin, commentController.updateComment); 
-//router.delete(`/comment/:id`,authenticate,admin, commentController.deleteComment); 
+router.delete(`/comment/:id`, commentController.deleteComment); 
 
 //! CRUD User
 router.post(`/signup`, userController.createUser); // =>ok

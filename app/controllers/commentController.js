@@ -335,3 +335,27 @@ const { Comment, User } = require(`../models`);
         });
     });
   };
+
+  // Suppresion de l'article de l'utilisateur
+  exports.deleteComment = async (req, res) => {
+    const commentId = parseInt(req.params.id, 10);
+      Comment.findByPk(commentId)
+      .then(comment => {  
+      if(!comment) {
+        throw new Error(`Commentaire non trouvé`);
+      }
+      return comment.destroy();
+    }).then(() => {
+      res.status(200).json({
+        success: true,
+        message: (`Commentaire effacé`)
+      });
+    }).catch(error => {
+      console.trace(error);
+      res.status(500).json({
+        success: false,
+        message: (`Le commentaire n'a pas été effacé`),
+        error: error.message
+      });
+    });
+  };
