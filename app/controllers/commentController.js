@@ -339,7 +339,7 @@ const { Comment, User } = require(`../models`);
   // Suppresion de l'article de l'utilisateur
   exports.deleteComment = async (req, res) => {
     const commentId = parseInt(req.params.id, 10);
-      Comment.findByPk(commentId)
+      await Comment.findByPk(commentId)
       .then(comment => {  
       if(!comment) {
         throw new Error(`Commentaire non trouvé`);
@@ -355,6 +355,37 @@ const { Comment, User } = require(`../models`);
       res.status(500).json({
         success: false,
         message: (`Le commentaire n'a pas été effacé`),
+        error: error.message
+      });
+    });
+  };
+
+    // Mise a jour de l'article de l'utilisateur
+  exports.updateComment = async (req, res) => {
+    const commentData = {
+      content : req.body.content,
+      user_id : req.body.user_id,
+      article_id : req.body.article_id,
+      guestbook_id : req.body.guestbook_id
+    } ;
+    const commentId = parseInt(req.params.id, 10);
+    await Comment.findByPk(commentId)
+    .then(comment => {
+      if(!comment) {
+        throw new Error(`Commentaire non trouvé`);
+      }
+      return comment.update(commentData);           
+    }).then((comment) => {
+      res.status(200).json({
+        success: true,
+        message: (`Commentaire mis à jour`),
+        comment
+      });
+    }).catch(error => {
+      console.log(error);
+      res.status(500).json({
+        success: false,
+        message: (`Le commentaire n'a pas été mis à jour`),
         error: error.message
       });
     });

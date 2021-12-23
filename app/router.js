@@ -32,7 +32,7 @@ router.get(`/adminuser/:id/article/:id`, authenticate, admin, adminController.ge
 router.get(`/comments`, commentController.getComments); 
 router.get(`/lastcomments`, commentController.getLastComments); 
 router.get(`/comment/:id`, commentController.getComment); 
-//router.patch(`/comment/:id`,authenticate,admin, commentController.updateComment); 
+router.patch(`/comment/:id`, commentController.updateComment); 
 router.delete(`/comment/:id`, commentController.deleteComment); 
 
 //! CRUD User
