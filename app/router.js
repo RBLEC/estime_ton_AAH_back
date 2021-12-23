@@ -29,11 +29,11 @@ router.get(`/adminuser/:id/articles`, authenticate, admin, adminController.getAd
 router.get(`/adminuser/:id/article/:id`, authenticate, admin, adminController.getAdminUserArticle); // =>ok
 
 //! comment admin
-router.get(`/comments`, commentController.getComments); 
-router.get(`/lastcomments`, commentController.getLastComments); 
-router.get(`/comment/:id`, commentController.getComment); 
-router.patch(`/comment/:id`, commentController.updateComment); 
-router.delete(`/comment/:id`, commentController.deleteComment); 
+router.get(`/comments`, authenticate, admin, commentController.getComments); 
+router.get(`/lastcomments`, authenticate, admin, commentController.getLastComments); 
+router.get(`/comment/:id`, authenticate, admin, commentController.getComment); 
+router.patch(`/comment/:id`, authenticate, admin, commentController.updateComment); 
+router.delete(`/comment/:id`, authenticate, admin, commentController.deleteComment); 
 
 //! CRUD User
 router.post(`/signup`, userController.createUser); // =>ok
