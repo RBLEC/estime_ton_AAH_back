@@ -29,7 +29,7 @@ router.get(`/adminuser/:id/articles`, authenticate, admin, adminController.getAd
 router.get(`/adminuser/:id/article/:id`, authenticate, admin, adminController.getAdminUserArticle); // =>ok
 
 //! comment admin
-router.get(`/comments`,authenticate,admin, commentController.getComments); 
+router.get(`/comments`, commentController.getComments); 
 router.get(`/lastcomments`,authenticate,admin, commentController.getLastComments); 
 router.get(`/comment/:id`,authenticate,admin, commentController.getComment); 
 //router.patch(`/comment/:id`,authenticate,admin, commentController.updateComment); 

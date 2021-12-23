@@ -249,9 +249,14 @@ const { Comment, User } = require(`../models`);
   // Liste tous les  commentaires par ordre de création desc
   exports.getComments = async (req, res) => {
     await Comment.findAndCountAll( {
-      include: {
-        association: `user`
-      },
+      include: [
+        'user',`article`, 'guestbook', {
+        association: `article` ,
+        include: "user"
+      },{
+        association: `guestbook` ,
+        include: "user"
+      }],
       order: [[`created_at`, `DESC`]],           
     }).then(comments => {
       res.status(200).json({
