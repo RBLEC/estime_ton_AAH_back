@@ -30,8 +30,8 @@ router.get(`/adminuser/:id/article/:id`, authenticate, admin, adminController.ge
 
 //! comment admin
 router.get(`/comments`, commentController.getComments); 
-router.get(`/lastcomments`,authenticate,admin, commentController.getLastComments); 
-router.get(`/comment/:id`,authenticate,admin, commentController.getComment); 
+router.get(`/lastcomments`, commentController.getLastComments); 
+router.get(`/comment/:id`, commentController.getComment); 
 //router.patch(`/comment/:id`,authenticate,admin, commentController.updateComment); 
 //router.delete(`/comment/:id`,authenticate,admin, commentController.deleteComment); 
 

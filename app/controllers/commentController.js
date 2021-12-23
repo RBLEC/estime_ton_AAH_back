@@ -277,10 +277,15 @@ const { Comment, User } = require(`../models`);
     // les 10 derniers commentaires
   exports.getLastComments = async (req, res) => {
     await Comment.findAndCountAll( {
-      include: {
-        association: `user`
-      },
-      order: [[`created_at`, `DESC`]], 
+      include: [
+        'user',`article`, 'guestbook', {
+        association: `article` ,
+        include: "user"
+      },{
+        association: `guestbook` ,
+        include: "user"
+      }],
+      order: [[`created_at`, `DESC`]],   
       limit:10,
       subQuery: false,    
     }).then(comments => {
@@ -304,7 +309,14 @@ const { Comment, User } = require(`../models`);
     const commentId = parseInt(req.params.id, 10);
     await Comment.findAndCountAll({
       where: id = commentId, 
-      include:'user',
+      include: [
+        'user',`article`, 'guestbook', {
+        association: `article` ,
+        include: "user"
+      },{
+        association: `guestbook` ,
+        include: "user"
+      }],
     }).then((comment) => {
       if(!comment) {
         throw new Error(`Commentaire non trouvé`);
