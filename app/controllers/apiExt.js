@@ -6,7 +6,7 @@ const axios = require('axios');
 exports.getAAH = async (req, res) => {
   try {
     await axios
-    .get("https://fr.openfisca.org/api/latest/parameter/prestations.minima_sociaux.aah.montant")
+    .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/aah/montant")
     .then(res =>{
       aahMontant= res.data.values;
       aahDescription= res.data.description;
@@ -32,7 +32,7 @@ exports.getAAH = async (req, res) => {
 exports.getMajorationPlafondCouple = async (req, res) => {
   try {
     await axios
-      .get("https://fr.openfisca.org/api/latest/parameter/prestations.minima_sociaux.aah.majoration_plafond_couple")
+      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/aah/majoration_plafond_couple")
       .then(res =>{
         majorationPlafondCoupleCoef= res.data.values;
         majorationPlafondCoupleDescription= res.data.description;
@@ -56,7 +56,7 @@ exports.getMajorationPlafondCouple = async (req, res) => {
 exports.getCoefPersonneACharge = async (req, res) => {
   try {
     await axios
-      .get("https://fr.openfisca.org/api/latest/parameter/prestations.minima_sociaux.aah.majoration_plafond_personne_a_charge")
+      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/aah/majoration_plafond_personne_a_charge")
       .then(res =>{
         coefPersonneACharge= res.data.values;
         coefPersonneAChargeDescription= res.data.description;
@@ -128,7 +128,7 @@ exports.getSmichbtf = async (req, res) => {
 exports.getMVA = async (req, res) => {
   try {
     await axios
-      .get("https://fr.openfisca.org/api/latest/parameter/prestations.minima_sociaux.caah.majoration_vie_autonome")
+      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/caah/majoration_vie_autonome")
       .then(res =>{
         mva= res.data.values;
         mvaDescription= res.data.description;
@@ -151,7 +151,7 @@ exports.getMVA = async (req, res) => {
 exports.getAgeMinimal = async (req, res) => {
   try {
     await axios
-      .get("https://fr.openfisca.org/api/latest/parameter/prestations.minima_sociaux.aah.age_minimal")
+      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/aah/age_minimal")
       .then(res =>{
         ageMinimal= res.data.values;
         ageMinimalDescription= res.data.description;
@@ -174,7 +174,7 @@ exports.getAgeMinimal = async (req, res) => {
 exports.getAgeRetraite = async (req, res) => {
   try {
     await axios
-      .get("https://fr.openfisca.org/api/latest/parameter/prestations.minima_sociaux.aah.age_legal_retraite")
+      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/aah/age_legal_retraite")
       .then(res =>{
         ageRetraite= res.data.values;
         ageRetraiteDescription= res.data.description;
@@ -198,7 +198,7 @@ exports.getAgeRetraite = async (req, res) => {
 exports.getTauxInvalidite = async (req, res) => {
   try {
     await axios
-      .get("https://fr.openfisca.org/api/latest/parameter/prestations.minima_sociaux.aah.taux_incapacite")
+      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/aah/taux_incapacite")
       .then(res =>{
         tauxInvalidite = res.data.values;
         tauxInvaliditeDescription = res.data.description;
@@ -222,7 +222,7 @@ exports.getTauxInvalidite = async (req, res) => {
 exports.getTauxInvaliditeMinimum = async (req, res) => {
   try {
     await axios
-      .get("https://fr.openfisca.org/api/latest/parameter/prestations.minima_sociaux.asi.taux_minimum_d_invalidite")
+      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/asi/taux_minimum_d_invalidite")
       .then(res =>{
         tauxInvaliditeMinimum = res.data.values;
         tauxInvaliditeMinimumDescription = "Taux d'incapacité minimum";
