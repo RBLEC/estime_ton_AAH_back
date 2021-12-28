@@ -21,6 +21,7 @@ const authenticateRefresh = require(`./middlewares/authenticateRefresh`);
 const admin = require(`./middlewares/admin`);
 
 //! admin
+//* admin user
 router.get(`/adminusers`, authenticate, admin, adminController.getAdminUsers); // =>ok
 router.get(`/adminuser/:id`, authenticate, admin, adminController.getAdminUser); // =>ok
 router.patch(`/adminuser/:id`, authenticate, admin, adminController.updateAdminUser); // =>ok
@@ -28,12 +29,37 @@ router.delete(`/adminuser/:id`, authenticate, admin, adminController.deleteAdmin
 router.get(`/adminuser/:id/articles`, authenticate, admin, adminController.getAdminUserArticles); // =>ok
 router.get(`/adminuser/:id/article/:id`, authenticate, admin, adminController.getAdminUserArticle); // =>ok
 
-//! comment admin
+//* comment admin
 router.get(`/comments`, authenticate, admin, commentController.getComments); 
 router.get(`/lastcomments`, authenticate, admin, commentController.getLastComments); 
 router.get(`/comment/:id`, authenticate, admin, commentController.getComment); 
 router.patch(`/comment/:id`, authenticate, admin, commentController.updateComment); 
 router.delete(`/comment/:id`, authenticate, admin, commentController.deleteComment); 
+
+//* Comment admin new
+router.get(`/admincomments`, authenticate, admin, adminController.getAdminComments); 
+router.get(`/admincomment/:id`, authenticate, admin, adminController.getAdminComment); 
+router.patch(`/admincomment/:id`, authenticate, admin, adminController.updateAdminComment); 
+router.delete(`/admincomment/:id`, authenticate, admin, adminController.deleteAdminComment); 
+
+//* Article admin
+router.get(`/adminarticles`, authenticate, admin, adminController.getAdminArticles); 
+router.get(`/adminarticle/:id`, authenticate, admin, adminController.getAdminArticle); 
+router.patch(`/adminarticle/:id`, authenticate, admin, adminController.updateAdminArticle); 
+router.delete(`/adminarticle/:id`, authenticate, admin, adminController.deleteAdminArticle); 
+
+//* Guestbook admin
+router.get(`/adminguestbooks`, authenticate, admin, adminController.getAdminGuestbooks); 
+router.get(`/adminguestbook/:id`, authenticate, admin, adminController.getAdminGuestbook); 
+router.patch(`/adminguestbook/:id`, authenticate, admin, adminController.updateAdminGuestbook); 
+router.delete(`/adminguestbook/:id`, authenticate, admin, adminController.deleteAdminGuestbook); 
+
+//* Infosimulation admin
+router.get(`/admininfosimulations`, adminController.getAdminInfosimulations); 
+router.get(`/admininfosimulation/:id`, authenticate, admin, adminController.getAdminInfosimulation); 
+//router.patch //! pas de mise à jour pour une simulation
+router.delete(`/admininfosimulation/:id`, authenticate, admin, adminController.deleteAdminInfosimulation); 
+
 
 //! CRUD User
 router.post(`/signup`, userController.createUser); // =>ok
