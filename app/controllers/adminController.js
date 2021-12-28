@@ -65,7 +65,7 @@ exports.getAdminUser = async (req, res) => {
 
 //* Suppréssion d'un utilisateur
 exports.deleteAdminUser = async (req, res) => {
-  const userId = userToken.id
+  const userId = parseInt(req.params.id, 10);
   await User.findByPk(userId)
     .then((user) => {
       return user.destroy();
