@@ -528,11 +528,14 @@ exports.getAdminUserArticle = async (req, res) => {
         association: `user`
       },
       order: [[`created_at`, `DESC`]],           
-    }).then(guestbooks => {
+    }).then(infosimulations => {
+      if(!infosimulations) {
+        throw new Error(`Infosimulation non trouvé`);
+      }
       res.status(200).json({
         success: true,
         message:(`Voici la liste de toutes les simulations.`),
-        guestbooks
+        infosimulations
       });
     }).catch(error => {
       console.trace(error);
