@@ -80,7 +80,7 @@ exports.getCoefPersonneACharge = async (req, res) => {
 exports.getSmichb = async (req, res) => {
   try {
     await axios
-      .get("https://fr.openfisca.org/api/latest/parameter/marche_travail.salaire_minimum.smic_h_b")
+      .get("https://fr.openfisca.org/api/latest/parameter/marche_travail.salaire_minimum/smic/smic_b_horaire")
       .then(res =>{
         smichb= res.data.values;
         smichbDescription= res.data.description;
@@ -104,7 +104,7 @@ exports.getSmichb = async (req, res) => {
 exports.getSmichbtf = async (req, res) => {
   try {
     await axios
-      .get("https://fr.openfisca.org/api/latest/parameter/marche_travail.salaire_minimum.nb_heure_travail_mensuel")
+      .get("https://fr.openfisca.org/api/latest/parameter/marche_travail.salaire_minimum/smic/nb_heures_travail_mensuel")
       .then(res =>{
         smichbtf= res.data.values;
         smichbtfDescription= res.data.description;
