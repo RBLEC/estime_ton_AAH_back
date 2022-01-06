@@ -32,7 +32,7 @@ exports.getAAH = async (req, res) => {
 exports.getMajorationPlafondCouple = async (req, res) => {
   try {
     await axios
-      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/aah/majoration_plafond_couple")
+      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/aah/majoration_plafond/majoration_plafond_couple")
       .then(res =>{
         majorationPlafondCoupleCoef= res.data.values;
         majorationPlafondCoupleDescription= res.data.description;
@@ -56,7 +56,7 @@ exports.getMajorationPlafondCouple = async (req, res) => {
 exports.getCoefPersonneACharge = async (req, res) => {
   try {
     await axios
-      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/aah/majoration_plafond_personne_a_charge")
+      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/aah/majoration_plafond/majoration_par_enfant_supplementaire")
       .then(res =>{
         coefPersonneACharge= res.data.values;
         coefPersonneAChargeDescription= res.data.description;
@@ -198,7 +198,7 @@ exports.getAgeRetraite = async (req, res) => {
 exports.getTauxInvalidite = async (req, res) => {
   try {
     await axios
-      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/aah/taux_incapacite")
+      .get("https://fr.openfisca.org/api/latest/parameter/prestations_sociales/prestations_etat_de_sante/invalidite/aah/taux_capacite/taux_incapacite")
       .then(res =>{
         tauxInvalidite = res.data.values;
         tauxInvaliditeDescription = res.data.description;
