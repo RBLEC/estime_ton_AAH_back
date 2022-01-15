@@ -22,7 +22,7 @@ exports.getAAH = async (req, res) => {
     console.error(error);
     res.status(500).json({
       success: false,
-      message:(`Les serveurs d'OpenFisca FRANCE sont indisponible pour le moment`),
+      message:(`Les serveurs d'OpenFisca FRANCE sont indisponibless pour le moment.`),
       error: error.message
     });
   }
@@ -46,7 +46,7 @@ exports.getMajorationPlafondCouple = async (req, res) => {
     console.error(error);
     res.status(500).json({
       success: false,
-      message:(`Les serveurs d'OpenFisca FRANCE sont indisponible pour le moment`),
+      message:(`Les serveurs d'OpenFisca FRANCE sont indisponibles pour le moment.`),
       error: error.message
     });
   }
@@ -70,7 +70,7 @@ exports.getCoefPersonneACharge = async (req, res) => {
     console.error(error);
     res.status(500).json({
       success: false,
-      message:(`Les serveurs d'OpenFisca FRANCE sont indisponible pour le moment`),
+      message:(`Les serveurs d'OpenFisca FRANCE sont indisponibles pour le moment.`),
       error: error.message
     });
   }
@@ -94,7 +94,7 @@ exports.getSmichb = async (req, res) => {
     console.error(error);
     res.status(500).json({
       success: false,
-      message:(`Les serveurs d'OpenFisca FRANCE sont indisponible pour le moment`),
+      message:(`Les serveurs d'OpenFisca FRANCE sont indisponibles pour le moment.`),
       error: error.message
     });
   }
@@ -118,7 +118,7 @@ exports.getSmichbtf = async (req, res) => {
     console.error(error);
     res.status(500).json({
       success: false,
-      message:(`Les serveurs d'OpenFisca FRANCE sont indisponible pour le moment`),
+      message:(`Les serveurs d'OpenFisca FRANCE sont indisponibles pour le moment.`),
       error: error.message
     });
   }
@@ -142,7 +142,7 @@ exports.getMVA = async (req, res) => {
     console.error(error);
     res.status(500).json({
       success: false,
-      message:(`Les serveurs d'OpenFisca FRANCE sont indisponible pour le moment`),
+      message:(`Les serveurs d'OpenFisca FRANCE sont indisponibles pour le moment.`),
       error: error.message
     });
   }
@@ -165,7 +165,7 @@ exports.getAgeMinimal = async (req, res) => {
     console.error(error);
     res.status(500).json({
       success: false,
-      message:(`Les serveurs d'OpenFisca FRANCE sont indisponible pour le moment`),
+      message:(`Les serveurs d'OpenFisca FRANCE sont indisponibles pour le moment.`),
       error: error.message
     });
   }
@@ -188,7 +188,7 @@ exports.getAgeRetraite = async (req, res) => {
     console.error(error);
     res.status(500).json({
       success: false,
-      message:(`Les serveurs d'OpenFisca FRANCE sont indisponible pour le moment`),
+      message:(`Les serveurs d'OpenFisca FRANCE sont indisponibles pour le moment.`),
       error: error.message
     });
   }
@@ -212,7 +212,7 @@ exports.getTauxInvalidite = async (req, res) => {
     console.error(error);
     res.status(500).json({
       success: false,
-      message:(`Les serveurs d'OpenFisca FRANCE sont indisponible pour le moment`),
+      message:(`Les serveurs d'OpenFisca FRANCE sont indisponibles pour le moment.`),
       error: error.message
     });
   }
@@ -236,7 +236,7 @@ exports.getTauxInvaliditeMinimum = async (req, res) => {
     console.error(error);
     res.status(500).json({
       success: false,
-      message:(`Les serveurs d'OpenFisca FRANCE sont indisponible pour le moment`),
+      message:(`Les serveurs d'OpenFisca FRANCE sont indisponibles pour le moment.`),
       error: error.message
     });
   }

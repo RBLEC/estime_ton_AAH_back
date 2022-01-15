@@ -28,13 +28,13 @@ const { Comment, User } = require(`../models`);
       console.trace(error);
       res.status(500).json({
         success: false,
-        message:(`Oups il y a un problème avec la listes de tous les commentaires de l'utilisateur`),
+        message:(`Oups il y a un problème avec la liste de tous les commentaires de l'utilisateur`),
         error: error.message
       });
     });
   };
 
-  // liste un commentaire et l'article
+  // affiche un commentaire et l'article
   exports.getCommentUser = async (req, res) => {
     const userId = userToken.id
     const commentId = parseInt(req.params.commentId, 10);
@@ -96,7 +96,7 @@ const { Comment, User } = require(`../models`);
     .then(() => {
       res.status(201).json({
         success: true,
-        message: (`Commentaire créer`),
+        message: (`Commentaire créé`),
         comment,
         user
       });
@@ -104,7 +104,7 @@ const { Comment, User } = require(`../models`);
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`Oups commentaire non créer`),
+        message: (`Oups commentaire non créé`),
         error: error.message
       });
     });      
@@ -136,7 +136,7 @@ const { Comment, User } = require(`../models`);
     .then(() => {
       res.status(201).json({
         success: true,
-        message: (`Commentaire créer`),
+        message: (`Commentaire créé`),
         comment,
         user
       });
@@ -179,7 +179,7 @@ const { Comment, User } = require(`../models`);
       res.status(500).json({
         success: false,
         error: error.message,
-        message: (`commentaire non effacé`)
+        message: (`Commentaire non effacé`)
       });
     });
   };
@@ -203,7 +203,7 @@ const { Comment, User } = require(`../models`);
     ]).then(values => {
       [user, comment] = values;
       if(!comment) {
-        throw new Error(`commentaire non trouvé`);
+        throw new Error(`Commentaire non trouvé`);
       }
       if(!user) {
         throw new Error(`Utilisateur non trouvé`);
@@ -233,14 +233,14 @@ const { Comment, User } = require(`../models`);
     await Comment.count().then(comments => {
       res.status(200).json({
         success: true,
-        message: (`Voici le nombre total de commentaire => ${comments}`),
+        message: (`Voici le nombre total de commentaires => ${comments}`),
         comments
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`impossible de compter le nombre de commentaire`),
+        message: (`Impossible de compter le nombre de commentaires`),
         error: error.message
       });
     });
@@ -336,7 +336,7 @@ const { Comment, User } = require(`../models`);
     });
   };
 
-  // Suppresion de l'article de l'utilisateur
+  // Supression de l'article de l'utilisateur
   exports.deleteComment = async (req, res) => {
     const commentId = parseInt(req.params.id, 10);
       await Comment.findByPk(commentId)
@@ -360,7 +360,7 @@ const { Comment, User } = require(`../models`);
     });
   };
 
-    // Mise a jour de l'article de l'utilisateur
+    // Mise à jour de l'article de l'utilisateur
   exports.updateComment = async (req, res) => {
     const commentData = {
       content : req.body.content,
@@ -390,3 +390,4 @@ const { Comment, User } = require(`../models`);
       });
     });
   };
+  

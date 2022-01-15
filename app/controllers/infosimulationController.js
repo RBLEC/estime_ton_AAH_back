@@ -11,7 +11,7 @@ const montantPercuAAHAvecMVA = require (`../middlewares/montantMVAPercu`);
 const statusAAH = require("../middlewares/statusAAH");
 const phraseFin = require("../middlewares/phraseFin");
 
-  // liste tous les infosimulation de l'utilisateur
+  // liste touters les infosimulation de l'utilisateur
   exports.getInfosimulationsUser = async (req, res) => {
     const userId = userToken.id
     await User.findAndCountAll( { 
@@ -24,20 +24,20 @@ const phraseFin = require("../middlewares/phraseFin");
       }   
       res.status(200).json({
         success: true,
-        message:(`Voici la liste tous les simulations de l'utilisateur`),
+        message:(`Voici la liste de toutes les simulations de l'utilisateur`),
         user
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message:(`Oups il y a un problème avec la liste tous les simulation de l'utilisateur`),
+        message:(`Oups il y a un problème avec la liste des simulations de l'utilisateur`),
         error: error.message
       });
     });           
   };
 
-  // Liste une simulation de l'utilisateur
+  // Affiche une simulation de l'utilisateur
   exports.getInfosimulationUser = async (req, res) => {
     const userId = userToken.id
     const infosimulationId = Number(req.params.infosimulationId, 10);  
@@ -53,20 +53,20 @@ const phraseFin = require("../middlewares/phraseFin");
         throw new Error(`Information de votre simulation non trouvé`);
       }
       if(infosimulation.user_id !== user.id) {
-        throw new Error(`Revenue de l'utilisateur non trouvé`);
+        throw new Error(`Revenus de l'utilisateur non trouvés`);
       }
       return (user, infosimulation);
     }).then(() => {
       res.status(200).json({
         success: true,
-        message:(`liste le revenu de l'utilisateur`),
+        message:(`affiche le revenu de l'utilisateur`),
         infosimulation
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message:(`Oups il y a un problème avec une simulation de l'utilisateur`),
+        message:(`Oups il y a un problème avec la simulation de l'utilisateur`),
         error: error.message
       });
     });
@@ -298,7 +298,7 @@ const phraseFin = require("../middlewares/phraseFin");
     };
 
     const nbsimulation = {
-      content: `un utilisateur a fait une simulation`,
+      content: `Un utilisateur a fait une simulation`,
       user_id: userId
     };
 
@@ -309,7 +309,7 @@ const phraseFin = require("../middlewares/phraseFin");
     ]).then(infosimulation => {
       res.status(201).json({
         success: true,
-        message: (`Simulation créer`),
+        message: (`Simulation créée`),
         infosimulation,
       });
     }).catch(error => {
@@ -322,7 +322,7 @@ const phraseFin = require("../middlewares/phraseFin");
     });
   };
 
-  // suppréssion d'une simulation de l'utilisateur
+  // suppression d'une simulation de l'utilisateur
   exports.deleteInfosimulationUser = async (req, res) => {
     const userId = userToken.id
     const infosimulationId = Number(req.params.infosimulationId, 10);
@@ -335,28 +335,28 @@ const phraseFin = require("../middlewares/phraseFin");
         throw new Error(`Utilisateur non trouvé`);
       }
       if(!infosimulation) {
-        throw new Error(`Simulation non trouvé`);
+        throw new Error(`Simulation non trouvée`);
       }
       if(infosimulation.user_id !== userId) {
-        throw new Error(`Simulation de l'utilisateur non trouvé`);
+        throw new Error(`Simulation de l'utilisateur non trouvée`);
       }
       return infosimulation.destroy();
     }).then(() => {
       res.status(200).json({
         success: true,
-        message: (`Simulation effacé`)
+        message: (`Simulation effacée`)
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`La simulation n'a pas été effacé`),
+        message: (`La simulation n'a pas été effacée`),
         error: error.message
       });
     });
   };
 
-  // compteur de Simulation
+  // compteur de simulations
   exports.getCountInfosimulations = async (req, res) => {
     await Infosimulation.count().then(infosimulations => {
       res.status(200).json({
@@ -368,7 +368,7 @@ const phraseFin = require("../middlewares/phraseFin");
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`impossible de compter le nombre de revenu`),
+        message: (`Impossible de compter le nombre de revenus`),
         error: error.message
       });
     });

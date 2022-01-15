@@ -5,7 +5,7 @@ class User extends Model {};
 
 // Premier parametre: la liste des valeurs dans le model (sans mettre les ids de relation)
 User.init({
-    // toute les propriétés sans les ids de relation dans le mld
+    // toutes les propriétés sans les ids de relation dans le mld
     pseudo: {
         type: DataTypes.TEXT,
         allowNull: false,

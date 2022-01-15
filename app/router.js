@@ -26,8 +26,8 @@ router.get(`/adminusers`, authenticate, admin, adminController.getAdminUsers); /
 router.get(`/adminuser/:id`, authenticate, admin, adminController.getAdminUser); // =>ok
 router.patch(`/adminuser/:id`, authenticate, admin, adminController.updateAdminUser); // =>ok
 router.delete(`/adminuser/:id`, authenticate, admin, adminController.deleteAdminUser); // =>ok
-router.get(`/adminuser/:id/articles`, authenticate, admin, adminController.getAdminUserArticles); // =>ok
-router.get(`/adminuser/:id/article/:id`, authenticate, admin, adminController.getAdminUserArticle); // =>ok
+//router.get(`/adminuser/:id/articles`, authenticate, admin, adminController.getAdminUserArticles); // =>ok //! a sup
+//router.get(`/adminuser/:id/article/:id`, authenticate, admin, adminController.getAdminUserArticle); // =>ok //! a sup
 
 //* comment admin
 router.get(`/comments`, authenticate, admin, commentController.getComments); 
@@ -55,7 +55,7 @@ router.patch(`/adminguestbook/:id`, authenticate, admin, adminController.updateA
 router.delete(`/adminguestbook/:id`, authenticate, admin, adminController.deleteAdminGuestbook); 
 
 //* Infosimulation admin
-router.get(`/admininfosimulations`, adminController.getAdminInfosimulations); 
+router.get(`/admininfosimulations`, authenticate, admin, adminController.getAdminInfosimulations); 
 router.get(`/admininfosimulation/:id`, authenticate, admin, adminController.getAdminInfosimulation); 
 //router.patch //! pas de mise à jour pour une simulation
 router.delete(`/admininfosimulation/:id`, authenticate, admin, adminController.deleteAdminInfosimulation); 
@@ -65,9 +65,7 @@ router.delete(`/admininfosimulation/:id`, authenticate, admin, adminController.d
 router.post(`/signup`, userController.createUser); // =>ok
 router.post(`/login`, userController.loginUser); // =>ok
 router.post(`/refreshToken`, authenticateRefresh); // =>ok
-//router.post //! pas besoin avec les JWT on ne peu pas les supprimés
 
-router.get(`/users`, authenticate, admin, userController.getUsers); // =>ok //! a sup
 router.get(`/user/:id`, authenticate, userController.getUser); // =>ok
 router.get(`/userLastComment/:id`, authenticate, userController.getUserLastComment); // =>ok
 router.get(`/userLastArticle/:id`, authenticate, userController.getUserLastArticle); // =>ok
@@ -116,7 +114,7 @@ router.get(`/guestbooks`, guestbookController.getGuestbooks); // =>ok
 router.get(`/lastguestbooks`, guestbookController.getLastGuestbooks); // =>ok
 router.get(`/guestbook/:id`, guestbookController.getGuestbook); // =>ok
 
-//! Creation d'une simulation
+//! Création d'une simulation
 router.get(`/nbsimulations`,authenticate,admin,nbsimulationController.getNbsimulations); // =>ok
 router.get(`/user/:userId/nbsimulations`,authenticate,nbsimulationController.getNbsimulationsUser); // =>ok
 

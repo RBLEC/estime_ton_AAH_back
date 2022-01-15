@@ -19,8 +19,8 @@ exports.getAdminUsers = async (req, res) => {
     order: [[`pseudo`]],
   })
     .then((users) => {
-      // dans le then (lorsque sequelize à enfin récupéré les listes) j`envoi les lites au client.
-      // je répond en JSON car je suis une API
+      // dans le then (lorsque sequelize à enfin récupéré les listes) j`envoie la liste au client.
+      // je réponds en JSON car je suis une API
       res.status(200).json({
         success: true,
         message: `Voici la liste de tous les utilisateurs par pseudo`,
@@ -28,7 +28,7 @@ exports.getAdminUsers = async (req, res) => {
       });
     })
     .catch((error) => {
-      // si sequelize à eu une erreur je revoi un message au client ne JSON pour lui dire qu`il y a un pépin
+      // si sequelize a eu une erreur je renvoie un message au client en JSON pour lui dire qu`il y a un pépin
       console.trace(error);
       res.status(500).json({
         success: false,
@@ -63,7 +63,7 @@ exports.getAdminUser = async (req, res) => {
     });
 };
 
-//* Suppréssion d'un utilisateur
+//* Suppression d'un utilisateur
 exports.deleteAdminUser = async (req, res) => {
   const userId = parseInt(req.params.id, 10);
   await User.findByPk(userId)
@@ -109,7 +109,7 @@ exports.updateAdminUser = async (req, res) => {
       return user.update(userData);
     })
     .then((user) => {
-      // lorsque le mise à jours est terminée je renvoi au client la user modifiée
+      // lorsque la mise à jours est terminéee je renvoie au client le user modifié
       const userWOPW = {
       pseudo: user.dataValues.pseudo,
       email: user.dataValues.email,
@@ -121,7 +121,7 @@ exports.updateAdminUser = async (req, res) => {
     const refreshToken = generateRefreshToken(userWOPW);
       res.status(200).json({
         success: true,
-        message: `Utilisateur mis à jour.`,
+        message: `L'utilisateur a été mis à jour.`,
         userWOPW,
         accessToken,
         refreshToken
@@ -129,7 +129,7 @@ exports.updateAdminUser = async (req, res) => {
     })
     .catch((error) => {
       console.trace(error);
-      // si sequelize à eu une erreur je revoi un message au client ne JSON pour lui dire qu`il y a un pépin
+      // si sequelize a eu une erreur je renvoie un message au client en JSON pour lui dire qu`il y a un pépin
       res.status(500).json({
         success: false,
         message: `L'utilisateur n'a pas été mis à jour.`,
@@ -151,11 +151,11 @@ exports.getAdminUserArticles = async (req, res) => {
       console.log(`user`, user)
 
       if (!user) {
-        throw new Error(`Utilisateur non trouvé`);
+        throw new Error(`Utilisateur non trouvé.`);
       }
       res.status(200).json({
         success: true,
-        message: `Toutes les informations de l'utilisateur`,
+        message: `Toutes les informations de l'utilisateur.`,
         user
       });
     })
@@ -177,18 +177,18 @@ exports.getAdminUserArticle = async (req, res) => {
         include: ['user','comment'], 
     }).then((article) => {
       if(!article) {
-        throw new Error(`Article non trouvé`);
+        throw new Error(`Article non trouvé.`);
       }
       res.status(200).json({
           success: true,
-          message:(`Voici l'article`),
+          message:(`Voici l'article.`),
           article
       });
     }).catch(error => {
       console.trace(error);
         res.status(500).json({
           success: false,
-          message:(`Oups il y a un problème pour lister l'article`),
+          message:(`Oups il y a un problème pour afficher l'article.`),
           error: error.message
         });
     });
@@ -210,14 +210,14 @@ exports.getAdminUserArticle = async (req, res) => {
     }).then(comments => {
       res.status(200).json({
         success: true,
-        message:(`Voici la liste de tous les commentaires`),
+        message:(`Voici la liste de tous les commentaires.`),
         comments
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
       success: false,
-      message:(`Oups il y a un problème avec la liste de tous les commentaires`),
+      message:(`Oups il y a un problème avec la liste de tous les commentaires.`),
       error: error.message
       });
     });
@@ -238,48 +238,48 @@ exports.getAdminUserArticle = async (req, res) => {
       }],
     }).then((comment) => {
       if(!comment) {
-        throw new Error(`Commentaire non trouvé`);
+        throw new Error(`Commentaire non trouvé.`);
       }
       res.status(200).json({
           success: true,
-          message:(`Voici le commentaire`),
+          message:(`Voici le commentaire.`),
           comment
       });
     }).catch(error => {
       console.trace(error);
         res.status(500).json({
           success: false,
-          message:(`Oups il y a un problème pour lister le commentaire`),
+          message:(`Oups il y a un problème pour afficher le commentaire.`),
           error: error.message
         });
     });
   };
 
-  // Suppresion de l'article de l'utilisateur
+  // Supression de l'article de l'utilisateur
   exports.deleteAdminComment = async (req, res) => {
     const commentId = parseInt(req.params.id, 10);
       await Comment.findByPk(commentId)
       .then(comment => {  
       if(!comment) {
-        throw new Error(`Commentaire non trouvé`);
+        throw new Error(`Commentaire non trouvé.`);
       }
       return comment.destroy();
     }).then(() => {
       res.status(200).json({
         success: true,
-        message: (`Commentaire effacé`)
+        message: (`Commentaire effacé.`)
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`Le commentaire n'a pas été effacé`),
+        message: (`Le commentaire n'a pas été effacé.`),
         error: error.message
       });
     });
   };
 
-    // Mise a jour de l'article de l'utilisateur
+    // Mise à jour de l'article de l'utilisateur
   exports.updateAdminComment = async (req, res) => {
     const commentData = {
       content : req.body.content,
@@ -291,20 +291,20 @@ exports.getAdminUserArticle = async (req, res) => {
     await Comment.findByPk(commentId)
     .then(comment => {
       if(!comment) {
-        throw new Error(`Commentaire non trouvé`);
+        throw new Error(`Commentaire non trouvé.`);
       }
       return comment.update(commentData);           
     }).then((comment) => {
       res.status(200).json({
         success: true,
-        message: (`Commentaire mis à jour`),
+        message: (`Commentaire mis à jour.`),
         comment
       });
     }).catch(error => {
       console.log(error);
       res.status(500).json({
         success: false,
-        message: (`Le commentaire n'a pas été mis à jour`),
+        message: (`Le commentaire n'a pas été mis à jour.`),
         error: error.message
       });
     });
@@ -321,20 +321,20 @@ exports.getAdminUserArticle = async (req, res) => {
     }).then(articles => {
       res.status(200).json({
         success: true,
-        message:(`Voici la liste de tous les articles`),
+        message:(`Voici la liste de tous les articles.`),
         articles
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
       success: false,
-      message:(`Oups il y a un problème avec la liste de tous les articles`),
+      message:(`Oups il y a un problème avec la liste de tous les articles.`),
       error: error.message
       });
     });
   };
 
-  // Liste un article
+  // Affiche un article
   exports.getAdminArticle = async (req, res) => {
     const articleId = parseInt(req.params.id, 10);
     await Article.findAndCountAll({
@@ -344,24 +344,24 @@ exports.getAdminUserArticle = async (req, res) => {
       },
     }).then((article) => {
       if(!article) {
-        throw new Error(`Article non trouvé`);
+        throw new Error(`Article non trouvé.`);
       }
       res.status(200).json({
           success: true,
-          message:(`Voici l'article'`),
+          message:(`Voici l'article.`),
           article
       });
     }).catch(error => {
       console.trace(error);
         res.status(500).json({
           success: false,
-          message:(`Oups il y a un problème pour lister l'article`),
+          message:(`Oups il y a un problème pour afficher l'article.`),
           error: error.message
         });
     });
   };
 
-  // Suppresion de l'article 
+  // Suppression de l'article 
   exports.deleteAdminArticle = async (req, res) => {
     const articleId = parseInt(req.params.id, 10);
       await Article.findByPk(articleId)
@@ -373,19 +373,19 @@ exports.getAdminUserArticle = async (req, res) => {
     }).then(() => {
       res.status(200).json({
         success: true,
-        message: (`Article effacé`)
+        message: (`Article effacé.`)
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`L'article n'a pas été effacé`),
+        message: (`L'article n'a pas été effacé.`),
         error: error.message
       });
     });
   };
 
-    // Mise a jour de l'article 
+    // Mise à jour de l'article 
   exports.updateAdminArticle = async (req, res) => {
     const articleData = {
       title : req.body.title,
@@ -396,20 +396,20 @@ exports.getAdminUserArticle = async (req, res) => {
     await Article.findByPk(articleId)
     .then(article => {
       if(!article) {
-        throw new Error(`ARticle non trouvé`);
+        throw new Error(`ARticle non trouvé.`);
       }
       return article.update(articleData);           
     }).then((article) => {
       res.status(200).json({
         success: true,
-        message: (`article mis à jour`),
+        message: (`article mis à jour.`),
         article
       });
     }).catch(error => {
       console.log(error);
       res.status(500).json({
         success: false,
-        message: (`L'article n'a pas été mis à jour`),
+        message: (`L'article n'a pas été mis à jour.`),
         error: error.message
       });
     });
@@ -439,7 +439,7 @@ exports.getAdminUserArticle = async (req, res) => {
     });
   };
 
-  // Liste un message du livre d'or
+  // Affiche un message du livre d'or
   exports.getAdminGuestbook = async (req, res) => {
     const guestbookId = parseInt(req.params.id, 10);
     await Guestbook.findAndCountAll({
@@ -449,48 +449,48 @@ exports.getAdminUserArticle = async (req, res) => {
       },
     }).then((guestbook) => {
       if(!guestbook) {
-        throw new Error(`Message du livre d'or non trouvé`);
+        throw new Error(`Message du livre d'or non trouvé.`);
       }
       res.status(200).json({
           success: true,
-          message:(`Voici le  message du livre d'or`),
+          message:(`Voici le  message du livre d'or.`),
           guestbook
       });
     }).catch(error => {
       console.trace(error);
         res.status(500).json({
           success: false,
-          message:(`Oups il y a un problème pour lister le  message du livre d'or`),
+          message:(`Oups il y a un problème pour afficher le  message du livre d'or.`),
           error: error.message
         });
     });
   };
 
-  // Suppresion du  message du livre d'or
+  // Suppression du  message du livre d'or
   exports.deleteAdminGuestbook = async (req, res) => {
     const guestbookId = parseInt(req.params.id, 10);
       await Guestbook.findByPk(guestbookId)
       .then(guestbook => {  
       if(!guestbook) {
-        throw new Error(`Message dans le livre d'or non trouvé`);
+        throw new Error(`Message dans le livre d'or non trouvé.`);
       }
       return guestbook.destroy();
     }).then(() => {
       res.status(200).json({
         success: true,
-        message: (`Message dans le livre d'or effacé`)
+        message: (`Message dans le livre d'or effacé.`)
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`Le message dans le livre d'or n'a pas été effacé`),
+        message: (`Le message dans le livre d'or n'a pas été effacé.`),
         error: error.message
       });
     });
   };
 
-    // Mise a jour du message dans le livre d'or
+    // Mise à jour d'un message dans le livre d'or
   exports.updateAdminGuestbook = async (req, res) => {
     const guestbookData = {
       title : req.body.title,
@@ -501,20 +501,20 @@ exports.getAdminUserArticle = async (req, res) => {
     await Guestbook.findByPk(guestbookId)
     .then(guestbook => {
       if(!guestbook) {
-        throw new Error(`Le message dans le livre d'or non trouvé`);
+        throw new Error(`Message dans le livre d'or non trouvé.`);
       }
       return guestbook.update(guestbookData);           
     }).then((guestbook) => {
       res.status(200).json({
         success: true,
-        message: (`Le message dans le livre d'or à été mis à jour`),
+        message: (`Le message dans le livre d'or à été mis à jour.`),
         guestbook
       });
     }).catch(error => {
       console.log(error);
       res.status(500).json({
         success: false,
-        message: (`Le message dans le livre d'or n'a pas été mis à jour`),
+        message: (`Le message dans le livre d'or n'a pas été mis à jour.`),
         error: error.message
       });
     });
@@ -529,9 +529,6 @@ exports.getAdminUserArticle = async (req, res) => {
       },
       order: [[`created_at`, `DESC`]],           
     }).then(infosimulations => {
-      if(!infosimulations) {
-        throw new Error(`Infosimulation non trouvé`);
-      }
       res.status(200).json({
         success: true,
         message:(`Voici la liste de toutes les simulations.`),
@@ -557,42 +554,42 @@ exports.getAdminUserArticle = async (req, res) => {
       },
     }).then((infosimulation) => {
       if(!infosimulation) {
-        throw new Error(`Infosimulation non trouvé`);
+        throw new Error(`Infosimulation non trouvée.`);
       }
       res.status(200).json({
           success: true,
-          message:(`Voici l'infosimulation`),
+          message:(`Voici l'infosimulation.`),
           infosimulation
       });
     }).catch(error => {
       console.trace(error);
         res.status(500).json({
           success: false,
-          message:(`Oups il y a un problème pour lister l'infosimulation`),
+          message:(`Oups il y a un problème pour lister l'infosimulation.`),
           error: error.message
         });
     });
   };
 
-  // Suppresion d'une infosimulation
+  // Supression d'une infosimulation
   exports.deleteAdminInfosimulation = async (req, res) => {
     const infosimulationId = parseInt(req.params.id, 10);
       await Infosimulation.findByPk(infosimulationId)
       .then(infosimulation => {  
       if(!infosimulation) {
-        throw new Error(`Infosimulation non trouvé`);
+        throw new Error(`Infosimulation non trouvée.`);
       }
       return infosimulation.destroy();
     }).then(() => {
       res.status(200).json({
         success: true,
-        message: (`Infosimulation effacé`)
+        message: (`Infosimulation effacée.`)
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`Infosimulation n'a pas été effacé`),
+        message: (`L'infosimulation n'a pas été effacée.`),
         error: error.message
       });
     });

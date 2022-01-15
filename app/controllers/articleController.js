@@ -10,14 +10,14 @@ const { Article, User } = require(`../models`);
     }).then(articles => {
       res.status(200).json({
         success: true,
-        message:(`Voici la liste de tous les articles`),
+        message:(`Voici la liste de tous les articles.`),
         articles
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
       success: false,
-      message:(`Oups il y a un problème avec la liste de tous les articles`),
+      message:(`Oups il y a un problème avec la liste de tous les articles.`),
       error: error.message
       });
     });
@@ -35,20 +35,20 @@ const { Article, User } = require(`../models`);
     }).then(articles => {
       res.status(200).json({
         success: true,
-        message:(`Voici des 10 derniers articles`),
+        message:(`Voici des 10 derniers articles.`),
         articles
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
       success: false,
-      message:(`Oups il y a un problème avec les 10 derniers articles`),
+      message:(`Oups il y a un problème avec les 10 derniers articles.`),
       error: error.message
       });
     });
   };
 
-  // Liste un article avec ses commentaires
+  // Affiche un article avec ses commentaires
   exports.getArticle = async (req, res) => {
     const articleId = parseInt(req.params.id, 10);
     //await Article.findByPk(articleId, {
@@ -60,18 +60,18 @@ const { Article, User } = require(`../models`);
       }],
     }).then((article) => {
       if(!article) {
-        throw new Error(`Article non trouvé`);
+        throw new Error(`Article non trouvé.`);
       }
       res.status(200).json({
           success: true,
-          message:(`Voici l'article`),
+          message:(`Voici l'article.`),
           article
       });
     }).catch(error => {
       console.trace(error);
         res.status(500).json({
           success: false,
-          message:(`Oups il y a un problème pour lister l'article`),
+          message:(`Oups il y a un problème pour afficher l'article.`),
           error: error.message
         });
     });
@@ -87,24 +87,24 @@ const { Article, User } = require(`../models`);
         order: [[model = 'article',"updated_at", "DESC",]],
     }).then((user) => {
       if(!user) {
-        throw new Error(`Utilisateur non trouvé`);
+        throw new Error(`Utilisateur non trouvé.`);
       }
       res.status(200).json({
         success: true,
-        message:(`Voici tous les articles de l'utilisateur`),
+        message:(`Voici tous les articles de l'utilisateur.`),
         user
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message:(`Oups il y a un problème pour lister de tous les articles de l'utilisateur`),
+        message:(`Oups il y a un problème pour lister tous les articles de l'utilisateur.`),
         error: error.message
       });
     });
   };
 
-  // Liste un article d'un utilisateur
+  // Affiche un article d'un utilisateur
   exports.getArticleUser = async (req, res) => {
     const userId = userToken.id
     const articleId = parseInt(req.params.articleId, 10);
@@ -118,32 +118,32 @@ const { Article, User } = require(`../models`);
     ]).then(values => {
       [user, article] = values;
         if(!user) {
-          throw new Error(`Utilisateur non trouvé`);
+          throw new Error(`Utilisateur non trouvé.`);
         }
         if(!article) {
-          throw new Error(`Article non trouvé`);
+          throw new Error(`Article non trouvé.`);
         }
         if(article.user_id !== user.id) {
-          throw new Error(`Article de l'utilisateur non trouvé`);
+          throw new Error(`Article de l'utilisateur non trouvé.`);
         }
         return (user, article);
     }).then(() => {
       res.status(200).json({
         success: true,
-        message:(`l'article de l'utilisateur`),
+        message:(`Voici l'article de l'utilisateur.`),
         article
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message:(`Oups il y a un problème avec l'article de l'utilisateur`),
+        message:(`Oups il y a un problème pour afficher l'article de l'utilisateur.`),
         error: error.message
       });
     });
   };
 
-  // création d'un article de l'utilisateur
+  // création d'un article d'un utilisateur
   exports.createArticleUser = async (req, res) => {
     const userId = userToken.id
     //const userId = req.body.user_id
@@ -156,7 +156,7 @@ const { Article, User } = require(`../models`);
       missingParams.push(`le contenu`);
     }
     if (missingParams.length > 0) {
-      return res.status(400).json(`Il manque des paramètres: ${missingParams.join(`, `)}`);
+      return res.status(400).json(`Il manque des paramètres: ${missingParams.join(`, `)}.`);
     }
     await User.findByPk(userId),   
     await Article.create({
@@ -166,20 +166,20 @@ const { Article, User } = require(`../models`);
     }).then(article => {
       res.status(201).json({
         success: true,
-        message: (`Votre article a été créer`),
+        message: (`Votre article a été créé.`),
         article,
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`Votre article n'a pas été créer`),
+        message: (`Votre article n'a pas été créé.`),
         error: error.message
       });
     });
   };
 
-  // Suppresion de l'article de l'utilisateur
+  // Suppression de l'article de l'utilisateur
   exports.deleteArticleUser = async (req, res) => {
     const userId = userToken.id
     const articleId = parseInt(req.params.articleId, 10);
@@ -189,31 +189,31 @@ const { Article, User } = require(`../models`);
     ]).then(values => {
       [user, article] = values;
       if(!user) {
-        throw new Error(`Utilisateur non trouvé`);
+        throw new Error(`Utilisateur non trouvé.`);
       }
       if(!article) {
-        throw new Error(`Article non trouvé`);
+        throw new Error(`Article non trouvé.`);
       }
       if(article.user_id !== userId) {
-        throw new Error(`Article de l'utilisateur non trouvé`);
+        throw new Error(`Article de l'utilisateur non trouvé.`);
       }
       return article.destroy();
     }).then(() => {
       res.status(200).json({
         success: true,
-        message: (`Article effacé`)
+        message: (`Article effacé.`)
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`L'article n'a pas été effacé`),
+        message: (`L'article n'a pas été effacé.`),
         error: error.message
       });
     });
   };
 
-  // Mise a jour de l'article de l'utilisateur
+  // Mise à jour de l'article de l'utilisateur
   exports.updateArticleUser = async (req, res) => {
     const userId = userToken.id
     const articleData = {
@@ -228,44 +228,44 @@ const { Article, User } = require(`../models`);
     ]).then(values => {
       [user, article] = values;
       if(!user) {
-        throw new Error(`Utilisateur non trouvé`);
+        throw new Error(`Utilisateur non trouvé.`);
       }
       if(!article) {
-        throw new Error(`Article non trouvé`);
+        throw new Error(`Article non trouvé.`);
       }
       if(article.user_id !== userId) {
-        throw new Error(`Article de l'utilisateur non trouvé`);
+        throw new Error(`Article de l'utilisateur non trouvé.`);
       }
       return article.update(articleData, user);           
     }).then( () => {
       res.status(200).json({
         success: true,
-        message: (`Article mis à jour`),
+        message: (`Article mis à jour.`),
         article
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`L'article n'a pas été mis à jour`),
+        message: (`L'article n'a pas été mis à jour.`),
         error: error.message
       });
     });
   };
 
-  // compteur du nombre d`article 
+  // compteur du nombre d`articles 
   exports.getCountArticles = async (req, res) => {
     await Article.count().then(articles => {
       res.status(200).json({
         success: true,
-        message: (`Voici le nombre total d'articles => ${articles}`),
+        message: (`Voici le nombre total d'articles => ${articles}.`),
         articles
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`impossible de compter le nombre d'article`),
+        message: (`impossible de compter le nombre d'articles.`),
         error: error.message
       });
     });

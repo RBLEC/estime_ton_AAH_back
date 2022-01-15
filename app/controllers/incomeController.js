@@ -24,7 +24,7 @@ const { User, Income} = require(`../models`);
     });           
   };
 
-  // Liste un revenu de l'utilisateur
+  // Affiche un revenu de l'utilisateur
   exports.getIncomeUser = (req, res) => {
     const userId = userToken.id
     const incomeId = parseInt(req.params.incomeId, 10);  
@@ -40,26 +40,26 @@ const { User, Income} = require(`../models`);
         throw new Error(`Revenu non trouvé`);
       }
       if(income.user_id !== user.id) {
-        throw new Error(`Revenue de l'utilisateur non trouvé`);
+        throw new Error(`Revenu de l'utilisateur non trouvé`);
       }
       return (user, income);
     }).then(() => {
       res.status(200).json({
         success: true,
-        message:(`liste le revenu de l'utilisateur`),
+        message:(`voici le revenu de l'utilisateur`),
         income
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message:(`Oups il y a un problème avec un revenu de l'utilisateur`),
+        message:(`Oups il y a un problème avec le revenu de l'utilisateur`),
         error: error.message
       });
     });
   };
 
-  // création d'un revenu pour l'utilisatuer
+  // création d'un revenu pour un utilisateur
   exports.createIncomeUser = (req, res) => {
     const userId = userToken.id
     const {year, amount, situation} = req.body;
@@ -91,20 +91,20 @@ const { User, Income} = require(`../models`);
     .then(income => {
       res.status(201).json({
         success: true,
-        message: (`Revenu créer`),
+        message: (`Revenu créé`),
         income,
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message:(`Oups le revenu n'a pas été créer`),
+        message:(`Oups le revenu n'a pas été créé`),
         error: error.message
       });
     });
   };
 
-  // suppréssion d'un revenu de l'utilisateur
+  // suppression d'un revenu de l'utilisateur
   exports.deleteIncomeUser = (req, res) => {
     const userId = userToken.id
     const incomeId = parseInt(req.params.incomeId, 10);
@@ -174,7 +174,7 @@ const { User, Income} = require(`../models`);
     });
   };
 
-  // compteur de revenue enregister
+  // compteur de revenus enregistés
   exports.getCountIncomes = (req, res) => {
     Income.count().then(incomes => {
       res.status(200).json({
@@ -186,7 +186,7 @@ const { User, Income} = require(`../models`);
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`impossible de compter le nombre de revenu`),
+        message: (`Impossible de compter le nombre de revenus`),
         error: error.message
       });
     });

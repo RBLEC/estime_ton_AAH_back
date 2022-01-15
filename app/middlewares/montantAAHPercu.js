@@ -1,4 +1,4 @@
-  //* Le montant AAH a percevoire
+  //* Le montant AAH a percevoir
   function montantAAHPercu(
     eligibiliteAAH, 
     resultassietteTotalFoyer,

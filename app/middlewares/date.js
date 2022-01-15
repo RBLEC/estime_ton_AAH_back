@@ -24,7 +24,7 @@ function dateTime() {
 
   return dateTime;
 
-  };
+};
 
 module.exports = dateTime;
 

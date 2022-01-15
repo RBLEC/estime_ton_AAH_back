@@ -1,6 +1,6 @@
 const { Nbsimulation, User } = require(`../models`);
 
-  // compteur du nombre de simulation enregister
+  // compteur du nombre de simulations enregistées
   exports.getCountNbsimulations = async (req, res) => {
     await Nbsimulation.count().then(simulations => {
       res.status(200).json({
@@ -12,13 +12,13 @@ const { Nbsimulation, User } = require(`../models`);
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`impossible de compter le nombre de simulation`),
+        message: (`Impossible de compter le nombre de simulations`),
         error: error.message
       });
     });
   };
 
-  // compte et montre toutes les simulations
+  // compte et affiche toutes les simulations
     exports.getNbsimulations = async (req, res) => {
     await Nbsimulation.findAndCountAll({
       order: [[`created_at`, `DESC`]]  
@@ -38,7 +38,7 @@ const { Nbsimulation, User } = require(`../models`);
     });
   };
 
-  // compte le nombre de simulation fait par un utilisateur
+  // compte le nombre de simulations faites par un utilisateur
     exports.getNbsimulationsUser = async (req, res) => {
     const userId = userToken.id
     await User.findAndCountAll( {
@@ -56,14 +56,14 @@ const { Nbsimulation, User } = require(`../models`);
       }
       res.status(200).json({
         success: true,
-        message:(`Voici le nombre de simulation de l'utilisateur`),
+        message:(`Voici le nombre de simulations de l'utilisateur`),
         user
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message:(`Oups il y a un problème pour compter le nombre de simulation de l'utilisateur`),
+        message:(`Oups il y a un problème pour compter le nombre de simulations de l'utilisateur`),
         error: error.message
       });
     });

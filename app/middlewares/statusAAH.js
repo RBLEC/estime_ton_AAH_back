@@ -25,7 +25,7 @@ const phraseFin = require("../middlewares/phraseFin");
         phraseAAH = phraseEligibiliteAAH(eligibiliteAAH);
         phraseMVA = phraseEligibiliteMVA(eligibiliteMVA);
         phraseCoef = (`Le coefficient de votre foyer est de ${coefDuFoyer}`);
-        phrasePlafond = (`avec un plafond de ${aahPlafondRessourcesMois.toFixed(2)} € mensuel, soit un plafond annuel de ${(aahPlafondRessourcesMois*12).toFixed(2)} €.`)
+        phrasePlafond = (`avec un plafond de ${aahPlafondRessourcesMois.toFixed(2)} € mensuels, soit un plafond annuel de ${(aahPlafondRessourcesMois*12).toFixed(2)} €.`)
         sommeRevenuFoyer = revenusTotalFoyer(                
           applicant_income_without_activity,
           applicant_income_with_activity,
@@ -50,7 +50,7 @@ const phraseFin = require("../middlewares/phraseFin");
 
   function NBChild(nb_child){
     if (nb_child > 0 ) {
-      phrase = (`vous avez ${nb_child} enfants ou personne à charge`);
+      phrase = (`vous avez ${nb_child} enfants ou personnes à charge`);
     } else { 
       phrase = (`vous n'avez pas d'enfant ou de personne à charge`);
     } return phrase;
@@ -60,7 +60,7 @@ const phraseFin = require("../middlewares/phraseFin");
     if (eligibiliteAAH === true) {
       phrase = (`Vous êtes éligible à l'AAH`);
     } else { 
-      phrase = (`vous n'êtes pas éligible à l'AAH `);
+      phrase = (`Vous n'êtes pas éligible à l'AAH `);
     } return phrase;
   };
 

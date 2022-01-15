@@ -1,4 +1,4 @@
-//* Fonction si la personne handicapé travail
+//* Fonction si la personne handicapée travaille
   function assiette(
     invalidite,
     smichb,
@@ -27,7 +27,7 @@ module.exports = assiette;
     revenusSalarial,
   ){
     smic_brut_annuel = 12 * Number(smichb) * Number(smicnbtf);
-    //! ici seulement si il touche 30%  de plus que le smic brute annuel sinon tranche 1 = 0  
+    //! ici seulement s'il touche 30%  de plus que le smic brut annuel sinon tranche 1 = 0  
     let tranche1 ;
       if( (( smic_brut_annuel * 1.3) < revenusSalarial)) {
         tranche1 = Number(revenusSalarial) - Number(smic_brut_annuel) * 1.3  ;

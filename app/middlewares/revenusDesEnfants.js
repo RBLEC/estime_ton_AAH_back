@@ -1,4 +1,4 @@
-  //* fonction des revenus enfants
+  //* fonction des revenus des enfants
     function revenus_des_enfants(
         nbPersonneACharge,
         revenusEnfant1,

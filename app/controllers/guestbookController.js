@@ -17,7 +17,7 @@ const { Guestbook, User } = require(`../models`);
       console.trace(error);
       res.status(500).json({
       success: false,
-      message:(`Oups il y a un problème avec la liste de tous les messages du livre d'or`),
+      message:(`Oups il y a un problème pour lister tous les messages du livre d'or`),
       error: error.message
       });
     });
@@ -42,13 +42,13 @@ const { Guestbook, User } = require(`../models`);
       console.trace(error);
       res.status(500).json({
       success: false,
-      message:(`Oups il y a un problème avec les 10 derniers  message du livre d'or`),
+      message:(`Oups il y a un problème avec les 10 derniers message du livre d'or`),
       error: error.message
       });
     });
   };
 
-  // Liste un message du livre d'or avec ses commentaires
+  // Affiche un message du livre d'or avec ses commentaires
   exports.getGuestbook = async (req, res) => {
     const guestbookId = parseInt(req.params.id, 10);
     await Guestbook.findAndCountAll({
@@ -70,13 +70,13 @@ const { Guestbook, User } = require(`../models`);
       console.trace(error);
         res.status(500).json({
           success: false,
-          message:(`Oups il y a un problème pour lister le message du livre d'or`),
+          message:(`Oups il y a un problème pour afficher le message du livre d'or`),
           error: error.message
         });
     });
   };
 
-  // Listes tous les messages du livre d'or de l'utilisateur
+  // Liste tous les messages du livre d'or de l'utilisateur
   exports.getGuestbooksUser = async (req, res) => {
     const userId = userToken.id
     await User.findAndCountAll( { 
@@ -102,7 +102,7 @@ const { Guestbook, User } = require(`../models`);
     });
   };
 
-  // Liste un messages du livre d'or d'un utilisateur
+  // Affiche un message du livre d'or d'un utilisateur
   exports.getGuestbookUser = async (req, res) => {
     const userId = userToken.id
     const guestbookId = parseInt(req.params.guestbookId, 10);
@@ -133,13 +133,13 @@ const { Guestbook, User } = require(`../models`);
       console.trace(error);
       res.status(500).json({
         success: false,
-        message:(`Oups il y a un problème avec le message de l'utilisateur`),
+        message:(`Oups il y a un problème pour afficher le message de l'utilisateur`),
         error: error.message
       });
     });
   };
 
-  // création d'un messages du livre d'or de l'utilisateur
+  // création d'un message du livre d'or de l'utilisateur
   exports.createGuestbookUser = async (req, res) => {
     const userId = userToken.id
     const {title, content} = req.body;
@@ -161,20 +161,20 @@ const { Guestbook, User } = require(`../models`);
     }).then(guestbook => {
       res.status(201).json({
         success: true,
-        message: (`Votre message dans le livre d'or a été créer`),
+        message: (`Votre message dans le livre d'or a été créé`),
         guestbook,
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`Votre message dans le livre d'or n'a pas été créer`),
+        message: (`Votre message dans le livre d'or n'a pas été créé`),
         error: error.message
       });
     });
   };
 
-  // Suppresion d'un messages du livre d'or de l'utilisateur
+  // Suppression d'un message du livre d'or de l'utilisateur
   exports.deleteGuestbookUser = async (req, res) => {
     const userId = userToken.id
     const guestbookId = parseInt(req.params.guestbookId, 10);
@@ -208,7 +208,7 @@ const { Guestbook, User } = require(`../models`);
     });
   };
 
-  // Mise a jour d'un messages du livre d'or de l'utilisateur
+  // Mise à jour d'un message du livre d'or de l'utilisateur
   exports.updateGuestbookUser = async (req, res) => {
     const guestbookData = req.body;
     const userId = userToken.id
@@ -244,19 +244,19 @@ const { Guestbook, User } = require(`../models`);
     });
   };
 
-  // compteur du nombre de message du livre d'or 
+  // compteur du nombre de messages du livre d'or 
   exports.getCountGuestbooks = async (req, res) => {
     await Guestbook.count().then(guestbooks => {
       res.status(200).json({
         success: true,
-        message: (`Voici le nombre total de message dans le livre d'or => ${guestbooks}`),
+        message: (`Voici le nombre total de messages dans le livre d'or => ${guestbooks}`),
         guestbooks
       });
     }).catch(error => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: (`impossible de compter le nombre de message dans le livre d'or`),
+        message: (`Impossible de compter le nombre de messages dans le livre d'or`),
         error: error.message
       });
     });

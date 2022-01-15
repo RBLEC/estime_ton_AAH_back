@@ -1,42 +1,12 @@
 const { User } = require(`../models`);
 const {generateAccessToken,generateRefreshToken }= require(`../middlewares/jwt`);
 const bcrypt = require("bcrypt");
-const assiette = require("../middlewares/assiette");
 
-//* liste de tous les utilisateurs
-exports.getUsers = async (req, res) => {
-  // J`utilise sequelize pour récupérer l`ensemble des listes
-  await User.findAndCountAll({
-    order: [[`pseudo`]],
-  })
-    .then((users) => {
-      // dans le then (lorsque sequelize à enfin récupéré les listes) j`envoi les lites au client.
-      // je répond en JSON car je suis une API
-      res.status(200).json({
-        success: true,
-        message: `Voici la liste de tous les utilisateurs par pseudo`,
-        users,
-      });
-    })
-    .catch((error) => {
-      // si sequelize à eu une erreur je revoi un message au client ne JSON pour lui dire qu`il y a un pépin
-      console.trace(error);
-      res.status(500).json({
-        success: false,
-        message: `Oups il y a un problème avec la liste de tous les utilisateurs, veuillez vous connecter.`,
-        error: error.message,
-      });
-    });
-};
-
-//* liste un utilisateur avec ses infos
+//* Affiche un utilisateur avec ses infos
 exports.getUser = async (req, res) => {
   const userId = userToken.id
   await User.findAll( { 
     where: id = userId,
-      //include: {
-      //  association: `article`
-      //},
     }).then((user) => {
       if (!user) {
         throw new Error(`Utilisateur non trouvé`);
@@ -57,7 +27,7 @@ exports.getUser = async (req, res) => {
     });
 };
 
-//* liste un utilisateur avec ses 10 dernier commentaires
+//* Affiche un utilisateur avec ses 10 dernier commentaires
 exports.getUserLastComment = async (req, res) => {
   const userId = userToken.id
   await User.findAndCountAll( { 
@@ -86,7 +56,7 @@ exports.getUserLastComment = async (req, res) => {
     });
 };
 
-//* liste un utilisateur avec ses 10 dernier articles
+//* liste un utilisateur avec ses 10 derniers articles
 exports.getUserLastArticle = async (req, res) => {
   const userId = userToken.id
   await User.findAndCountAll( { 
@@ -116,7 +86,7 @@ exports.getUserLastArticle = async (req, res) => {
     });
 };
 
-//* liste un utilisateur avec ses 10 dernier message du livre d'or
+//* affiche un utilisateur avec ses 10 dernier message du livre d'or
 exports.getUserLastGuestbook = async (req, res) => {
   const userId = userToken.id
   await User.findAndCountAll( { 
@@ -145,7 +115,7 @@ exports.getUserLastGuestbook = async (req, res) => {
     });
 };
 
-//* liste un utilisateur avec ses 10 dernières information de simulation
+//* liste un utilisateur avec ses 10 dernières informations de simulations
 exports.getUserLastInfosimulation = async (req, res) => {
   const userId = userToken.id
   await User.findAndCountAll( { 
@@ -168,7 +138,7 @@ exports.getUserLastInfosimulation = async (req, res) => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: `Oups il y a un problème avec les 10 dernières simulations de l'utilisateur, veuillez vous connecter..`,
+        message: `Oups il y a un problème avec les 10 dernières simulations de l'utilisateur, veuillez vous connecter.`,
         error: error.message,
       });
     });
@@ -226,7 +196,7 @@ exports.createUser = async (req, res) => {
     await User.create(newUser);
     res.status(200).json({
       success: true,
-      message: `Tout c'est bien passé, l'utilisateur à bien été crée avec le pseudo ${pseudo}`,
+      message: `Tout s'est bien passé, l'utilisateur à bien été crée avec le pseudo ${pseudo}`,
       newUserWOPW
     });
   } catch (error) {
@@ -250,7 +220,7 @@ exports.updateUser = async (req, res) => {
       // 409 conflit
       return res.status(409).json({
         success: false,
-        message: `le pseudo ${req.body.pseudo} est déja existant !`,
+        message: `Le pseudo ${req.body.pseudo} est déja existant !`,
       });
     }
   }
@@ -268,7 +238,7 @@ exports.updateUser = async (req, res) => {
       return user.update(userData);
     })
     .then((user) => {
-      // lorsque le mise à jours est terminée je renvoi au client la usere modifiée
+      // lorsque le mise à jours est terminée je renvoie au client le user modifié
       const userWOPW = {
       pseudo: user.dataValues.pseudo,
       email: user.dataValues.email,
@@ -287,7 +257,7 @@ exports.updateUser = async (req, res) => {
     })
     .catch((error) => {
       console.trace(error);
-      // si sequelize à eu une erreur je revoi un message au client ne JSON pour lui dire qu`il y a un pépin
+      // si sequelize a eu une erreur je renvoie un message au client en JSON pour lui dire qu`il y a un pépin
       res.status(500).json({
         success: false,
         message: `L'utilisateur n'a pas été mis à jour`,
@@ -296,7 +266,7 @@ exports.updateUser = async (req, res) => {
     });
 };
 
-//* Suppréssion de l'utilisateur
+//* Suppression de l'utilisateur
 exports.deleteUser = async (req, res) => {
   const userId = userToken.id
   await User.findByPk(userId)
@@ -319,13 +289,13 @@ exports.deleteUser = async (req, res) => {
     });
 };
 
-//* compteur du nombre d'utilisateur enregister
+//* compteur du nombre d'utilisateurs enregistés
 exports.getCountUsers = async (req, res) => {
   await User.count()
     .then((users) => {
       res.status(200).json({
         success: true,
-        message: `Voici le nombre total d'utilisateur => ${users}`,
+        message: `Voici le nombre total d'utilisateurs => ${users}`,
         users,
       });
     })
@@ -333,7 +303,7 @@ exports.getCountUsers = async (req, res) => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: `impossible de compter le nombre d'utilisateur`,
+        message: `Impossible de compter le nombre d'utilisateurs`,
         error: error.message,
       });
     });
@@ -383,7 +353,7 @@ exports.loginUser = async (req, res) => {
     const refreshToken = generateRefreshToken(userLog);
     res.status(200).json({
       success: true,
-      message: `Bienvenu ${userInfo.pseudo}`,
+      message: `Bienvenue ${userInfo.pseudo}`,
       userInfo,
       accessToken,
       refreshToken
@@ -392,7 +362,7 @@ exports.loginUser = async (req, res) => {
       console.trace(error);
       res.status(500).json({
         success: false,
-        message: `Données non trouvé !`,
+        message: `Données non trouvées !`,
         error: error.message,
       });
   }

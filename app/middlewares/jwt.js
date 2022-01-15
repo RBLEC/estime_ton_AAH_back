@@ -11,7 +11,7 @@ exports.generateAccessToken = (loginUser) => {
   return jwt.sign(loginUser, jwtSecret, { expiresIn: "1d" });
 };
 
-// Fonction qui rafraichie un token pour un durée de un an
+// Fonction qui rafraichit un token pour une durée d'un an
 exports.generateRefreshToken=(loginUser)=> {
   return jwt.sign(loginUser, jwtSecretRefresh, { expiresIn: jwtTimeRefresh });
 };
