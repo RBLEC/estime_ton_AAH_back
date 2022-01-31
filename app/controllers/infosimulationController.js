@@ -10,6 +10,8 @@ const eligibiliteFoyer = require (`../middlewares/eligibiliteFoyer`);
 const montantPercuAAHAvecMVA = require (`../middlewares/montantMVAPercu`);
 const statusAAH = require("../middlewares/statusAAH");
 const phraseFin = require("../middlewares/phraseFin");
+const boolean = require("../middlewares/boolean");
+const abattementConjoint = require("../middlewares/abattementConjoint");
 
   // liste touters les infosimulation de l'utilisateur
   exports.getInfosimulationsUser = async (req, res) => {
@@ -121,54 +123,73 @@ const phraseFin = require("../middlewares/phraseFin");
     const aahPlafondRessourcesMois = coefDuFoyer * req.body.aah_amount;
 
     const eligibiliteAAHDemandeur = eligibiliteAAH(
-      Boolean(req.body.applicant_disability),
+      boolean(req.body.applicant_disability),
       Number(req.body.applicant_age),
       Number(req.body.ageMinimal),
       Number(req.body.ageRetraite),
       Number(req.body.applicant_disability_rate),
       Number(req.body.disability_rate_mini),
-      Boolean(req.body.place_of_residence)
+      boolean(req.body.place_of_residence)
     );
+    // console.log('eligibiliteAAHDemandeur', eligibiliteAAHDemandeur);
     
     const eligibiliteAAHConjoint = eligibiliteAAH(
-      Boolean(req.body.spouse_disability),
+      boolean(req.body.spouse_disability),
       Number(req.body.spouse_age),
       Number(req.body.ageMinimal),
       Number(req.body.ageRetraite),
       Number(req.body.spouse_disability_rate),
       Number(req.body.disability_rate_mini),
-      Boolean(req.body.place_of_residence)
+      boolean(req.body.place_of_residence)
     );
-    
+    //  console.log('eligibiliteAAHConjoint', eligibiliteAAHConjoint);
+
+    const aplBoolean = boolean(req.body.apl);  
+      //console.log('Boolean test', aplBoolean);
+
+    const abattement2022 = abattementConjoint(
+      req.body.nb_child,
+    )
+    console.log('abattement2022', abattement2022);
+
     const eligibiliteMVADemandeur = eligibiliteMVA(
-      Boolean(req.body.apl),
+      boolean(req.body.apl),
       Number(req.body.applicant_disability_rate),
       Number(req.body.disability_rate_max),
       Number(req.body.applicant_income_with_activity),
     ); 
 
+    // console.log('eligibiliteMVADemandeur', eligibiliteMVADemandeur);
+
     const eligibiliteMVAConjoint = eligibiliteMVA(
-      Boolean(req.body.apl),
+      boolean(req.body.apl),
       Number(req.body.spouse_disability_rate),
       Number(req.body.disability_rate_max),
       Number(req.body.spouse_income_with_activity),
     ); 
+
+    // console.log('eligibiliteMVAConjoint', eligibiliteMVAConjoint);
     
     const assietteDemandeur = assiette(
-      req.body.applicant_disability,
+      boolean(req.body.applicant_disability),
       Number(req.body.smichb),
       Number(req.body.smicnbtf),
       Number(req.body.applicant_income_with_activity),
       Number(req.body.applicant_income_without_activity),
+      req.body.nb_child,
+      abattement2022
     ); 
     
     const assietteConjoint = assiette(
-      req.body.spouse_disability,
+      boolean(req.body.spouse_disability),
       Number(req.body.smichb),
       Number(req.body.smicnbtf),
       Number(req.body.spouse_income_with_activity),
       Number(req.body.spouse_income_without_activity),
+      req.body.nb_child,
+      abattement2022
     ); 
+    // console.log('assietteConjoint', assietteConjoint);
 
     const revenusDesEnfants = revenusTotalEnfants(
       req.body.nb_child,
@@ -238,6 +259,7 @@ const phraseFin = require("../middlewares/phraseFin");
       req.body.aah_amount,
       montantAAHAvecMVA,
     );
+    console.log('statusSimple', statusSimple);
 
     const newInfosimulation = {
     // Data => ok
@@ -255,11 +277,11 @@ const phraseFin = require("../middlewares/phraseFin");
     // Info du foyer
       household_composition: req.body.household_composition,
       nb_child: req.body.nb_child,
-      place_of_residence: req.body.place_of_residence,
-      apl: req.body.apl,
+      place_of_residence: boolean(req.body.place_of_residence),
+      apl: boolean(req.body.apl),
     // le demandeur
       applicant_age: req.body.applicant_age,
-      applicant_disability: req.body.applicant_disability,
+      applicant_disability: boolean(req.body.applicant_disability),
       applicant_disability_rate: req.body.applicant_disability_rate,
       applicant_income_without_activity: req.body.applicant_income_without_activity,
       applicant_income_with_activity: req.body.applicant_income_with_activity,
@@ -285,6 +307,7 @@ const phraseFin = require("../middlewares/phraseFin");
       plafond_foyer_mensuel: aahPlafondRessourcesMois.toFixed(2),
       eligibilite_aah_foyer: eligibiliteAAHallFoyer,
       eligibilite_mva_foyer: eligibiliteMVAallFoyer,
+      abattement2022: abattement2022,
       assiette_demandeur: assietteDemandeur.toFixed(2) ,
       assiette_conjoint: assietteConjoint.toFixed(2) ,
       assiette_enfant: assietteEnfant.toFixed(2),
@@ -301,6 +324,9 @@ const phraseFin = require("../middlewares/phraseFin");
       content: `Un utilisateur a fait une simulation`,
       user_id: userId
     };
+
+   // console.log('req.body', req.body.apl);
+    //console.log(' newInfosimulation',  newInfosimulation);
 
     await Promise.all([
       User.findByPk(userId),    

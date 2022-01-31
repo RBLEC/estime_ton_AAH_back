@@ -166,6 +166,10 @@ Infosimulation.init({
         type: DataTypes.BOOLEAN, 
         allowNull: false
     },
+    abattement2022: {
+        type: DataTypes.INTEGER, 
+        allowNull: true
+    },
     assiette_demandeur: {
         type: DataTypes.INTEGER, 
         allowNull: false

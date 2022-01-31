@@ -9,13 +9,13 @@ BEGIN;
 
 -- Supprime les tables si elles existent déjà, comme ça on est sûr de partir sur de bonnes bases
 -- On rajoute CASCADE pour ne pas avoir de probleme de références cassées 
-DROP TABLE IF EXISTS "user" CASCADE;
+--DROP TABLE IF EXISTS "user" CASCADE;
 DROP TABLE IF EXISTS "infosimulation" CASCADE;
-DROP TABLE IF EXISTS "article" CASCADE;
-DROP TABLE IF EXISTS "guestbook" CASCADE; 
-DROP TABLE IF EXISTS "comment" CASCADE;
-DROP TABLE IF EXISTS "nbsimulation" CASCADE;
-DROP TABLE IF EXISTS "article_guestbook_comment_user" CASCADE; -- ! on ferme avec un " ; " 
+--DROP TABLE IF EXISTS "article" CASCADE;
+--DROP TABLE IF EXISTS "guestbook" CASCADE; 
+--DROP TABLE IF EXISTS "comment" CASCADE;
+--DROP TABLE IF EXISTS "nbsimulation" CASCADE;
+--DROP TABLE IF EXISTS "article_guestbook_comment_user" CASCADE; -- ! on ferme avec un " ; " 
 
 
 -- Création de la TABLE "utilisateur"
@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS "user" (
     "pseudo" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "author" TEXT NULL,
     "role" INTEGER NOT NULL,
     "created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMP NULL DEFAULT NOW()
@@ -47,7 +48,7 @@ CREATE TABLE IF NOT EXISTS "infosimulation" (
     "household_composition" TEXT NOT NULL,
     "nb_child" INTEGER NOT NULL,
     "place_of_residence" BOOLEAN NOT NULL, 
-    "apl" BOOLEAN NOT NULL,       
+    "apl" TEXT NOT NULL,       
     -- le demandeur
     "applicant_age" INTEGER NOT NULL,
     "applicant_disability" BOOLEAN NOT NULL,
@@ -76,6 +77,7 @@ CREATE TABLE IF NOT EXISTS "infosimulation" (
     "plafond_foyer_mensuel" TEXT NOT NULL,
     "eligibilite_aah_foyer"  BOOLEAN NOT NULL,
     "eligibilite_mva_foyer" BOOLEAN NOT NULL,
+    "abattement2022" INTEGER NULL,
     "assiette_demandeur" TEXT NOT NULL,
     "assiette_conjoint"  TEXT NOT NULL,
     "assiette_enfant"  TEXT NOT NULL,

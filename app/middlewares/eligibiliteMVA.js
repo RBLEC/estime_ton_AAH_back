@@ -6,7 +6,7 @@
     revenusAvecActivite
     ) { 
       let eligibilite_MVA;
-      if (apl == true ) {
+      if (apl === true ) {
         eligibilite_MVA = true;
         if (disability_rate >=  tauxInvaliditeMax ) {
           eligibilite_MVA = true;
