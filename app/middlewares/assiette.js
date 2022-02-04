@@ -58,8 +58,8 @@ module.exports = assiette;
   function assiette_conjointEnfant(revenusSalarial, revenusNonSalarial,abattement2022){
 
     total_assiette = 
-      Number(revenusSalarial) +
-      Number(revenusNonSalarial) * 0.9 -
+      (Number(revenusSalarial) +
+      Number(revenusNonSalarial) )* 0.9 -
       Number(abattement2022)
 
     return total_assiette;
