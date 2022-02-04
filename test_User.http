@@ -8,8 +8,8 @@ POST http://localhost:5000/signup
 Content-Type: application/json
 
 {
-  "pseudo": "cidaah2t81924534tt",
-  "password": "atcidaah",
+  "pseudo": "cide74Admin",
+  "password": "8P8PQ2ww*",
   "email": "regis@aah.com",
   "birthdate": "11/05/1895",
   "role": 3,
@@ -23,8 +23,8 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-  "pseudo": "cidaah2",
-  "password": "cidaah"
+  "pseudo": "cide74Admin",
+  "password": "8P8PQ2ww*"
 }
 
 ### Lister les utilisateurs =>ok  

@@ -59,10 +59,10 @@ module.exports = assiette;
 
     total_assiette = 
       Number(revenusSalarial) +
-      Number(revenusNonSalarial) -
+      Number(revenusNonSalarial) * 0.9 -
       Number(abattement2022)
 
-    return 0.9 * total_assiette;
+    return total_assiette;
   };
 
 

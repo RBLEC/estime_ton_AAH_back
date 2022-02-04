@@ -24,7 +24,7 @@ GET http://localhost:5000/article/21
 ### Créer un article => ok
 POST http://localhost:5000/user/6/article
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkYWFoMiIsImVtYWlsIjoicmVnaXNAYWFoLmNvbSIsInJvbGUiOjMsImlhdCI6MTYzNDQxMDY4NCwiZXhwIjoxNjM0NDk3MDg0fQ.bJ5Y1g0bW5hTPyOFwaQkwuavr6pWWWNoBnSvBZ7hjV4
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicHNldWRvIjoiY2lkZTc0QWRtaW4iLCJlbWFpbCI6InJlZ2lzQGFhaC5jb20iLCJhdXRob3IiOm51bGwsInJvbGUiOjMsImlhdCI6MTY0MzY1OTkxMSwiZXhwIjoxNjQzNzQ2MzExfQ.1hvRM90cdm1KVHj7etLH4uoAfFjhty9fntcY1J6u3UM
 
 {
   "title": "Création d'un article",
