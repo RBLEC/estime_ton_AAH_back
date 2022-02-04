@@ -35,7 +35,7 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywicHNldWRvIj
 post http://localhost:5000/user/1/infosimulation
 #post https://projet-estime-ton-aah-back.herokuapp.com/user/1/infosimulation
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInBzZXVkbyI6ImNpZGFhaDI3NzciLCJlbWFpbCI6InJlZ2lzQGFhaC5jb20iLCJyb2xlIjozLCJpYXQiOjE2MzU0MzEyNjEsImV4cCI6MTYzNTUxNzY2MX0.obYwRPgsS9jrXAoDj42o66ESjCUA0LRzWDcmcZkdy6A
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTQsInBzZXVkbyI6ImNpZGFhaDIzIiwiZW1haWwiOiJyZWdpc0BhYWguY29tIiwiYXV0aG9yIjpudWxsLCJyb2xlIjoxLCJpYXQiOjE2NDM5NTU2MDIsImV4cCI6MTY0NDA0MjAwMn0.yTqPNbfkjCTFcZ8C318U0ScWZANkoqKenpQEiT_9Nqs
 
 {
     // Data
@@ -52,7 +52,7 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInBzZXVkby
     "coefPersonneACharge": 0.5,
     // Info du foyer
     "household_composition": "en couple",
-    "nb_child": 9,
+    "nb_child": 2,
     "place_of_residence" : true,
     "apl": true,
     // le demandeur
@@ -66,7 +66,7 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInBzZXVkby
     "spouse_disability" : false,
     "spouse_disability_rate" :0,
     "spouse_income_without_activity":0,
-    "spouse_income_with_activity": 37000,
+    "spouse_income_with_activity": 27000,
     // les enfants
     "child_income1": 10,
     "child_income2": 0,
